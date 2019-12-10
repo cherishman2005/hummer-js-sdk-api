@@ -60,7 +60,11 @@
 
 ### channel-demo配置
 
-采用http(CDN)方式引用聊天室js_sdk
+（1）npm包
+
+ npm install hummer-channel
+
+（2）采用http(CDN)方式引用聊天室js_sdk
 ```javascript
 <script charset="utf-8" src=" https://***.**.com/hummer-channel-x.x.x.js"></script>
 ```
