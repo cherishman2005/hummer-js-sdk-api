@@ -2,6 +2,8 @@
 
 # Hummer Channel Service js-sdk
 
+https://github.com/cherishman2005/hummer-js-sdk-api/
+
 ## FAQ
 
 ### 动态
