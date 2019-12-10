@@ -27,8 +27,9 @@
 
 ### 注意事项
 
-本系统支持使用64位数字的用户ID(uid)。由于javascript的number类型不支持64位的整数。
-所以sdk使用string来存储uid。
+（1）本系统支持使用64位数字的用户ID(uid)。由于javascript的number类型不支持64位的整数。所以sdk使用string来存储uid。
+
+（2）一个浏览器只能登录一个用户（uid）。
 
 ChannelService与SignalService互通兼容，新业务使用ChannelService。
 
@@ -135,7 +136,7 @@ Message定义：
 | ---------------- | ----------------------- | ------------------------------------------------------- |
 | type             | number                  | 消息内容类型                                            |
 | data             | Uint8Array              | 消息内容                                                |
-| appExtras        | { [k: string]: string } | 可选参数。 用户自定义的数据。 键和值为string的json-object。     |
+| appExtras        | {[k: string]: string}   | 可选参数。 用户自定义的数据。 键和值为string的json-object。  |
 | serverAcceptedTs | string                  | 服务器接收到消息的时间戳(毫秒)。64bit整型对应的字符串。 |
 
 
@@ -312,7 +313,7 @@ channel.getInstance().then(res => {
 
 | Name      | Type   | Description                 |
 | --------- | ------ | --------------------------- |
-| code      | number | 0：表示成功                 |
+| rescode   | number | 0：表示成功                 |
 | msg       | string | 返回描述                    |
 
 示例：
@@ -326,7 +327,7 @@ channel.sendMessageToUser(params).then(res => {
 ```
 响应：
 ```javascript
-{"code":0,"msg":"ok"}
+{"rescode":0,"msg":"ok"}
 ```
 
 ### 给指定channel发送组播消息(sendMessageToChannel)
@@ -344,7 +345,7 @@ channel.sendMessageToUser(params).then(res => {
 
 | Name      | Type   | Description                 |
 | --------- | ------ | --------------------------- |
-| code      | number | 0：表示成功                 |
+| rescode   | number | 0：表示成功                 |
 | msg       | string | 返回描述                    |
 | timestamp | string | 64bit整型对应的字符串(毫秒) |
 
@@ -359,7 +360,7 @@ channel.sendMessageToChannel(params).then(res => {
 ```
 响应：
 ```javascript
-{"code":0,"msg":"ok","timestamp":"1569328870441"}
+{"rescode":0,"msg":"ok","timestamp":"1569328870441"}
 ```
 
 
@@ -375,7 +376,7 @@ channel.sendMessageToChannel(params).then(res => {
 
 | Name     | Type    | Description  |
 | -------- | ------- | ------------ |
-| code     | number  | 0：表示成功  |
+| rescode  | number  | 0：表示成功  |
 | msg      | string  | 返回描述     |
 | uid      | string  | 用户uid      |
 | isOnline | boolean | 用户是否在线 |
@@ -392,7 +393,7 @@ channel.queryOnlineStatusForUser({uid: uid}).then(res => {
 
 响应：
 ```js
-{"code":0, "msg":"ok", "uid":"123", "isOnline":true}
+{"rescode":0, "msg":"ok", "uid":"123", "isOnline":true}
 ```
 
 ### 【辅助工具】将string编码成Utf8二进制(encodeStringToUtf8Bytes)
@@ -451,6 +452,7 @@ Hummer.Utify.decodeUtf8BytesToString(content)
 | Name     | Type    | Description  |
 | -------- | ------- | ------------ |
 |  rescode | number  |   0:成功     |
+|  msg     | string  |   返回描述   |
 
 示例：
 ```js
@@ -476,7 +478,7 @@ Hummer.Utify.decodeUtf8BytesToString(content)
 | Name     | Type    | Description  |
 | -------- | ------- | ------------ |
 |  rescode | number  |   0:成功     |
-
+|  msg     | string  |   返回描述   |
 
 示例：
 ```js
