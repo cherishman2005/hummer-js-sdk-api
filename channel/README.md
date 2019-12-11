@@ -8,6 +8,10 @@ https://github.com/cherishman2005/hummer-js-sdk-api/
 
 ### 动态
 
+[2019-12-11] 提供hummer-channel.js  1.0.5版本
+
+	接口未改动：（I）js-sdk内部心跳超时优化；（II）js-sdk内部可靠组播优化；
+
 [2019-12-02] 提供hummer-channel.js  1.0.4版本
 
 	接口未改动，js-sdk内部优化
@@ -57,20 +61,28 @@ https://github.com/cherishman2005/hummer-js-sdk-api/
 	（5）单个用户查询在线状态；
 	（6）与SignalService兼容互通；
 
-
-## 调试示例demo
-
-### channel-demo配置
+## hummer-channel js-sdk安装配置
 
 （1）npm包
 
  npm install hummer-channel
-
+ 
+ ```javascript
+ import Hummer from 'humer-channel'
+ ```
+ 
 （2）采用http(CDN)方式引用聊天室js_sdk
 ```javascript
 <script charset="utf-8" src=" https://***.**.com/hummer-channel-x.x.x.js"></script>
 ```
 使用js-sdk的业务部署在后端服务器。
+
+
+## 调试示例demo
+
+https://github.com/cherishman2005/vue-room
+
+### channel-demo配置
 
 【注】js_sdk带上版本号发布（如“1.0.2”）。
 
