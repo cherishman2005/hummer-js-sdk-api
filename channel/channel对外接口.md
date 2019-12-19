@@ -5,7 +5,7 @@
     - [注意事项](#%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a1%b9)
     - [初始化Hummer](#%e5%88%9d%e5%a7%8b%e5%8c%96hummer)
     - [hummer刷新Token](#hummer%e5%88%b7%e6%96%b0token)
-    - [初始化Channel Service](#%e5%88%9d%e5%a7%8b%e5%8c%96signal-service)
+    - [初始化Channel Service](#%e5%88%9d%e5%a7%8b%e5%8c%96channel-service)
       - [接收消息回调函数(onReceiveMessage)](#%e6%8e%a5%e6%94%b6%e6%b6%88%e6%81%af%e5%9b%9e%e8%b0%83%e5%87%bd%e6%95%b0onreceivemessage)
       - [接收channel组播消息回调函数(onReceiveChannelMessage)]
       - [接收到上线Notify回调(onNotifyJoinChannel)]
@@ -457,7 +457,7 @@ Hummer.Utify.decodeUtf8BytesToString(content)
 示例：
 ```js
         let params = {channelId};
-        this.signal.joinChannel(params).then(res => {
+        this.channel.joinChannel(params).then(res => {
           console.log("joinChannel res:", res);
         }).catch(err => {
         });
@@ -483,7 +483,7 @@ Hummer.Utify.decodeUtf8BytesToString(content)
 示例：
 ```js
         let params = {channelId, extra};
-        this.signal.leaveChannel(params).then(res => {
+        this.channel.leaveChannel(params).then(res => {
           console.log("leaveChannel res:", res);
         }).catch(err => {
         });
@@ -561,7 +561,7 @@ Hummer.Utify.decodeUtf8BytesToString(content)
 
 示例：
 ```javascript
-        this.signal.getChannelUserList({channelId}).then(res => {
+        this.channel.getChannelUserList({channelId}).then(res => {
           console.log("getChannelUserList res:", res);
         }).catch(err => {
         });
