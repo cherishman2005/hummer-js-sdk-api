@@ -9,7 +9,7 @@ https://github.com/cherishman2005/hummer-js-sdk-api/
 
 ### 动态
 
-[2019-12-11] 提供寻欢IM P2PChat hummer-im js-sdk1.0.3版本
+[2019-12-11] 提供寻欢IM P2PChat hummer-im js-sdk1.0.4版本
 
 	接口不变，js-sdk内部优化升级
 
