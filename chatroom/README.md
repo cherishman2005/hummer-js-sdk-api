@@ -2,7 +2,7 @@ https://github.com/cherishman2005/hummer-js-sdk-api
 
 # 修改点
 
-## [2019-12-19]hummer-chatroom-1.0.4.js 更新发布
+## [2019-12-19]hummer-chatroom-1.0.5.js 更新发布
 	接口不变，备份非可靠组播版本
     
 ## [2019-11-19]hummer-chatroom-1.0.4.js 更新发布
