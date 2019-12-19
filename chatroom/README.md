@@ -1,5 +1,4 @@
-npm路径:
-https://www.npmjs.com/package/hummer-chatroom
+https://github.com/cherishman2005/hummer-js-sdk-api
 
 # 修改点
 
@@ -33,6 +32,9 @@ hummer.refreshToken({uid, token})
 [2019-08-22] h5service-hummer-sdk-1.0.1.js 正式发布
 
 # js-sdk引用方式
+
+npm路径:
+https://www.npmjs.com/package/hummer-chatroom
 
 （1）npm包引用
 	npm install hummer-chatroom
