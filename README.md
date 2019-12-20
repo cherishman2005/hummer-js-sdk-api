@@ -8,6 +8,12 @@ channel npm包下载地址：
 
 https://www.npmjs.com/package/hummer-channel
 
+## hummer-signal
+
+signal npm包下载地址：
+
+https://www.npmjs.com/package/hummer-signal
+
 ## hummer-im 
 
 im npm包下载地址：
