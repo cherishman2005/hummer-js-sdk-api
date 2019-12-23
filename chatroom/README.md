@@ -45,6 +45,7 @@ https://www.npmjs.com/package/hummer-chatroom
 ```javascript
 <script charset="utf-8" src="https://***.***.com/hummer-chatroom-x.x.x.js"></script>
 ```
+
 ## chatroom-demo(VUE框架)
   demo功能： 一对一聊天，一对多聊天；
 

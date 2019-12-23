@@ -65,12 +65,12 @@ https://github.com/cherishman2005/hummer-js-sdk-api/
 
 （1）npm包
 
- npm install hummer-channel
- 
- ```javascript
- import Hummer from 'humer-channel'
- ```
- 
+npm install hummer-channel
+
+```javascript
+import Hummer from 'humer-channel'
+```
+
 （2）采用http(CDN)方式引用聊天室js_sdk
 ```javascript
 <script charset="utf-8" src=" https://***.**.com/hummer-channel-x.x.x.js"></script>
@@ -83,8 +83,6 @@ https://github.com/cherishman2005/hummer-js-sdk-api/
 https://github.com/cherishman2005/vue-room
 
 ### channel-demo配置
-
-【注】js_sdk带上版本号发布（如“1.0.2”）。
 
 nginx.conf
 ```javascript
