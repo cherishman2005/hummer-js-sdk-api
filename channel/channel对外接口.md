@@ -72,7 +72,7 @@ const hummer = new Hummer.Hummer({ appid: [appid],
 | onLoginStatus        |      Function        | 接收登录状态变更消息  |
 | onerror    | Function | 返回json-object，如果code=0，表示成功。如{"code":0,"msg":"ok"}                         |
 
-### hummer刷新Token
+### hummer刷新Token(refreshToken)
 
 请求参数：
 
@@ -436,7 +436,7 @@ Hummer.Utify.decodeUtf8BytesToString(content)
 ```
 
 
-### 进入频道joinChannel
+### 进入频道(joinChannel)
 
 请求参数：
 
@@ -463,7 +463,7 @@ Hummer.Utify.decodeUtf8BytesToString(content)
         });
 ```
 
-### 离开频道leaveChannel
+### 离开频道(leaveChannel)
 
 请求参数：
 
