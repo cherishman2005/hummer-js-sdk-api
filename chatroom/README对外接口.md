@@ -121,7 +121,7 @@ chatroom.setChatroomRecvCb({onRecvSingleUserData: onRecvSingleUserData})
 
 ### 发送请求消息的接口
 
-#### GetInstance获取实例
+#### getInstance获取实例
 请求参数：
 
 | Name                  | Type              |
