@@ -2,6 +2,28 @@ https://github.com/cherishman2005/hummer-js-sdk-api
 
 # 修改点
 
+## [2020-01-16]hummer-chatroom js-sdk1.0.7更新发布（针对shopline需求的测试联调版本）
+
+主要新增功能：
+### 公屏功能：
+	（1）公屏实名登录流程；—— 支持全球账户登录（仅内部使用，外部使用第三方登录token）
+	（2）未登录者，可以观看公屏。—— 支持匿名流程；（匿名时 uid='0'）
+	（3）公屏支持实时发言，频道内用户都能看到公屏信息；—— （非可靠通道消息）
+
+### service_sdk功能：（server to client）—— 中台定制功能，对外服务时不提供
+（1）subscribeBcGroup/unSubscribeBcGroup订阅/退订广播组
+（2）onRecvBroadcastMessage/onRecvUnicastMessage 接收service通道广播/单播
+
+### 全球账户登录下的chatroom-demo
+	https://github.com/cherishman2005/vue-chatroom/tree/master/chatroom
+	
+	udb登录时credit转otp的功能，还没有灰度，调试时需要配置hosts。（具体咨询罗文江）
+
+
+【注】
+	（1）uid, groupType, groupId均为uint64bit数据，因为js对64bit传递会出现精度丢失。—— 这里采用 64bit对应的字符串与业务交互。
+	（2）service_sdk与chatroom js-sdk共用一个websocket实例。
+
 ## [2019-12-26]hummer-chatroom js-sdk1.0.6更新发布
 	接口不变，增加部分可靠单播和可靠组播功能
 	以下功能及通知修改为可靠信令通道：
