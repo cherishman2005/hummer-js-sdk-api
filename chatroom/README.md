@@ -3,6 +3,10 @@ https://github.com/cherishman2005/hummer-js-sdk-api
 # 修改点
 
 
+## [2020-01-20]hummer-chatroom js-sdk1.0.9更新发布（针对shopline需求的测试联调版本）
+	对外接口不变：
+	（1）sdk内部优化；
+
 ## [2020-01-17]hummer-chatroom js-sdk1.0.8更新发布（针对shopline需求的测试联调版本）
 	对外接口不变：
 	（1）主要新增功能：支持CN, idn，ind, are等区域的功能；
