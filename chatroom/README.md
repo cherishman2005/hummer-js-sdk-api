@@ -2,6 +2,11 @@ https://github.com/cherishman2005/hummer-js-sdk-api
 
 # 修改点
 
+## [2020-02-07]hummer-chatroom js-sdk1.1.0更新发布（针对shopline需求的测试联调版本）
+	对外接口不变：
+	（1）解决utf8编码emoji表情对ios不兼容的问题；
+	（2）新增chatroom全球化功能支持；
+	（3）sdk内部优化；
 
 ## [2020-01-20]hummer-chatroom js-sdk1.0.9更新发布（针对shopline需求的测试联调版本）
 	对外接口不变：
