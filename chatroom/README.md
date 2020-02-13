@@ -2,6 +2,10 @@ https://github.com/cherishman2005/hummer-js-sdk-api
 
 # 修改点
 
+## [2020-02-13]hummer-chatroom js-sdk1.1.1更新发布
+	对外接口不变：
+	（1）sdk内部优化；
+
 ## [2020-02-07]hummer-chatroom js-sdk1.1.0更新发布（针对shopline需求的测试联调版本）
 	对外接口不变：
 	（1）解决utf8编码emoji表情对ios不兼容的问题；
@@ -26,8 +30,8 @@ https://github.com/cherishman2005/hummer-js-sdk-api
 	（3）公屏支持实时发言，频道内用户都能看到公屏信息；—— （非可靠通道消息）
 
 ### service_sdk功能：（server to client）—— 中台定制功能，对外服务时不提供
-（1）subscribeBcGroup/unSubscribeBcGroup订阅/退订广播组
-（2）onRecvBroadcastMessage/onRecvUnicastMessage 接收service通道广播/单播
+	（1）subscribeBcGroup/unSubscribeBcGroup订阅/退订广播组
+	（2）onRecvBroadcastMessage/onRecvUnicastMessage 接收service通道广播/单播
 
 ### 全球账户登录下的chatroom-demo
 	https://github.com/cherishman2005/vue-chatroom/tree/master/chatroom
@@ -36,6 +40,7 @@ https://github.com/cherishman2005/hummer-js-sdk-api
 
 
 【注】
+
 	（1）uid, groupType, groupId均为uint64bit数据，因为js对64bit传递会出现精度丢失。—— 这里采用 64bit对应的字符串与业务交互。
 	（2）service_sdk与chatroom js-sdk共用一个websocket实例。
 
