@@ -3,48 +3,84 @@
 
 ## hummer-channel主要接入流程
 
-	（1）Hummer初始化
-		hummer = new Hummer.Hummer({});
+	1 Hummer初始化
+		hummer = Hummer.createHummer({});;
 		需要的入参包括：appid, uid, token等信息；
 		
 		uid和token生成方法详见：
 		https://www.sunclouds.com/cloud/v2/developer/doc.htm?serviceId=102&typeCode=FAQ&title=Python&version=2.0&parentId=852
 
-	（2）ChannelService初始化
-		channel = new Hummer.ChannelService({hummer, channel的回调obj})
+	2 ChannelService初始化
+		client = hummer.createInstance();
 
-	（3）加入channel
-		channel.joinChannel(channelId)
-		
-	（4）发送P2P的消息
-		channel.sendMessageToUser({})
 
-	（5）给指定channel发送组播消息
-		channel.sendMessageToChannel({})
+	3 P2P的消息处理
 
-	（6）设置用户属性(setUserAttributes)
-		channel.setUserAttributes({})
+		3.1 设置用户归属地
+			client.setUserRegion({ region });
 		
-	（7）删除用户某些属性(deleteUserAttributesByKeys)
-		channel.deleteUserAttributesByKeys({})
+		3.2 发送P2P的消息
+			client.sendMessageToUser({});
 
-	（8）获取频道用户列表(getChannelUserList)
-		channel.getChannelUserList({})
+		3.3 接收对端消息
+			client.on('MessageFromUser', (data) => { console.log(data); });
 		
-	（9）根据用户某一属性获取频道用户列表(getChannelUserListByAtrribute)
-		channel.getChannelUserListByAtrribute({})
+		3.4 查询单个用户在线
+			client.queryOnlineStatusForUser({uid: uid});
 		
-	（10）接收频道内用户在线更新，组播消息，对端消息，用户属性变更消息等
-		在初始化channel时通过入参设置回调；
+		3.5 批量查询用户在线
+			client.queryUsersOnlineStatus({ uids: uids })
+
+
+	4 频道消息处理
+	
+		4.1 先要创建一个频道实例；
+			channel = client.createChannel({ region, channelId })
 		
-	（11）离开channel
-		channel.leaveChannel()
+		4.2 加入频道；
+			channel.joinChannel()
+		
+		4.3 给指定channel发送组播消息
+			channel.sendMessageToChannel({})
+
+		4.4 设置用户属性(setUserAttributes)
+			channel.setUserAttributes({})
+		
+		4.5 删除用户某些属性(deleteUserAttributesByKeys)
+			channel.deleteUserAttributesByKeys({})
+
+		4.6 获取频道用户列表(getChannelUserList)
+			channel.getChannelUserList({})
+		
+		4.7 根据用户某一属性获取频道用户列表(getChannelUserListByAtrribute)
+			channel.getChannelUserListByAtrribute({})
+		
+		4.8 接收组播消息
+			channel.on('ChannelMessage', (data) => { console.log(data); });
+		
+		4.9 接收加入频道通知
+			channel.on('NotifyJoinChannel', (data) => { console.log(data); });
+		
+		4.10 接收离开频道通知
+			channel.on('NotifyLeaveChannel', (data) => { console.log(data); });
+		
+		4.11 接收用户属性设置通知
+			channel.on('NotifyUserAttributesSet', (data) => { console.log(data); });
+		
+		4.12 接收用户属性删除通知
+			channel.on('NotifyUserAttributesDelete', (data) => { console.log(data); });
+		
+		4.13 接收用户数变更通知
+			channel.on('NotifyUserCountChange', (data) => { console.log(data); });
+		
+		4.14 退出channel
+			channel.leaveChannel()
+		
+		4.15 获取频道用户列表(getChannelUserList)
+			channel.getChannelUserCount({ channelIds: channelIds });
 
 ## 其他接口
 
-	（1） 查询Instance实例
-		channel.getInstance();
-	
-	（2）token刷新接口
-		hummer.refreshToken({uid, token});
+	（1） 查询Instance实例信息
+		hummer.getInstanceInfo();
 
