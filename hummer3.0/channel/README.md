@@ -33,9 +33,9 @@ npm install hummer-channel-sdk
 import Hummer from 'humer-channel-sdk'
 ```
 
-（2）采用http(CDN)方式引用聊天室js_sdk
+（2）采用http方式引用聊天室js_sdk
 ```javascript
-<script charset="utf-8" src=" https://***.**.com/hummer-channel-sdk-x.x.x.js"></script>
+<script charset="utf-8" src="./path/hummer-channel-sdk-x.x.x.js"></script>
 ```
 使用js-sdk的业务部署在后端服务器。
 
