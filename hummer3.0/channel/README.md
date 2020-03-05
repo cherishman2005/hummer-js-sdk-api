@@ -1,6 +1,6 @@
 [TOC]
 
-# Hummer Channel Service js-sdk
+# Hummer Channel js-sdk
 
 https://github.com/cherishman2005/hummer-js-sdk-api/
 

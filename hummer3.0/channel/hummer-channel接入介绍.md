@@ -55,29 +55,31 @@
 		4.7 根据用户某一属性获取频道用户列表(getChannelUserListByAtrribute)
 			channel.getChannelUserListByAtrribute({})
 		
-		4.8 接收组播消息
+		4.8 查询单个或多个频道用户数(getChannelUserCount)
+			channel.getChannelUserCount({ channelIds: channelIds });
+		
+		4.9 接收组播消息
 			channel.on('ChannelMessage', (data) => { console.log(data); });
 		
-		4.9 接收加入频道通知
+		4.10 接收加入频道通知
 			channel.on('NotifyJoinChannel', (data) => { console.log(data); });
 		
-		4.10 接收离开频道通知
+		4.11 接收离开频道通知
 			channel.on('NotifyLeaveChannel', (data) => { console.log(data); });
 		
-		4.11 接收用户属性设置通知
+		4.12 接收用户属性设置通知
 			channel.on('NotifyUserAttributesSet', (data) => { console.log(data); });
 		
-		4.12 接收用户属性删除通知
+		4.13 接收用户属性删除通知
 			channel.on('NotifyUserAttributesDelete', (data) => { console.log(data); });
 		
-		4.13 接收用户数变更通知
+		4.14 接收用户数变更通知
 			channel.on('NotifyUserCountChange', (data) => { console.log(data); });
 		
-		4.14 退出channel
+		4.15 退出channel
 			channel.leaveChannel()
 		
-		4.15 获取频道用户列表(getChannelUserList)
-			channel.getChannelUserCount({ channelIds: channelIds });
+
 
 ## 其他接口
 

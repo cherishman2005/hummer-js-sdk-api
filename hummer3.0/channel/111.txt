@@ -1,0 +1,42 @@
+- [Hummer Channel Service js-sdk](#hummer-channel-js-sdk)
+  - [js-sdk对外接口](#js-sdk%e5%af%b9%e5%a4%96%e6%8e%a5%e5%8f%a3)
+    - [注意事项](#%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a1%b9)
+    - [初始化Hummer](createHummer())
+      - [接收链接状态的回调(hummer.on('ConnectStatus', (data) => {}))]
+      - [接收登录状态的回调(hummer.on('LoginStatus', (data) => {}))]
+    - [创建ChannelService实例](createInstance())
+      - 		3.1 设置用户归属地
+			client.setUserRegion({ region });
+		
+		3.2 发送P2P的消息
+			client.sendMessageToUser({});
+
+		3.3 接收对端消息
+			client.on('MessageFromUser', (data) => { console.log(data); });
+		
+		3.4 查询单个用户在线
+			client.queryOnlineStatusForUser({uid: uid});
+		
+		3.5 批量查询用户在线
+			client.queryUsersOnlineStatus({ uids: uids })
+      - [接收链接状态的回调(hummer.on('ConnectStatus', (data) => {}))]
+      - [接收登录状态的回调(hummer.on('LoginStatus', (data) => {}))]
+    
+    - [初始化Channel Service](#%e5%88%9d%e5%a7%8b%e5%8c%96channel-service)
+      - [接收消息回调函数(onReceiveMessage)](#%e6%8e%a5%e6%94%b6%e6%b6%88%e6%81%af%e5%9b%9e%e8%b0%83%e5%87%bd%e6%95%b0onreceivemessage)
+      - [接收channel组播消息回调函数(onReceiveChannelMessage)]
+      - [接收到上线Notify回调(onNotifyJoinChannel)]
+      - [接收到下线Notify回调(onNotifyLeaveChannel)]
+      - [设置用户属性Notify回调(onNotifyUserAttributesSet)]
+      - [删除用户某一属性Notify回调(onNotifyUserAttributesDelete)]
+    - [getInstance获取实例(getInstance)](#getinstance%e8%8e%b7%e5%8f%96%e5%ae%9e%e4%be%8bgetinstance)
+    - [给用户发消息(sendMessageToUser)](#%e7%bb%99%e7%94%a8%e6%88%b7%e5%8f%91%e6%b6%88%e6%81%afsendmessagetouser)
+    - [给指定channel发送组播消息(sendMessageToChannel)]
+    - [查询用户在线状态(queryOnlineStatusForUser)](#%e6%9f%a5%e8%af%a2%e7%94%a8%e6%88%b7%e5%9c%a8%e7%ba%bf%e7%8a%b6%e6%80%81queryonlinestatusforuser)
+    - [进入频道(joinChannel)]
+    - [离开频道(leaveChannel)]
+    - [设置用户属性(setUserAttributes)]
+    - [删除用户某些属性(deleteUserAttributesByKeys)]
+    - [获取频道用户列表(getChannelUserList)]
+    - [根据用户某一属性获取频道用户列表(getChannelUserListByAtrribute)]
+    - [辅助工具]encodeStringToUtf8Bytes和decodeUtf8BytesToString
