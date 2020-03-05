@@ -1,6 +1,37 @@
-[TOC]
-
 # Hummer Channel Service js-sdk
+
+   * [Hummer Channel Service js-sdk](#hummer-channel-service-js-sdk)
+      * [js-sdk对外接口](#js-sdk对外接口)
+         * [注意事项](#注意事项)
+         * [初始化Hummer](#初始化hummer)
+            * [接收链接状态的回调(hummer.on('ConnectStatus', (data) =&gt; {}))](#接收链接状态的回调hummeronconnectstatus-data--)
+            * [接收登录状态的回调(hummer.on('LoginStatus', (data) =&gt; {}))](#接收登录状态的回调hummeronloginstatus-data--)
+         * [初始化Channel Service](#初始化channel-service)
+            * [P2P的消息处理](#p2p的消息处理)
+               * [设置用户归属地](#设置用户归属地)
+               * [发送P2P的消息(sendMessageToUser)](#发送p2p的消息sendmessagetouser)
+               * [接收对端消息（client.on('MessageFromUser', (data) =&gt; {})）](#接收对端消息clientonmessagefromuser-data--)
+               * [查询单个用户在线(queryOnlineStatusForUser)](#查询单个用户在线queryonlinestatusforuser)
+               * [批量查询用户在线(queryUsersOnlineStatus)](#批量查询用户在线queryusersonlinestatus)
+            * [频道消息处理](#频道消息处理)
+               * [创建单个频道实例(createChannel)](#创建单个频道实例createchannel)
+               * [加入频道(joinChannel)](#加入频道joinchannel)
+               * [离开频道(leaveChannel)](#离开频道leavechannel)
+               * [channel发送组播消息(sendMessageToChannel)](#channel发送组播消息sendmessagetochannel)
+               * [channel设置用户属性(setUserAttributes)](#channel设置用户属性setuserattributes)
+               * [channel删除用户某些属性(deleteUserAttributesByKeys)](#channel删除用户某些属性deleteuserattributesbykeys)
+               * [channel获取频道用户列表(getChannelUserList)](#channel获取频道用户列表getchanneluserlist)
+               * [channel根据用户某一属性获取频道用户列表(getChannelUserListByAtrribute)](#channel根据用户某一属性获取频道用户列表getchanneluserlistbyatrribute)
+               * [channel查询单个或多个频道用户数(getChannelUserCount)](#channel查询单个或多个频道用户数getchannelusercount)
+               * [channel接收组播消息（channel.on('ChannelMessage', (data) =&gt; {})）](#channel接收组播消息channelonchannelmessage-data--)
+               * [channel接收到上线Notify回调（channel.on('NotifyJoinChannel', (data) =&gt; {})）](#channel接收到上线notify回调channelonnotifyjoinchannel-data--)
+            * [channel接收到上线Notify回调（channel.on('NotifyLeaveChannel', (data) =&gt; {})）](#channel接收到上线notify回调channelonnotifyleavechannel-data--)
+            * [接收设置用户属性Notify的回调(channel.on('NotifyUserAttributesSet', (data) =&gt; {}))](#接收设置用户属性notify的回调channelonnotifyuserattributesset-data--)
+            * [接收到删除用户某一属性Notify回调(channel.on('NotifyUserAttributesDelete', (data) =&gt; {}))](#接收到删除用户某一属性notify回调channelonnotifyuserattributesdelete-data--)
+         * [getInstanceInfo获取实例信息(getInstanceInfo)](#getinstanceinfo获取实例信息getinstanceinfo)
+         * [【辅助工具】将string编码成Utf8二进制(encodeStringToUtf8Bytes)](#辅助工具将string编码成utf8二进制encodestringtoutf8bytes)
+         * [【辅助工具】将Utf8二进制解码成string类型(decodeUtf8BytesToString)](#辅助工具将utf8二进制解码成string类型decodeutf8bytestostring)
+
 
 ## js-sdk对外接口
 
