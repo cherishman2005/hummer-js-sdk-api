@@ -236,7 +236,7 @@ interface Message {
 ```
 
 ##### 查询单个用户在线(queryOnlineStatusForUser)
-发送P2P的消息
+查询单个用户在线
 ```javascript
 client.queryOnlineStatusForUser({uid: uid});
 ```
@@ -272,7 +272,9 @@ channel.queryOnlineStatusForUser({uid: uid}).then(res => {
 ```
 
 ##### 批量查询用户在线(queryUsersOnlineStatus)
-发送P2P的消息
+
+批量查询用户在线
+
 ```javascript
 client.queryUsersOnlineStatus({ uids: uids })
 ```
@@ -281,7 +283,7 @@ client.queryUsersOnlineStatus({ uids: uids })
 
 | Name | Type   | Description |
 | ---- | ------ | ----------- |
-| uids | string[] | 要查询的单个或多个uid   |
+| uids | string[] | 要查询的uid列表   |
 
 响应数据：Promise<> 
 
@@ -289,7 +291,7 @@ client.queryUsersOnlineStatus({ uids: uids })
 | -------- | ------- | ------------ |
 | rescode  | number  | 0：表示成功  |
 | msg      | string  | 返回描述     |
-| onlineUids | string[]  | 在线的单个或多个uid      |
+| onlineUids | string[]  | 在线的uid列表      |
 
 【注】queryUsersOnlineStatus可以逐步替掉接口queryOnlineStatusForUser
 
@@ -325,7 +327,7 @@ channel = client.createChannel({ region, channelId })
 
 | Name      | Type   | Description                 |
 | --------- | ------ | --------------------------- |
-|    | Object | 返回channel实例                |
+|    | Object | 返回Channel实例                |
 
 【注】可以创建多个频道实例，并且可以在不同的业务归属region
 
@@ -396,8 +398,8 @@ channel.sendMessageToChannel({})
 | --------- | ----------------------- | --------------------------------------------------- |
 | type      | string                  | content的类型。用户自己约定。                       |
 | content   | Uint8Array                  | 消息的内容。                                    |
-| option    | object                  | 可选设置项。现包括成员reliable，默认"yes"可靠；取值['yes', 'no']|
-| appExtras | { [k: string]: string } | 可选参数。 用户自定义的数据。 键和值为string的json-object。 |
+| option    | object                  | 可选设置项。现包括成员reliable，默认"yes"可靠；取值('yes' | 'no')|
+| appExtras | { [k: string]: string } | 可选参数。 用户自定义的数据。 键和值为string的Object。 |
 
 响应数据：Promise<>
 
@@ -408,7 +410,7 @@ channel.sendMessageToChannel({})
 
 示例：
 ```javascript
-let params = { type, content, channelId, option: {reliable} }
+let params = { type, content, option: {reliable} }
 channel.sendMessageToChannel(params).then(res => {
   console.log("res: " + JSON.stringify(res));
 }).catch(err => {
@@ -574,7 +576,7 @@ channel.getChannelUserCount({})
 示例：
 ```javascript
     channel.getChannelUserCount({ channelIds: channelIds }).then(res => {
-      console.log("getChannelUserCount res:", res);
+      console.log("res:", res);
     }).catch(err => {
     });
 ```
@@ -587,7 +589,7 @@ channel.getChannelUserCount({})
 
 
 ##### channel接收组播消息(channel.on('ChannelMessage', (data) => {}))
-
+接收指定频道的消息
 ```javascript
 channel.on('ChannelMessage', (data) => { console.log(data); })
 ```
@@ -634,6 +636,7 @@ interface ChannelMessage {
 ```
 channel.on('NotifyJoinChannel', (data) => { console.log(data); })
 ```
+接收加入该频道的用户列表通知
 
 回调通知：
 
@@ -662,6 +665,8 @@ handler data定义：
 
 ##### channel接收到退出频道Notify回调(channel.on('NotifyLeaveChannel', (data) => {}))
 
+接收退出该频道的用户列表通知
+
 ```
 channel.on('NotifyLeaveChannel', (data) => { console.log(data); })
 ```
@@ -687,6 +692,8 @@ Typescript定义参考：
 ```
 
 ##### 接收设置用户属性Notify的回调(channel.on('NotifyUserAttributesSet', (data) => {}))
+
+接收到该频道设置用户某一属性Notify回调通知
 
 ```
 channel.on('NotifyUserAttributesSet', (data) => { console.log(data); })
@@ -721,6 +728,8 @@ Typescript定义参考：
 
 ##### 接收到删除用户某一属性Notify回调(channel.on('NotifyUserAttributesDelete', (data) => {}))
 
+接收到该频道删除用户某一属性Notify回调通知
+
 ```
 channel.on('NotifyUserAttributesDelete', (data) => { console.log(data); });
 ```
@@ -753,6 +762,9 @@ Typescript定义参考：
 ```
 
 ### getInstanceInfo获取实例信息(getInstanceInfo)
+
+获取实例信息的API接口，用来辅助排查实例的在线状态信息，方便用于调试。
+
 请求参数：
 
 | Name | Type |
@@ -771,14 +783,14 @@ Typescript定义参考：
 示例：
 ```javascript
 hummer.getInstanceInfo().then(res => {
-  console.log("getInstanceInfo: " + JSON.stringify(res));
+  console.log("res: " + JSON.stringify(res));
 }).catch(err => {
   console.log(err);
 });
 ```
 响应：
 ```javascript
-{ "uid": "123", "instanceId": 3114848827, "channelList": [ "test_channel", "test" ], "isAnonymous": false, "appid": 1350626568 }
+{ "uid": "123", "instanceId": 3114848827, "isAnonymous": false, "appid": 1350626568 }
 ```
 
 ### 【辅助工具】将string编码成Utf8二进制(encodeStringToUtf8Bytes)
