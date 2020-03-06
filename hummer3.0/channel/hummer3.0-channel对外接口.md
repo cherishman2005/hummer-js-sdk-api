@@ -23,9 +23,9 @@
                * [channel获取频道用户列表(getChannelUserList)](#channel获取频道用户列表getchanneluserlist)
                * [channel根据用户某一属性获取频道用户列表(getChannelUserListByAtrribute)](#channel根据用户某一属性获取频道用户列表getchanneluserlistbyatrribute)
                * [channel查询单个或多个频道用户数(getChannelUserCount)](#channel查询单个或多个频道用户数getchannelusercount)
-               * [channel接收组播消息（channel.on('ChannelMessage', (data) =&gt; {})）](#channel接收组播消息channelonchannelmessage-data--)
-               * [channel接收到上线Notify回调（channel.on('NotifyJoinChannel', (data) =&gt; {})）](#channel接收到上线notify回调channelonnotifyjoinchannel-data--)
-            * [channel接收到上线Notify回调（channel.on('NotifyLeaveChannel', (data) =&gt; {})）](#channel接收到上线notify回调channelonnotifyleavechannel-data--)
+               * [channel接收组播消息(channel.on('ChannelMessage', (data) =&gt; {}))](#channel接收组播消息channelonchannelmessage-data--)
+               * [channel接收到上线Notify回调(channel.on('NotifyJoinChannel', (data) =&gt; {}))](#channel接收到上线notify回调channelonnotifyjoinchannel-data--)
+            * [channel接收到上线Notify回调(channel.on('NotifyLeaveChannel', (data) =&gt; {}))](#channel接收到上线notify回调channelonnotifyleavechannel-data--)
             * [接收设置用户属性Notify的回调(channel.on('NotifyUserAttributesSet', (data) =&gt; {}))](#接收设置用户属性notify的回调channelonnotifyuserattributesset-data--)
             * [接收到删除用户某一属性Notify回调(channel.on('NotifyUserAttributesDelete', (data) =&gt; {}))](#接收到删除用户某一属性notify回调channelonnotifyuserattributesdelete-data--)
          * [getInstanceInfo获取实例信息(getInstanceInfo)](#getinstanceinfo获取实例信息getinstanceinfo)
@@ -83,6 +83,13 @@ hummer初始化时，通过onError回调返回来回馈初始化是否成功。
 
 #### 接收链接状态的回调(hummer.on('ConnectStatus', (data) => {}))
 
+回调通知：
+
+| name    | type    | description                 |
+| ------- | ------- | --------------------------- |
+| evenName | string | 取值"ConnectStatus" |
+| handler | function  | 接收回调                 |
+
 回调参数：
 
 | name    | type    | description                 |
@@ -100,6 +107,13 @@ enum ConnectStatus {
 
 
 #### 接收登录状态的回调(hummer.on('LoginStatus', (data) => {}))
+
+回调通知：
+
+| name    | type    | description                 |
+| ------- | ------- | --------------------------- |
+| evenName | string | 取值"LoginStatus" |
+| handler | function  | 接收回调                 |
 
 回调参数：
 
@@ -184,6 +198,13 @@ client.sendMessageToUser(params).then(res => {
 ```javascript
 client.on('MessageFromUser', (data) => { console.log(data); });
 ```
+
+回调通知：
+
+| name    | type    | description                 |
+| ------- | ------- | --------------------------- |
+| evenName | string | 取值"NotifyUserAttributesDelete" |
+| handler | function  | 接收回调                 |
 
 回调参数：
 
@@ -311,7 +332,7 @@ channel = client.createChannel({ region, channelId })
 
 ##### 加入频道(joinChannel)
 ```js
-channel.joinChannel()
+channel.joinChannel();
 ```
 
 请求参数：
@@ -391,7 +412,7 @@ let params = { type, content, channelId, option: {reliable} }
 channel.sendMessageToChannel(params).then(res => {
   console.log("res: " + JSON.stringify(res));
 }).catch(err => {
-  console.log(err)
+  console.log(err);
 })
 ```
 响应：
@@ -413,19 +434,20 @@ channel.setUserAttributes({})
 | attributes | {[k: string]: string} | 用户属性 |
 
 
-响应数据：
+响应数据：Promise<>
 
 | Name     | Type    | Description  |
 | -------- | ------- | ------------ |
 |  rescode | number  |   0:成功     |
+| msg       | string | 返回描述     |
 
 
 示例：
 ```js
     let params = { attributes };
-    channel.setUserAttributes(params).then((res) => {
+    channel.setUserAttributes(params).then(res => {
       console.log("setUserAttributes Res: ", res);
-    }).catch((err) => {
+    }).catch(err => {
       console.log(err)
     })
 ```
@@ -448,8 +470,8 @@ channel.deleteUserAttributesByKeys({})
 
 | Name     | Type    | Description  |
 | -------- | ------- | ------------ |
-|  rescode | number  |   200:成功     |
-
+|  rescode | number  |   0:成功     |
+| msg       | string | 返回描述     |
 
 示例：
 ```js
@@ -481,6 +503,7 @@ channel.getChannelUserList()
 |    channelId       |      string        |     |
 |    users             |      string[]        | 用户列表 |
 |    rescode             |      number          | 0：表示成功|
+| msg       | string | 返回描述     |
 
 示例：
 ```javascript
@@ -508,7 +531,7 @@ channel.getChannelUserListByAtrribute({})
 |    key        |      string        |   用户属性key       |
 |    prop        |      string        |  用户属性value值   |
 
-响应数据：
+响应数据：Promise<>
 
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- | ----------- |
@@ -516,6 +539,7 @@ channel.getChannelUserListByAtrribute({})
 |    channelId       |      string        |     |
 |    users             |      string[]          | 用户列表 |
 |    rescode             |      number          | 0：表示成功|
+| msg       | string | 返回描述     |
 
 示例：
 ```javascript
@@ -538,13 +562,14 @@ channel.getChannelUserCount({})
 | --------------------- | ----------------- |   ----------------- |
 |    channelIds        |      string[]        |   同一区域的频道列表       |
 
-响应数据：
+响应数据：Promise<>
 
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- | ----------- |
 |    appid             |      number        |     |
 |    channelIdCount       |      {[channelId:string]:number}     |     |
 |    rescode             |      number          | 0：表示成功|
+| msg       | string | 返回描述     |
 
 示例：
 ```javascript
@@ -561,12 +586,21 @@ channel.getChannelUserCount({})
 
 
 
-##### channel接收组播消息（channel.on('ChannelMessage', (data) => {})）
+##### channel接收组播消息(channel.on('ChannelMessage', (data) => {}))
 
 ```javascript
-channel.on('ChannelMessage', (data) => { console.log(data); });
+channel.on('ChannelMessage', (data) => { console.log(data); })
 ```
-回调参数：
+
+回调通知：
+
+| name    | type    | description                 |
+| ------- | ------- | --------------------------- |
+| evenName | string | 取值"ChannelMessage" |
+| handler | function  | 接收回调                 |
+
+
+handler回调参数：
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
@@ -595,11 +629,19 @@ interface ChannelMessage {
 }
 ```
 
-##### channel接收到上线Notify回调（channel.on('NotifyJoinChannel', (data) => {})）
+##### channel接收到上线Notify回调(channel.on('NotifyJoinChannel', (data) => {}))
 
 ```
-channel.on('NotifyJoinChannel', (data) => { console.log(data); });
+channel.on('NotifyJoinChannel', (data) => { console.log(data); })
 ```
+
+回调通知：
+
+| name    | type    | description                 |
+| ------- | ------- | --------------------------- |
+| evenName | string | 取值"NotifyJoinChannel" |
+| handler | function  | 接收回调                 |
+
 
 回调参数：
 
@@ -608,7 +650,7 @@ channel.on('NotifyJoinChannel', (data) => { console.log(data); });
 | handler  | object  | 详细定义后面描述            |
 
 
-Message定义：
+handler data定义：
 
 | name             | type                    | description                                             |
 | ---------------- | ----------------------- | ------------------------------------------------------- |
@@ -618,20 +660,21 @@ Message定义：
 {"uid":["555"]}
 ```
 
-#### channel接收到上线Notify回调（channel.on('NotifyLeaveChannel', (data) => {})）
+#### channel接收到上线Notify回调(channel.on('NotifyLeaveChannel', (data) => {}))
 
 ```
-channel.on('NotifyLeaveChannel', (data) => { console.log(data); });
+channel.on('NotifyLeaveChannel', (data) => { console.log(data); })
 ```
 
-回调参数：
+回调通知：
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| handler  | object  | 详细定义后面描述            |
+| evenName | string | 取值"NotifyLeaveChannel" |
+| handler | function  | 接收回调                 |
 
 
-Message定义：
+handler data定义：
 
 | name             | type                    | description                                             |
 | ---------------- | ----------------------- | ------------------------------------------------------- |
@@ -646,8 +689,15 @@ Typescript定义参考：
 #### 接收设置用户属性Notify的回调(channel.on('NotifyUserAttributesSet', (data) => {}))
 
 ```
-channel.on('NotifyUserAttributesSet', (data) => { console.log(data); });
+channel.on('NotifyUserAttributesSet', (data) => { console.log(data); })
 ```
+
+回调通知：
+
+| name    | type    | description                 |
+| ------- | ------- | --------------------------- |
+| evenName | string | 取值"NotifyUserAttributesSet" |
+| handler | function  | 接收回调                 |
 
 回调参数：
 
@@ -674,6 +724,13 @@ Typescript定义参考：
 ```
 channel.on('NotifyUserAttributesDelete', (data) => { console.log(data); });
 ```
+
+回调通知：
+
+| name    | type    | description                 |
+| ------- | ------- | --------------------------- |
+| evenName | string | 取值"NotifyUserAttributesDelete" |
+| handler | function  | 接收回调                 |
 
 回调参数：
 
@@ -713,8 +770,8 @@ Typescript定义参考：
 
 示例：
 ```javascript
-hummer.getInstance().then(res => {
-  console.log("GetInstance: " + JSON.stringify(res));
+hummer.getInstanceInfo().then(res => {
+  console.log("getInstanceInfo: " + JSON.stringify(res));
 }).catch(err => {
   console.log(err);
 });
@@ -741,7 +798,7 @@ hummer.getInstance().then(res => {
 
 示例：
 ```js
-Hummer.Utify.encodeStringToUtf8Bytes(content)
+Hummer.Utify.encodeStringToUtf8Bytes(content);
 ```
 
 ### 【辅助工具】将Utf8二进制解码成string类型(decodeUtf8BytesToString)
@@ -760,5 +817,5 @@ Hummer.Utify.encodeStringToUtf8Bytes(content)
 
 示例：
 ```js
-Hummer.Utify.decodeUtf8BytesToString(content)
+Hummer.Utify.decodeUtf8BytesToString(content);
 ```
