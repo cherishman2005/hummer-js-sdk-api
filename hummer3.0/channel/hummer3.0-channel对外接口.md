@@ -87,7 +87,7 @@ hummer初始化时，通过onError回调返回来回馈初始化是否成功。
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| evenName | string | 取值"ConnectStatus" |
+| eventName | string | 取值"ConnectStatus" |
 | handler | function  | 接收回调                 |
 
 回调参数：
@@ -112,7 +112,7 @@ enum ConnectStatus {
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| evenName | string | 取值"LoginStatus" |
+| eventName | string | 取值"LoginStatus" |
 | handler | function  | 接收回调                 |
 
 回调参数：
@@ -203,7 +203,7 @@ client.on('MessageFromUser', (data) => { console.log(data); });
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| evenName | string | 取值"NotifyUserAttributesDelete" |
+| eventName | string | 取值"NotifyUserAttributesDelete" |
 | handler | function  | 接收回调                 |
 
 回调参数：
@@ -596,7 +596,7 @@ channel.on('ChannelMessage', (data) => { console.log(data); })
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| evenName | string | 取值"ChannelMessage" |
+| eventName | string | 取值"ChannelMessage" |
 | handler | function  | 接收回调                 |
 
 
@@ -639,7 +639,7 @@ channel.on('NotifyJoinChannel', (data) => { console.log(data); })
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| evenName | string | 取值"NotifyJoinChannel" |
+| eventName | string | 取值"NotifyJoinChannel" |
 | handler | function  | 接收回调                 |
 
 
@@ -670,7 +670,7 @@ channel.on('NotifyLeaveChannel', (data) => { console.log(data); })
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| evenName | string | 取值"NotifyLeaveChannel" |
+| eventName | string | 取值"NotifyLeaveChannel" |
 | handler | function  | 接收回调                 |
 
 
@@ -696,7 +696,7 @@ channel.on('NotifyUserAttributesSet', (data) => { console.log(data); })
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| evenName | string | 取值"NotifyUserAttributesSet" |
+| eventName | string | 取值"NotifyUserAttributesSet" |
 | handler | function  | 接收回调                 |
 
 回调参数：
@@ -729,7 +729,7 @@ channel.on('NotifyUserAttributesDelete', (data) => { console.log(data); });
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| evenName | string | 取值"NotifyUserAttributesDelete" |
+| eventName | string | 取值"NotifyUserAttributesDelete" |
 | handler | function  | 接收回调                 |
 
 回调参数：
