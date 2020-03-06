@@ -16,18 +16,18 @@
             * [频道消息处理](#频道消息处理)
                * [创建单个频道实例(createChannel)](#创建单个频道实例createchannel)
                * [加入频道(joinChannel)](#加入频道joinchannel)
-               * [离开频道(leaveChannel)](#离开频道leavechannel)
+               * [退出频道(leaveChannel)](#退出频道leavechannel)
                * [channel发送组播消息(sendMessageToChannel)](#channel发送组播消息sendmessagetochannel)
                * [channel设置用户属性(setUserAttributes)](#channel设置用户属性setuserattributes)
                * [channel删除用户某些属性(deleteUserAttributesByKeys)](#channel删除用户某些属性deleteuserattributesbykeys)
                * [channel获取频道用户列表(getChannelUserList)](#channel获取频道用户列表getchanneluserlist)
                * [channel根据用户某一属性获取频道用户列表(getChannelUserListByAtrribute)](#channel根据用户某一属性获取频道用户列表getchanneluserlistbyatrribute)
-               * [channel查询单个或多个频道用户数(getChannelUserCount)](#channel查询单个或多个频道用户数getchannelusercount)
+               * [查询单个或多个频道用户数(getChannelUserCount)](#查询单个或多个频道用户数getchannelusercount)
                * [channel接收组播消息(channel.on('ChannelMessage', (data) =&gt; {}))](#channel接收组播消息channelonchannelmessage-data--)
                * [channel接收到加入频道Notify回调(channel.on('NotifyJoinChannel', (data) =&gt; {}))](#channel接收到加入频道notify回调channelonnotifyjoinchannel-data--)
                * [channel接收到退出频道Notify回调(channel.on('NotifyLeaveChannel', (data) =&gt; {}))](#channel接收到退出频道notify回调channelonnotifyleavechannel-data--)
-               * [接收设置用户属性Notify的回调(channel.on('NotifyUserAttributesSet', (data) =&gt; {}))](#接收设置用户属性notify的回调channelonnotifyuserattributesset-data--)
-               * [接收到删除用户某一属性Notify回调(channel.on('NotifyUserAttributesDelete', (data) =&gt; {}))](#接收到删除用户某一属性notify回调channelonnotifyuserattributesdelete-data--)
+               * [channel接收设置用户属性Notify的回调(channel.on('NotifyUserAttributesSet', (data) =&gt; {}))](#channel接收设置用户属性notify的回调channelonnotifyuserattributesset-data--)
+               * [channel接收到删除用户某一属性Notify回调(channel.on('NotifyUserAttributesDelete', (data) =&gt; {}))](#channel接收到删除用户某一属性notify回调channelonnotifyuserattributesdelete-data--)
          * [getInstanceInfo获取实例信息(getInstanceInfo)](#getinstanceinfo获取实例信息getinstanceinfo)
          * [【辅助工具】将string编码成Utf8二进制(encodeStringToUtf8Bytes)](#辅助工具将string编码成utf8二进制encodestringtoutf8bytes)
          * [【辅助工具】将Utf8二进制解码成string类型(decodeUtf8BytesToString)](#辅助工具将utf8二进制解码成string类型decodeutf8bytestostring)
@@ -60,7 +60,9 @@ channel区分可靠P2P、非可靠P2P；可靠组播、非可靠组播；
 
 
 ### 初始化Hummer
-Hummer初始化
+
+Hummer初始化：创建hummer实例
+
 ```javascript
       this.hummer = Hummer.createHummer({ appid: this.appid,
                                   uid: this.uid,
@@ -132,10 +134,17 @@ export enum LoginStatus {
 
 ### 初始化Channel Service
 
+初始化： 创建ChanelService实例
+
 ```javascript
 client = hummer.createInstance();
 ```
 
+响应数据：
+
+| Name      | Type   | Description                 |
+| --------- | ------ | --------------------------- |
+|    | Object | 返回ChannelService实例             |
 
 
 #### P2P的消息处理
@@ -150,7 +159,7 @@ client.setUserRegion({ region });
 | --------- | ----------------------- | --------------------------------------------------- |
 | region    | string                  | 用户归属地（"cn"/"ap_southeast"/"ap_south" / "us" / "me_east" / "sa_east"）                      |
 
-响应数据：
+响应数据：Promise<>
 
 | Name      | Type   | Description                 |
 | --------- | ------ | --------------------------- |
@@ -172,7 +181,7 @@ client.sendMessageToUser({});
 | option    | object                  | 可选设置项。现包括成员reliable，默认"yes"可靠；取值['yes', 'no']|
 | appExtras | { [k: string]: string } | 可选参数。 用户自定义的数据。 键和值为string的json-object。 |
 
-响应数据：
+响应数据：Promise<>
 
 | Name      | Type   | Description                 |
 | --------- | ------ | --------------------------- |
@@ -273,7 +282,7 @@ channel.queryOnlineStatusForUser({uid: uid}).then(res => {
 
 ##### 批量查询用户在线(queryUsersOnlineStatus)
 
-批量查询用户在线
+批量查询用户在线列表
 
 ```javascript
 client.queryUsersOnlineStatus({ uids: uids })
@@ -312,6 +321,9 @@ client.queryUsersOnlineStatus({uids: uids}).then(res => {
 #### 频道消息处理
 
 ##### 创建单个频道实例(createChannel)
+
+创建单个频道实例
+
 ```js
 channel = client.createChannel({ region, channelId })
 ```
@@ -320,7 +332,7 @@ channel = client.createChannel({ region, channelId })
 
 | Name      | Type                    | Description                                         |
 | --------- | ----------------------- | --------------------------------------------------- |
-| region    | string                  | 业务归属地（"cn"/"ap_southeast"/"ap_south" / "us" / "me_east" / "sa_east"）                      |
+| region    | string                  | 业务归属地（"cn"/"ap_southeast"/"ap_south" / "us" / "me_east" / "sa_east"） |
 | channelId    | string                  | 频道ID                      |
 
 响应数据：
@@ -360,7 +372,7 @@ channel.joinChannel();
         });
 ```
 
-##### 离开频道(leaveChannel)
+##### 退出频道(leaveChannel)
 
 请求参数：
 
@@ -552,7 +564,7 @@ channel.getChannelUserListByAtrribute({})
 ```
 
 
-##### channel查询单个或多个频道用户数(getChannelUserCount)
+##### 查询单个或多个频道用户数(getChannelUserCount)
 
 ```js
 channel.getChannelUserCount({})
@@ -691,7 +703,7 @@ Typescript定义参考：
 {"uid":["135666911222"]}
 ```
 
-##### 接收设置用户属性Notify的回调(channel.on('NotifyUserAttributesSet', (data) => {}))
+##### channel接收设置用户属性Notify的回调(channel.on('NotifyUserAttributesSet', (data) => {}))
 
 接收到该频道设置用户某一属性Notify回调通知
 
@@ -726,7 +738,7 @@ Typescript定义参考：
 {"uid":"123","attributes":{"Name":"阿武","Description":"js_sdk测试","Bulletin":"bull","Extention":"ex"}}
 ```
 
-##### 接收到删除用户某一属性Notify回调(channel.on('NotifyUserAttributesDelete', (data) => {}))
+##### channel接收到删除用户某一属性Notify回调(channel.on('NotifyUserAttributesDelete', (data) => {}))
 
 接收到该频道删除用户某一属性Notify回调通知
 
