@@ -1,28 +1,31 @@
 # Hummer Channel Service js-sdk
 
-- [Hummer Channel Service js-sdk](#hummer-channel-js-sdk)
-  - [js-sdk对外接口](#js-sdk%e5%af%b9%e5%a4%96%e6%8e%a5%e5%8f%a3)
-    - [注意事项](#%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a1%b9)
-    - [初始化Hummer](#%e5%88%9d%e5%a7%8b%e5%8c%96hummer)
-    - [hummer刷新Token](#hummer%e5%88%b7%e6%96%b0token)
-    - [初始化Channel Service](#%e5%88%9d%e5%a7%8b%e5%8c%96channel-service)
-      - [接收消息回调函数(onReceiveMessage)](#%e6%8e%a5%e6%94%b6%e6%b6%88%e6%81%af%e5%9b%9e%e8%b0%83%e5%87%bd%e6%95%b0onreceivemessage)
-      - [接收channel组播消息回调函数(onReceiveChannelMessage)]
-      - [接收到上线Notify回调(onNotifyJoinChannel)]
-      - [接收到下线Notify回调(onNotifyLeaveChannel)]
-      - [设置用户属性Notify回调(onNotifyUserAttributesSet)]
-      - [删除用户某一属性Notify回调(onNotifyUserAttributesDelete)]
-    - [getInstance获取实例(getInstance)](#getinstance%e8%8e%b7%e5%8f%96%e5%ae%9e%e4%be%8bgetinstance)
-    - [给用户发消息(sendMessageToUser)](#%e7%bb%99%e7%94%a8%e6%88%b7%e5%8f%91%e6%b6%88%e6%81%afsendmessagetouser)
-    - [给指定channel发送组播消息(sendMessageToChannel)]
-    - [查询用户在线状态(queryOnlineStatusForUser)](#%e6%9f%a5%e8%af%a2%e7%94%a8%e6%88%b7%e5%9c%a8%e7%ba%bf%e7%8a%b6%e6%80%81queryonlinestatusforuser)
-    - [进入频道(joinChannel)]
-    - [离开频道(leaveChannel)]
-    - [设置用户属性(setUserAttributes)]
-    - [删除用户某些属性(deleteUserAttributesByKeys)]
-    - [获取频道用户列表(getChannelUserList)]
-    - [根据用户某一属性获取频道用户列表(getChannelUserListByAtrribute)]
-    - [辅助工具]encodeStringToUtf8Bytes和decodeUtf8BytesToString
+   * [Hummer Channel Service js-sdk](#hummer-channel-service-js-sdk)
+      * [js-sdk对外接口](#js-sdk对外接口)
+         * [注意事项](#注意事项)
+         * [初始化Hummer](#初始化hummer)
+         * [hummer刷新Token(refreshToken)](#hummer刷新tokenrefreshtoken)
+         * [初始化Channel Service](#初始化channel-service)
+            * [接收消息回调函数(onReceiveMessage)](#接收消息回调函数onreceivemessage)
+            * [接收channel组播消息回调函数(onReceiveChannelMessage)](#接收channel组播消息回调函数onreceivechannelmessage)
+            * [接收到上线Notify回调(onNotifyJoinChannel)](#接收到上线notify回调onnotifyjoinchannel)
+            * [接收到下线Notify回调(onNotifyLeaveChannel)](#接收到下线notify回调onnotifyleavechannel)
+            * [接收设置用户属性Notify的回调(onNotifyUserAttributesSet)](#接收设置用户属性notify的回调onnotifyuserattributesset)
+            * [接收到删除用户某一属性Notify回调(onNotifyUserAttributesDelete)](#接收到删除用户某一属性notify回调onnotifyuserattributesdelete)
+         * [getInstance获取实例(getInstance)](#getinstance获取实例getinstance)
+         * [给用户发P2P消息(sendMessageToUser)](#给用户发p2p消息sendmessagetouser)
+         * [给指定channel发送组播消息(sendMessageToChannel)](#给指定channel发送组播消息sendmessagetochannel)
+         * [查询用户在线状态(queryOnlineStatusForUser)](#查询用户在线状态queryonlinestatusforuser)
+         * [【辅助工具】将string编码成Utf8二进制(encodeStringToUtf8Bytes)](#辅助工具将string编码成utf8二进制encodestringtoutf8bytes)
+         * [【辅助工具】将Utf8二进制解码成string类型(decodeUtf8BytesToString)](#辅助工具将utf8二进制解码成string类型decodeutf8bytestostring)
+         * [进入频道(joinChannel)](#进入频道joinchannel)
+         * [离开频道(leaveChannel)](#离开频道leavechannel)
+         * [设置用户属性(setUserAttributes)](#设置用户属性setuserattributes)
+         * [删除用户某些属性(deleteUserAttributesByKeys)](#删除用户某些属性deleteuserattributesbykeys)
+         * [获取频道用户列表(getChannelUserList)](#获取频道用户列表getchanneluserlist)
+         * [根据用户某一属性获取频道用户列表(getChannelUserListByAtrribute)](#根据用户某一属性获取频道用户列表getchanneluserlistbyatrribute)
+
+
 ## js-sdk对外接口
 
 ### 注意事项
