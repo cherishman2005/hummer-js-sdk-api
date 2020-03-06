@@ -280,7 +280,7 @@ client.queryOnlineStatusForUser({uid: uid});
 
 示例：
 ```js
-channel.queryOnlineStatusForUser({uid: uid}).then(res => {
+client.queryOnlineStatusForUser({uid: uid}).then(res => {
   console.log("res: " + JSON.stringify(res));
 }).catch(err => {
   console.log(err);
