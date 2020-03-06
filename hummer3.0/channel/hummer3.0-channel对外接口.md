@@ -22,7 +22,7 @@
                * [channel删除用户某些属性(deleteUserAttributesByKeys)](#channel删除用户某些属性deleteuserattributesbykeys)
                * [channel获取频道用户列表(getChannelUserList)](#channel获取频道用户列表getchanneluserlist)
                * [channel根据用户某一属性获取频道用户列表(getChannelUserListByAtrribute)](#channel根据用户某一属性获取频道用户列表getchanneluserlistbyatrribute)
-               * [查询单个或多个频道用户数(getChannelUserCount)](#查询单个或多个频道用户数getchannelusercount)
+               * [channel查询单个或多个频道用户数(getChannelUserCount)](#channel查询单个或多个频道用户数getchannelusercount)
                * [channel接收组播消息(channel.on('ChannelMessage', (data) =&gt; {}))](#channel接收组播消息channelonchannelmessage-data--)
                * [channel接收到加入频道Notify回调(channel.on('NotifyJoinChannel', (data) =&gt; {}))](#channel接收到加入频道notify回调channelonnotifyjoinchannel-data--)
                * [channel接收到退出频道Notify回调(channel.on('NotifyLeaveChannel', (data) =&gt; {}))](#channel接收到退出频道notify回调channelonnotifyleavechannel-data--)
@@ -564,7 +564,9 @@ channel.getChannelUserListByAtrribute({})
 ```
 
 
-##### 查询单个或多个频道用户数(getChannelUserCount)
+##### channel查询单个或多个频道用户数(getChannelUserCount)
+
+在预先设定的区域，channel查询单个或多个频道用户数
 
 ```js
 channel.getChannelUserCount({})
