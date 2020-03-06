@@ -4,8 +4,8 @@
       * [js-sdk对外接口](#js-sdk对外接口)
          * [注意事项](#注意事项)
          * [初始化Hummer](#初始化hummer)
-            * [接收链接状态的回调(hummer.on('ConnectStatus', (data) =&gt; {}))](#接收链接状态的回调hummeronconnectstatus-data--)
-            * [接收登录状态的回调(hummer.on('LoginStatus', (data) =&gt; {}))](#接收登录状态的回调hummeronloginstatus-data--)
+            * [接收链接状态的回调通知(hummer.on('ConnectStatus', (data) =&gt; {}))](#接收链接状态的回调hummeronconnectstatus-data--)
+            * [接收登录状态的回调通知(hummer.on('LoginStatus', (data) =&gt; {}))](#接收登录状态的回调hummeronloginstatus-data--)
          * [初始化Channel Service](#初始化channel-service)
             * [P2P的消息处理](#p2p的消息处理)
                * [设置用户归属地](#设置用户归属地)
@@ -83,7 +83,7 @@ Hummer初始化：创建hummer实例
 hummer初始化时，通过onError回调返回来回馈初始化是否成功。
 
 
-#### 接收链接状态的回调(hummer.on('ConnectStatus', (data) => {}))
+#### 接收链接状态的回调通知(hummer.on('ConnectStatus', (data) => {}))
 
 回调通知：
 
@@ -108,7 +108,7 @@ enum ConnectStatus {
 ```
 
 
-#### 接收登录状态的回调(hummer.on('LoginStatus', (data) => {}))
+#### 接收登录状态的回调通知(hummer.on('LoginStatus', (data) => {}))
 
 回调通知：
 
