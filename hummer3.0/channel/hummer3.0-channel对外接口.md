@@ -79,11 +79,13 @@ Hummer初始化：创建hummer实例
 | token      | string |                                                                                          |
 | onError    | Function | 返回Object，如果code=0，表示成功。如{"code":0,"msg":"ok"}                         |
 
-
-hummer初始化时，通过onError回调返回来回馈初始化是否成功。
-
+【注】hummer初始化时，通过onError回调返回来回馈初始化是否成功。
 
 #### 接收链接状态的回调通知(hummer.on('ConnectStatus', (data) => {}))
+
+```javascript
+hummer.on('ConnectStatus', (data) => {});
+```
 
 回调通知：
 
@@ -107,8 +109,11 @@ enum ConnectStatus {
 }
 ```
 
-
 #### 接收登录状态的回调通知(hummer.on('LoginStatus', (data) => {}))
+
+```javascript
+hummer.on('LoginStatus', (data) => {});
+```
 
 回调通知：
 
@@ -151,7 +156,9 @@ client = hummer.createInstance();
 
 ##### 设置用户归属地
 
+```javascript
 client.setUserRegion({ region });
+```
 
 请求参数：
 
@@ -168,8 +175,11 @@ client.setUserRegion({ region });
 
 
 ##### 发送P2P的消息(sendMessageToUser)
+
 发送P2P的消息
-client.sendMessageToUser({});
+```javascript
+client.sendMessageToUser({})；
+```
 
 请求参数：
 
@@ -203,6 +213,8 @@ client.sendMessageToUser(params).then(res => {
 ```
 
 ##### 接收对端消息（client.on('MessageFromUser', (data) => {})）
+
+P2P接收对端的消息
 
 ```javascript
 client.on('MessageFromUser', (data) => { console.log(data); });
@@ -480,7 +492,7 @@ channel.deleteUserAttributesByKeys({})
 | keys | string[] | 用户属性key数组 |
 
 
-响应数据：
+响应数据：Promise<>
 
 | Name     | Type    | Description  |
 | -------- | ------- | ------------ |
@@ -509,7 +521,7 @@ channel.getChannelUserList()
 |    NA        |      NA        |     | |
 
 
-响应数据：
+响应数据：Promise<>
 
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- | ----------- |
