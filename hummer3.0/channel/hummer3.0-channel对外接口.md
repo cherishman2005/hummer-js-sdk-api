@@ -24,10 +24,10 @@
                * [channel根据用户某一属性获取频道用户列表(getChannelUserListByAtrribute)](#channel根据用户某一属性获取频道用户列表getchanneluserlistbyatrribute)
                * [channel查询单个或多个频道用户数(getChannelUserCount)](#channel查询单个或多个频道用户数getchannelusercount)
                * [channel接收组播消息(channel.on('ChannelMessage', (data) =&gt; {}))](#channel接收组播消息channelonchannelmessage-data--)
-               * [channel接收到上线Notify回调(channel.on('NotifyJoinChannel', (data) =&gt; {}))](#channel接收到上线notify回调channelonnotifyjoinchannel-data--)
-            * [channel接收到上线Notify回调(channel.on('NotifyLeaveChannel', (data) =&gt; {}))](#channel接收到上线notify回调channelonnotifyleavechannel-data--)
-            * [接收设置用户属性Notify的回调(channel.on('NotifyUserAttributesSet', (data) =&gt; {}))](#接收设置用户属性notify的回调channelonnotifyuserattributesset-data--)
-            * [接收到删除用户某一属性Notify回调(channel.on('NotifyUserAttributesDelete', (data) =&gt; {}))](#接收到删除用户某一属性notify回调channelonnotifyuserattributesdelete-data--)
+               * [channel接收到加入频道Notify回调(channel.on('NotifyJoinChannel', (data) =&gt; {}))](#channel接收到加入频道notify回调channelonnotifyjoinchannel-data--)
+               * [channel接收到退出频道Notify回调(channel.on('NotifyLeaveChannel', (data) =&gt; {}))](#channel接收到退出频道notify回调channelonnotifyleavechannel-data--)
+               * [接收设置用户属性Notify的回调(channel.on('NotifyUserAttributesSet', (data) =&gt; {}))](#接收设置用户属性notify的回调channelonnotifyuserattributesset-data--)
+               * [接收到删除用户某一属性Notify回调(channel.on('NotifyUserAttributesDelete', (data) =&gt; {}))](#接收到删除用户某一属性notify回调channelonnotifyuserattributesdelete-data--)
          * [getInstanceInfo获取实例信息(getInstanceInfo)](#getinstanceinfo获取实例信息getinstanceinfo)
          * [【辅助工具】将string编码成Utf8二进制(encodeStringToUtf8Bytes)](#辅助工具将string编码成utf8二进制encodestringtoutf8bytes)
          * [【辅助工具】将Utf8二进制解码成string类型(decodeUtf8BytesToString)](#辅助工具将utf8二进制解码成string类型decodeutf8bytestostring)
@@ -629,7 +629,7 @@ interface ChannelMessage {
 }
 ```
 
-##### channel接收到上线Notify回调(channel.on('NotifyJoinChannel', (data) => {}))
+##### channel接收到加入频道Notify回调(channel.on('NotifyJoinChannel', (data) => {}))
 
 ```
 channel.on('NotifyJoinChannel', (data) => { console.log(data); })
@@ -660,7 +660,7 @@ handler data定义：
 {"uid":["555"]}
 ```
 
-#### channel接收到上线Notify回调(channel.on('NotifyLeaveChannel', (data) => {}))
+##### channel接收到退出频道Notify回调(channel.on('NotifyLeaveChannel', (data) => {}))
 
 ```
 channel.on('NotifyLeaveChannel', (data) => { console.log(data); })
@@ -686,7 +686,7 @@ Typescript定义参考：
 {"uid":["135666911222"]}
 ```
 
-#### 接收设置用户属性Notify的回调(channel.on('NotifyUserAttributesSet', (data) => {}))
+##### 接收设置用户属性Notify的回调(channel.on('NotifyUserAttributesSet', (data) => {}))
 
 ```
 channel.on('NotifyUserAttributesSet', (data) => { console.log(data); })
@@ -719,7 +719,7 @@ Typescript定义参考：
 {"uid":"123","attributes":{"Name":"阿武","Description":"js_sdk测试","Bulletin":"bull","Extention":"ex"}}
 ```
 
-#### 接收到删除用户某一属性Notify回调(channel.on('NotifyUserAttributesDelete', (data) => {}))
+##### 接收到删除用户某一属性Notify回调(channel.on('NotifyUserAttributesDelete', (data) => {}))
 
 ```
 channel.on('NotifyUserAttributesDelete', (data) => { console.log(data); });
