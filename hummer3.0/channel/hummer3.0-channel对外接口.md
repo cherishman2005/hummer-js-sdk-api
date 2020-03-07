@@ -214,7 +214,7 @@ client.sendMessageToUser(params).then(res => {
 
 ##### 接收对端消息（client.on('MessageFromUser', (data) => {})）
 
-P2P接收对端的消息
+接收对端的P2P消息
 
 ```javascript
 client.on('MessageFromUser', (data) => { console.log(data); });
@@ -224,14 +224,14 @@ client.on('MessageFromUser', (data) => { console.log(data); });
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| eventName | string | 取值"NotifyUserAttributesDelete" |
+| eventName | string | 取值"MessageFromUser"      |
 | handler | function  | 接收回调                 |
 
 回调参数：
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| message | Message | 消息实体。 详细定义后面描述 |
+| message | Message | 消息对象。                  |
 | fromUid | string  | 发送者的uid                 |
 
 Message定义：
@@ -624,7 +624,7 @@ channel.on('ChannelMessage', (data) => { console.log(data); })
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| eventName | string | 取值"ChannelMessage" |
+| eventName | string | 取值"ChannelMessage"       |
 | handler | function  | 接收回调                 |
 
 
@@ -632,7 +632,7 @@ handler回调参数：
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| message | Message | 消息实体。 详细定义后面描述 |
+| message | Message | 频道消息对象                |
 | fromUid | string  | 发送者的uid                 |
 
 
@@ -659,16 +659,17 @@ interface ChannelMessage {
 
 ##### channel接收到加入频道Notify回调(channel.on('NotifyJoinChannel', (data) => {}))
 
+接收加入频道的用户列表通知。
+
 ```
 channel.on('NotifyJoinChannel', (data) => { console.log(data); })
 ```
-接收加入该频道的用户列表通知
 
 回调通知：
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| eventName | string | 取值"NotifyJoinChannel" |
+| eventName | string | 取值"NotifyJoinChannel"    |
 | handler | function  | 接收回调                 |
 
 
@@ -691,7 +692,7 @@ handler data定义：
 
 ##### channel接收到退出频道Notify回调(channel.on('NotifyLeaveChannel', (data) => {}))
 
-接收退出该频道的用户列表通知
+接收退出频道的用户列表通知。
 
 ```
 channel.on('NotifyLeaveChannel', (data) => { console.log(data); })
@@ -701,7 +702,7 @@ channel.on('NotifyLeaveChannel', (data) => { console.log(data); })
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| eventName | string | 取值"NotifyLeaveChannel" |
+| eventName | string | 取值"NotifyLeaveChannel"   |
 | handler | function  | 接收回调                 |
 
 
@@ -719,7 +720,7 @@ Typescript定义参考：
 
 ##### channel接收设置用户属性Notify的回调(channel.on('NotifyUserAttributesSet', (data) => {}))
 
-接收到该频道设置用户某一属性Notify回调通知
+接收到该频道设置用户某一属性Notify回调通知。
 
 ```
 channel.on('NotifyUserAttributesSet', (data) => { console.log(data); })
