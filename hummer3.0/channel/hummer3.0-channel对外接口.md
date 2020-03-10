@@ -6,13 +6,12 @@
          * [初始化Hummer](#初始化hummer)
             * [接收链接状态的回调通知(hummer.on('ConnectStatus', (data) =&gt; {}))](#接收链接状态的回调通知hummeronconnectstatus-data--)
             * [接收登录状态的回调通知(hummer.on('LoginStatus', (data) =&gt; {}))](#接收登录状态的回调通知hummeronloginstatus-data--)
+            * [设置用户归属地](#设置用户归属地)
          * [初始化Channel Service](#初始化channel-service)
             * [P2P的消息处理](#p2p的消息处理)
-               * [设置用户归属地](#设置用户归属地)
                * [发送P2P的消息(sendMessageToUser)](#发送p2p的消息sendmessagetouser)
-               * [接收对端消息（client.on('MessageFromUser', (data) =&gt; {})）](#接收对端消息clientonmessagefromuser-data--)
-               * [查询单个用户在线(queryOnlineStatusForUser)](#查询单个用户在线queryonlinestatusforuser)
-               * [批量查询用户在线(queryUsersOnlineStatus)](#批量查询用户在线queryusersonlinestatus)
+               * [接收对端消息(client.on('MessageFromUser', (data) =&gt; {}))](#接收对端消息clientonmessagefromuser-data--)
+               * [批量查询用户在线列表(queryUsersOnlineStatus)](#批量查询用户在线列表queryusersonlinestatus)
             * [频道消息处理](#频道消息处理)
                * [创建单个频道实例(createChannel)](#创建单个频道实例createchannel)
                * [加入频道(joinChannel)](#加入频道joinchannel)
@@ -41,20 +40,14 @@
 
 （2）一个浏览器只能登录一个用户（uid）。
 
-ChannelService与SignalService互通兼容，新业务使用ChannelService。
+channelService区分可靠P2P；可靠组播；
+    
 
-
-channel区分可靠P2P、非可靠P2P；可靠组播、非可靠组播；
-    
-【注】非可靠：这里非可靠是在网络异常，或抖动时才会出现掉包；——非可靠可以满足绝大部分场景；
-    
-    对于高并发，时延要求高的场景建议采用非可靠设置（如白板）； 对于可靠性要求高的场景采用可靠设置；
-    
 （I）白板功能调试主要场景：（时延较小，满足需求）
 
-    （a）【1对1白板授课】非可靠的p2p；
+    （a）【1对1白板授课】可靠的p2p；
 
-    （b）【1对多白板授课】非可靠的组播；
+    （b）【1对多白板授课】可靠的组播；
 
 （II）另外一个场景是1对多，老师禁掉其他学生的声音的控制；采用可靠p2p
 
@@ -136,6 +129,25 @@ export enum LoginStatus {
 }
 ```
 
+#### 设置用户归属地
+
+```javascript
+hummer.setUserRegion({ region });
+```
+
+请求参数：
+
+| Name      | Type                    | Description                                         |
+| --------- | ----------------------- | --------------------------------------------------- |
+| region    | string                  | 用户归属地（"cn"/"ap_southeast"/"ap_south" / "us" / "me_east" / "sa_east"）                      |
+
+响应数据：Promise<>
+
+| Name      | Type   | Description                 |
+| --------- | ------ | --------------------------- |
+| rescode   | number | 0：表示成功                 |
+| msg       | string | 返回描述                    |
+
 
 ### 初始化Channel Service
 
@@ -154,26 +166,6 @@ client = hummer.createInstance();
 
 #### P2P的消息处理
 
-##### 设置用户归属地
-
-```javascript
-client.setUserRegion({ region });
-```
-
-请求参数：
-
-| Name      | Type                    | Description                                         |
-| --------- | ----------------------- | --------------------------------------------------- |
-| region    | string                  | 用户归属地（"cn"/"ap_southeast"/"ap_south" / "us" / "me_east" / "sa_east"）                      |
-
-响应数据：Promise<>
-
-| Name      | Type   | Description                 |
-| --------- | ------ | --------------------------- |
-| rescode   | number | 0：表示成功                 |
-| msg       | string | 返回描述                    |
-
-
 ##### 发送P2P的消息(sendMessageToUser)
 
 发送P2P的消息
@@ -188,7 +180,6 @@ client.sendMessageToUser({})；
 | type      | string                  | content的类型。用户自己约定。                       |
 | content   | Uint8Array              | 消息的内容。                                        |
 | receiver  | string                  | 接收者uid                                           |
-| option    | object                  | 可选设置项。现包括成员reliable，默认"yes"可靠；取值['yes', 'no']|
 | appExtras | { [k: string]: string } | 可选参数。 用户自定义的数据。 键和值为string的json-object。 |
 
 响应数据：Promise<>
@@ -200,7 +191,7 @@ client.sendMessageToUser({})；
 
 示例：
 ```javascript
-let params = { type, content, receiver, option: {reliable} }
+let params = { type, content, receiver }
 client.sendMessageToUser(params).then(res => {
   console.log("res: " + JSON.stringify(res));
 }).catch(err => {
@@ -212,7 +203,7 @@ client.sendMessageToUser(params).then(res => {
 {"rescode":0,"msg":"ok"}
 ```
 
-##### 接收对端消息（client.on('MessageFromUser', (data) => {})）
+##### 接收对端消息(client.on('MessageFromUser', (data) => {}))
 
 接收对端的P2P消息
 
@@ -241,8 +232,6 @@ Message定义：
 | type             | number                  | 消息内容类型                                            |
 | data             | Uint8Array              | 消息内容                                                |
 | appExtras        | {[k: string]: string}   | 可选参数。 用户自定义的数据。 键和值为string的json-object。  |
-| serverAcceptedTs | string                  | 服务器接收到消息的时间戳(毫秒)。64bit整型对应的字符串。 |
-
 
 ```typescript
 interface Message {
@@ -250,49 +239,12 @@ interface Message {
         type: string;
         data: Uint8Array;
         appExtras?: ({ [k: string]: string }|null);
-        serverAcceptedTs: string;
     },
     fromUid: string;
 }
 ```
 
-##### 查询单个用户在线(queryOnlineStatusForUser)
-查询单个用户在线
-```javascript
-client.queryOnlineStatusForUser({uid: uid});
-```
-
-请求参数：
-
-| Name | Type   | Description |
-| ---- | ------ | ----------- |
-| uid  | string | 要查的uid   |
-
-响应数据：Promise<>
-
-| Name     | Type    | Description  |
-| -------- | ------- | ------------ |
-| rescode  | number  | 0：表示成功  |
-| msg      | string  | 返回描述     |
-| uid      | string  | 用户uid      |
-| isOnline | boolean | 用户是否在线 |
-
-
-示例：
-```js
-client.queryOnlineStatusForUser({uid: uid}).then(res => {
-  console.log("res: " + JSON.stringify(res));
-}).catch(err => {
-  console.log(err);
-})
-```
-
-响应：
-```js
-{"rescode":0, "msg":"ok", "uid":"123", "isOnline":true}
-```
-
-##### 批量查询用户在线(queryUsersOnlineStatus)
+##### 批量查询用户在线列表(queryUsersOnlineStatus)
 
 批量查询用户在线列表
 
@@ -313,8 +265,6 @@ client.queryUsersOnlineStatus({ uids: uids })
 | rescode  | number  | 0：表示成功  |
 | msg      | string  | 返回描述     |
 | onlineUids | string[]  | 在线的uid列表      |
-
-【注】queryUsersOnlineStatus可以逐步替掉接口queryOnlineStatusForUser
 
 示例：
 ```js
@@ -422,7 +372,6 @@ channel.sendMessageToChannel({})
 | --------- | ----------------------- | --------------------------------------------------- |
 | type      | string                  | content的类型。用户自己约定。                       |
 | content   | Uint8Array                  | 消息的内容。                                    |
-| option    | object                  | 可选设置项。现包括成员reliable，默认"yes"可靠；取值('yes' | 'no')|
 | appExtras | { [k: string]: string } | 可选参数。 用户自定义的数据。 键和值为string的Object。 |
 
 响应数据：Promise<>
@@ -434,7 +383,7 @@ channel.sendMessageToChannel({})
 
 示例：
 ```javascript
-let params = { type, content, option: {reliable} }
+let params = { type, content }
 channel.sendMessageToChannel(params).then(res => {
   console.log("res: " + JSON.stringify(res));
 }).catch(err => {
@@ -464,8 +413,8 @@ channel.setUserAttributes({})
 
 | Name     | Type    | Description  |
 | -------- | ------- | ------------ |
-|  rescode | number  |   0:成功     |
-| msg       | string | 返回描述     |
+| rescode  | number  |   0:成功     |
+| msg      | string  | 返回描述     |
 
 
 示例：
@@ -643,7 +592,6 @@ Message定义：
 | type             | number                  | 消息内容类型                                            |
 | data             | Uint8Array              | 消息内容                                                |
 | appExtras        | { [k: string]: string } | 可选参数。 用户自定义的数据。 键和值为string的json-object。  |
-| serverAcceptedTs | string                  | 服务器接收到消息的时间戳(毫秒)。64bit整型对应的字符串。 |
 
 ```typescript
 interface ChannelMessage {
@@ -651,7 +599,6 @@ interface ChannelMessage {
         type: string;
         data: Uint8Array;
         appExtras?: ({ [k: string]: string }|null);
-        serverAcceptedTs: string;
     },
     fromUid: string;
 }
