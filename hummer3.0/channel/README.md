@@ -25,6 +25,8 @@ https://github.com/cherishman2005/hummer-js-sdk-api/
 
 ## hummer-channel-sdk js-sdk安装配置
 
+npm包路径：https://www.npmjs.com/package/hummer-channel-sdk
+
 （1）npm包
 
 npm install hummer-channel-sdk

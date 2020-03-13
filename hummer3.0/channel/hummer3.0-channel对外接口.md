@@ -6,7 +6,7 @@
          * [初始化Hummer](#初始化hummer)
             * [接收链接状态的回调通知(hummer.on('ConnectStatus', (data) =&gt; {}))](#接收链接状态的回调通知hummeronconnectstatus-data--)
             * [接收登录状态的回调通知(hummer.on('LoginStatus', (data) =&gt; {}))](#接收登录状态的回调通知hummeronloginstatus-data--)
-            * [设置用户归属地](#设置用户归属地)
+            * [设置用户归属地(setUserRegion)](#设置用户归属地setuserregion)
          * [初始化Channel Service](#初始化channel-service)
             * [P2P的消息处理](#p2p的消息处理)
                * [发送P2P的消息(sendMessageToUser)](#发送p2p的消息sendmessagetouser)
@@ -129,7 +129,7 @@ export enum LoginStatus {
 }
 ```
 
-#### 设置用户归属地
+#### 设置用户归属地(setUserRegion)
 
 ```javascript
 hummer.setUserRegion({ region });
