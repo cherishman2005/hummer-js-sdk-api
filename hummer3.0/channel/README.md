@@ -8,9 +8,7 @@ https://github.com/cherishman2005/hummer-js-sdk-api/
 
 ### 动态
 
-[2019-03-20] 【hummer-channel-sdk新版本】提供hummer-channel-sdk 2.1.0版本
-
-【重点】在hummer-channel.js  1.0.5版本的基础上做了接口调整。新业务请使用“hummer-channel-sdk”版本。
+[2019-03-25] 【hummer-channel-sdk新版本】提供hummer-channel-sdk 2.1.0版本
 
 接口调整，详见接口hummer3.0文档：《hummer3.0-channel对外接口.md》
 
