@@ -1,5 +1,8 @@
 # Hummer Channel Service js-sdk
 
+npm包发布路径： https://www.npmjs.com/package/hummer-channel-sdk
+
+
    * [Hummer Channel Service js-sdk](#hummer-channel-service-js-sdk)
       * [js-sdk对外接口](#js-sdk对外接口)
          * [注意事项](#注意事项)
