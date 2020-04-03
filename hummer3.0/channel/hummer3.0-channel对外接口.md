@@ -17,16 +17,28 @@
                * [加入频道(joinChannel)](#加入频道joinchannel)
                * [退出频道(leaveChannel)](#退出频道leavechannel)
                * [channel发送组播消息(sendMessageToChannel)](#channel发送组播消息sendmessagetochannel)
-               * [channel设置用户属性(setUserAttributes)](#channel设置用户属性setuserattributes)
-               * [channel删除用户某些属性(deleteUserAttributesByKeys)](#channel删除用户某些属性deleteuserattributesbykeys)
+               * [channel设置本地用户属性(setUserAttributes)](#channel设置本地用户属性setuserattributes)
+               * [channel删除本地用户某些属性(deleteUserAttributesByKeys)](#channel删除本地用户某些属性deleteuserattributesbykeys)
+               * [channel添加或更新本地用户的属性(addOrUpdateUserAttributes)](#channel添加或更新本地用户的属性addorupdateuserattributes)
+               * [channel清空本地用户的属性(clearUserAttributes)](#channel清空本地用户的属性clearuserattributes)
                * [channel获取频道用户列表(getChannelUserList)](#channel获取频道用户列表getchanneluserlist)
                * [channel根据用户某一属性获取频道用户列表(getChannelUserListByAtrribute)](#channel根据用户某一属性获取频道用户列表getchanneluserlistbyatrribute)
+               * [channel全量设置某指定频道的属性(setChannelAttributes)](#channel全量设置某指定频道的属性setchannelattributes)
+               * [channel删除某指定频道的指定属性(deleteChannelAttributesByKeys)](#channel删除某指定频道的指定属性deletechannelattributesbykeys)
+               * [channel更新频道属性(addOrUpdateChannelAttributes)](#channel更新频道属性addorupdatechannelattributes)
+               * [channel清空某指定频道的属性(clearChannelAttributes)](#channel清空某指定频道的属性clearchannelattributes)
+               * [channel查询某指定频道的全部属性(getChannelAttributes)](#channel查询某指定频道的全部属性getchannelattributes)
+               * [channel查询某指定频道指定属性名的属性(getChannelAttributesByKeys)](#channel查询某指定频道指定属性名的属性getchannelattributesbykeys)
                * [channel查询单个或多个频道用户数(getChannelUserCount)](#channel查询单个或多个频道用户数getchannelusercount)
                * [channel接收组播消息(channel.on('ChannelMessage', (data) =&gt; {}))](#channel接收组播消息channelonchannelmessage-data--)
                * [channel接收到加入频道Notify回调(channel.on('NotifyJoinChannel', (data) =&gt; {}))](#channel接收到加入频道notify回调channelonnotifyjoinchannel-data--)
                * [channel接收到退出频道Notify回调(channel.on('NotifyLeaveChannel', (data) =&gt; {}))](#channel接收到退出频道notify回调channelonnotifyleavechannel-data--)
                * [channel接收设置用户属性Notify的回调(channel.on('NotifyUserAttributesSet', (data) =&gt; {}))](#channel接收设置用户属性notify的回调channelonnotifyuserattributesset-data--)
                * [channel接收到删除用户某一属性Notify回调(channel.on('NotifyUserAttributesDelete', (data) =&gt; {}))](#channel接收到删除用户某一属性notify回调channelonnotifyuserattributesdelete-data--)
+               * [channel接收到添加或更新用户某一属性Notify回调(channel.on('NotifyUserAttributesAddOrUpdate', (data) =&gt; {}))](#channel接收到添加或更新用户某一属性notify回调channelonnotifyuserattributesaddorupdate-data--)
+               * [channel接收设置频道属性Notify的回调(channel.on('NotifyChannelAttributesSet', (data) =&gt; {}))](#channel接收设置频道属性notify的回调channelonnotifychannelattributesset-data--)
+               * [channel接收到删除频道某一属性Notify回调(channel.on('NotifyChannelAttributesDelete', (data) =&gt; {}))](#channel接收到删除频道某一属性notify回调channelonnotifychannelattributesdelete-data--)
+               * [channel接收到添加或更新频道某一属性Notify回调(channel.on('NotifyChannelAttributesAddOrUpdate', (data) =&gt; {}))](#channel接收到添加或更新频道某一属性notify回调channelonnotifychannelattributesaddorupdate-data--)
          * [getInstanceInfo获取实例信息(getInstanceInfo)](#getinstanceinfo获取实例信息getinstanceinfo)
          * [【辅助工具】将string编码成Utf8二进制(encodeStringToUtf8Bytes)](#辅助工具将string编码成utf8二进制encodestringtoutf8bytes)
          * [【辅助工具】将Utf8二进制解码成string类型(decodeUtf8BytesToString)](#辅助工具将utf8二进制解码成string类型decodeutf8bytestostring)
@@ -396,7 +408,7 @@ channel.sendMessageToChannel(params).then(res => {
 ```
 
 
-##### channel设置用户属性(setUserAttributes)
+##### channel设置本地用户属性(setUserAttributes)
 
 ```js
 channel.setUserAttributes({})
@@ -428,7 +440,7 @@ channel.setUserAttributes({})
 ```
 
 
-##### channel删除用户某些属性(deleteUserAttributesByKeys)
+##### channel删除本地用户某些属性(deleteUserAttributesByKeys)
 
 ```js
 channel.deleteUserAttributesByKeys({})
@@ -438,7 +450,7 @@ channel.deleteUserAttributesByKeys({})
 
 | Name | Type   | Description |
 | ---- | ------ | ----------- |
-| keys | string[] | 用户属性key数组 |
+| attributes | {[k: string]: string} | 用户属性 |
 
 
 响应数据：Promise<>
@@ -456,6 +468,67 @@ channel.deleteUserAttributesByKeys({})
       console.log(err)
     })
 ```
+
+##### channel添加或更新本地用户的属性(addOrUpdateUserAttributes)
+
+```js
+channel.addOrUpdateUserAttributes({attributes})
+```
+
+请求参数：
+
+| Name | Type   | Description |
+| ---- | ------ | ----------- |
+| attributes | string[] | 用户属性key数组 |
+
+
+响应数据：Promise<>
+
+| Name     | Type    | Description  |
+| -------- | ------- | ------------ |
+|  rescode | number  |   0:成功     |
+| msg       | string | 返回描述     |
+
+示例：
+```js
+    let params = { attributes };
+    channel.addOrUpdateUserAttributes(params).then(res => {
+      console.log("addOrUpdateUserAttributes res: ", res);
+    }).catch(err => {
+      console.log(err)
+    })
+```
+
+
+##### channel清空本地用户的属性(clearUserAttributes)
+
+```js
+channel.clearUserAttributes()
+```
+
+请求参数：
+
+| Name | Type   | Description |
+| ---- | ------ | ----------- |
+| NA | | | |
+
+
+响应数据：Promise<>
+
+| Name     | Type    | Description  |
+| -------- | ------- | ------------ |
+|  rescode | number  |   0:成功     |
+| msg       | string | 返回描述     |
+
+示例：
+```js
+    channel.clearUserAttributes().then(res => {
+      console.log("clearUserAttributes res: ", res);
+    }).catch(err => {
+      console.log(err)
+    })
+```
+
 
 ##### channel获取频道用户列表(getChannelUserList)
 
@@ -482,7 +555,7 @@ channel.getChannelUserList()
 
 示例：
 ```javascript
-        this.channel.getChannelUserList().then(res => {
+        channel.getChannelUserList().then(res => {
           console.log("getChannelUserList res:", res);
         }).catch(err => {
         });
@@ -524,6 +597,188 @@ channel.getChannelUserListByAtrribute({})
     });
 ```
 
+##### channel全量设置某指定频道的属性(setChannelAttributes)
+
+```js
+channel.setChannelAttributes({})
+```
+
+请求参数：
+
+| Name | Type   | Description |
+| ---- | ------ | ----------- |
+| attributes | {[k: string]: string} | 频道属性key-value键值对 |
+
+
+响应数据：Promise<>
+
+| Name     | Type    | Description  |
+| -------- | ------- | ------------ |
+| rescode  | number  |   0:成功     |
+| msg      | string  | 返回描述     |
+
+
+示例：
+```js
+    let params = { attributes };
+    channel.setChannelAttributes(params).then(res => {
+      console.log("setChannelAttributes Res: ", res);
+    }).catch(err => {
+      console.log(err)
+    })
+```
+
+
+##### channel删除某指定频道的指定属性(deleteChannelAttributesByKeys)
+
+```js
+channel.deleteChannelAttributesByKeys({})
+```
+
+请求参数：
+
+| Name | Type   | Description |
+| ---- | ------ | ----------- |
+| keys | string[] | 频道属性key数组 |
+
+
+响应数据：Promise<>
+
+| Name     | Type    | Description  |
+| -------- | ------- | ------------ |
+|  rescode | number  |   0:成功     |
+| msg       | string | 返回描述     |
+
+示例：
+```js
+    channel.deleteChannelAttributesByKeys({ keys }).then(res => {
+      console.log("deleteChannelAttributesByKeys Res: ", res);
+    }).catch(err => {
+      console.log(err)
+    })
+```
+
+##### channel更新频道属性(addOrUpdateChannelAttributes)
+
+```js
+channel.addOrUpdateChannelAttributes({attributes})
+```
+
+请求参数：
+
+| Name | Type   | Description |
+| ---- | ------ | ----------- |
+| attributes | {[k: string]: string} | 频道属性key-value键值对 |
+
+响应数据：Promise<>
+
+| Name     | Type    | Description  |
+| -------- | ------- | ------------ |
+|  rescode | number  |   0:成功     |
+| msg       | string | 返回描述     |
+
+示例：
+```js
+    let params = { attributes };
+    channel.addOrUpdateChannelAttributes(params).then(res => {
+      console.log("addOrUpdateChannelAttributes res: ", res);
+    }).catch(err => {
+      console.log(err)
+    })
+```
+
+
+##### channel清空某指定频道的属性(clearChannelAttributes)
+
+```js
+channel.clearChannelAttributes()
+```
+
+请求参数：
+
+| Name | Type   | Description |
+| ---- | ------ | ----------- |
+| NA | | | |
+
+
+响应数据：Promise<>
+
+| Name     | Type    | Description  |
+| -------- | ------- | ------------ |
+|  rescode | number  |   0:成功     |
+| msg       | string | 返回描述     |
+
+示例：
+```js
+    channel.clearChannelAttributes().then(res => {
+      console.log("clearChannelAttributes res: ", res);
+    }).catch(err => {
+      console.log(err)
+    })
+```
+
+
+##### channel查询某指定频道的全部属性(getChannelAttributes)
+
+```js
+channel.getChannelAttributes()
+```
+
+请求参数：
+
+| Name | Type   | Description |
+| ---- | ------ | ----------- |
+| NA | | | |
+
+
+响应数据：Promise<>
+
+| Name     | Type    | Description  |
+| -------- | ------- | ------------ |
+|  rescode | number  |   0:成功     |
+| msg       | string | 返回描述     |
+| attributes | {[k: string]: string} | 频道属性key-value键值对 |
+
+示例：
+```js
+    channel.getChannelAttributes().then(res => {
+      console.log("getChannelAttributes res: ", res);
+    }).catch(err => {
+      console.log(err)
+    })
+```
+
+
+##### channel查询某指定频道指定属性名的属性(getChannelAttributesByKeys)
+
+```js
+channel.getChannelAttributesByKeys()
+```
+
+请求参数：
+
+| Name | Type   | Description |
+| ---- | ------ | ----------- |
+| keys | string[] | 频道属性key数组 |
+
+
+响应数据：Promise<>
+
+| Name     | Type    | Description  |
+| -------- | ------- | ------------ |
+|  rescode | number  |   0:成功     |
+| msg       | string | 返回描述     |
+| attributes | {[k: string]: string} | 频道属性key-value键值对 |
+
+示例：
+```js
+    channel.getChannelAttributesByKeys({keys}).then(res => {
+      console.log("getChannelAttributesByKeys res: ", res);
+    }).catch(err => {
+      console.log(err)
+    })
+```
+
 
 ##### channel查询单个或多个频道用户数(getChannelUserCount)
 
@@ -560,7 +815,6 @@ channel.getChannelUserCount({})
 ```javascript
 {"appid":1350626568,"channelIdCount":{"test123":0,"test999":3},"rescode":0,"msg":""}
 ```
-
 
 
 ##### channel接收组播消息(channel.on('ChannelMessage', (data) => {}))
@@ -719,7 +973,7 @@ channel.on('NotifyUserAttributesDelete', (data) => { console.log(data); });
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| notify  | object  | 详细定义后面描述            |
+|         | object  | 详细定义后面描述            |
 
 
 Message定义：
@@ -727,12 +981,164 @@ Message定义：
 | name             | type                    | description                                             |
 | ---------------- | ----------------------- | ------------------------------------------------------- |
 | uid             | string                   | UID                                                     |
-| attributes      | object                   | 用户属性 |
+| lastUpdateTs     | string                  | 用户属性最近一次删除的时间戳（毫秒） |
+| attributes       | {[k:string]: string}    | 用户属性 |
 
 Typescript定义参考：
 
 ```javascript
-{"uid":"999000","attributes":{"channel_role_name":"teacher"}
+{"uid":"999888","lastUpdateTs":"1585895009875","attributes":{"channel_role_name":"student"}}
+```
+
+
+##### channel接收到添加或更新用户某一属性Notify回调(channel.on('NotifyUserAttributesAddOrUpdate', (data) => {}))
+
+接收到添加或更新用户某一属性Notify回调通知
+
+```
+channel.on('NotifyUserAttributesAddOrUpdate', (data) => { console.log(data); });
+```
+
+回调通知：
+
+| name    | type    | description                 |
+| ------- | ------- | --------------------------- |
+| eventName | string | 取值"NotifyUserAttributesAddOrUpdate" |
+| handler | function  | 接收回调                 |
+
+回调参数：
+
+| name    | type    | description                 |
+| ------- | ------- | --------------------------- |
+|         | object  | 详细定义将data定义描述      |
+
+
+Message定义：
+
+| name             | type                    | description                                             |
+| ---------------- | ----------------------- | ------------------------------------------------------- |
+| uid             | string                   | UID                                                     |
+| lastUpdateTs     | string                  | 用户属性最近一次更新的时间戳（毫秒） |
+| attributes       | {[k:string]: string}    | 用户属性 |
+
+
+参考示例：
+
+```javascript
+{"uid":"999888","lastUpdateTs":"1585894858984","attributes":{"Name":"awu","channel_role_name":"student"}}
+```
+
+
+##### channel接收设置频道属性Notify的回调(channel.on('NotifyChannelAttributesSet', (data) => {}))
+
+接收到该频道的某一属性Notify回调通知。
+
+```
+channel.on('NotifyChannelAttributesSet', (data) => { console.log(data); })
+```
+
+回调通知：
+
+| name    | type    | description                 |
+| ------- | ------- | --------------------------- |
+| eventName | string | 取值"NotifyChannelAttributesSet" |
+| handler | function  | 接收回调                 |
+
+回调参数：
+
+| name    | type    | description                 |
+| ------- | ------- | --------------------------- |
+|         | object  | 详细定义将data定义描述      |
+
+
+data定义：
+
+| name             | type                    | description                                             |
+| ---------------- | ----------------------- | ------------------------------------------------------- |
+| lastUpdateUid    | string                  | 最近一次变更频道属性的用户UID |
+| lastUpdateTs     | string                  | 频道属性最近一次设置的时间戳（毫秒） |
+| attributes       | {[k:string]: string}    | 频道属性 |
+
+参考示例：
+
+```javascript
+{"lastUpdateUid":"999888","lastUpdateTs":"1585893855556","attributes":{"Name":"awu","Bulletin":"bull","Extention":"ex","channel_name":"nginx大讲堂"}}
+```
+
+##### channel接收到删除频道某一属性Notify回调(channel.on('NotifyChannelAttributesDelete', (data) => {}))
+
+接收到该频道删除用户某一属性Notify回调通知
+
+```
+channel.on('NotifyChannelAttributesDelete', (data) => { console.log(data); });
+```
+
+回调通知：
+
+| name    | type    | description                 |
+| ------- | ------- | --------------------------- |
+| eventName | string | 取值"NotifyChannelAttributesDelete" |
+| handler | function  | 接收回调                 |
+
+回调参数：
+
+| name    | type    | description                 |
+| ------- | ------- | --------------------------- |
+|         | object  | 详细定义将data定义描述      |
+
+
+data定义：
+
+| name             | type                    | description                                             |
+| ---------------- | ----------------------- | ------------------------------------------------------- |
+| lastUpdateUid    | string                  | 最近一次变更频道属性的用户UID |
+| lastUpdateTs     | string                  | 频道属性最近一次删除的时间戳（毫秒） |
+| attributes       | {[k:string]: string}    | 频道属性 |
+
+
+参考示例：
+
+```javascript
+{"lastUpdateUid":"999888","lastUpdateTs":"1585893904930","attributes":{"channel_name":"nginx大讲堂"}}
+```
+
+
+##### channel接收到添加或更新频道某一属性Notify回调(channel.on('NotifyChannelAttributesAddOrUpdate', (data) => {}))
+
+接收到添加或更新频道某一属性Notify回调通知
+
+```
+channel.on('NotifyChannelAttributesAddOrUpdate', (data) => { console.log(data); });
+```
+
+回调通知：
+
+| name    | type    | description                 |
+| ------- | ------- | --------------------------- |
+| eventName | string | 取值"NotifyChannelAttributesAddOrUpdate" |
+| handler | function  | 接收回调                 |
+
+
+回调参数：
+
+| name    | type    | description                 |
+| ------- | ------- | --------------------------- |
+|         | object  | 详细定义将data定义描述      |
+
+
+data定义：
+
+| name             | type                    | description                                             |
+| ---------------- | ----------------------- | ------------------------------------------------------- |
+| lastUpdateUid    | string                  | 最近一次变更频道属性的用户UID |
+| lastUpdateTs     | string                  | 频道属性最近一次更新的时间戳（毫秒） |
+| attributes       | {[k:string]: string}    | 频道属性 |
+
+
+参考示例：
+
+```javascript
+{"lastUpdateUid":"999888","lastUpdateTs":"1585893996807","attributes":{"channel_name":"nginx大讲堂","owner":"awu"}}
 ```
 
 ### getInstanceInfo获取实例信息(getInstanceInfo)
