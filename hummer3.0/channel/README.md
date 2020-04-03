@@ -8,6 +8,27 @@ https://github.com/cherishman2005/hummer-js-sdk-api/
 
 ### 动态
 
+[2019-04-03] 【hummer-channel-sdk新版本】提供hummer-channel-sdk 2.1.1版本
+
+接口调整，详见接口hummer3.0文档：《hummer3.0-channel对外接口.md》
+
+主要新增功能如下：
+
+用户属性管理主要新增API：
+
+	addOrUpdateUserAttributes	添加或更新本地用户的属性
+	clearUserAttributes	清空本地用户的属性
+
+频道属性管理主要新增API：
+
+	setChannelAttributes 	全量设置某指定频道的属性
+	addOrUpdateChannelAttributes	更新频道属性
+	deleteChannelAttributesByKeys	删除某指定频道的指定属性
+	clearChannelAttributes	清空某指定频道的属性
+	getChannelAttributes	查询某指定频道的全部属性
+	getChannelAttributesByKeys	查询某指定频道指定属性名的属性
+
+
 [2019-03-25] 【hummer-channel-sdk新版本】提供hummer-channel-sdk 2.1.0版本
 
 接口调整，详见接口hummer3.0文档：《hummer3.0-channel对外接口.md》
