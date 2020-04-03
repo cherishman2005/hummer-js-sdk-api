@@ -34,12 +34,12 @@
                * [channel接收到加入频道Notify回调(channel.on('NotifyJoinChannel', (data) =&gt; {}))](#channel接收到加入频道notify回调channelonnotifyjoinchannel-data--)
                * [channel接收到退出频道Notify回调(channel.on('NotifyLeaveChannel', (data) =&gt; {}))](#channel接收到退出频道notify回调channelonnotifyleavechannel-data--)
                * [channel接收设置用户属性Notify的回调(channel.on('NotifyUserAttributesSet', (data) =&gt; {}))](#channel接收设置用户属性notify的回调channelonnotifyuserattributesset-data--)
-               * [channel接收到删除用户某一属性Notify回调(channel.on('NotifyUserAttributesDelete', (data) =&gt; {}))](#channel接收到删除用户某一属性notify回调channelonnotifyuserattributesdelete-data--)
-               * [channel接收到添加或更新用户某一属性Notify回调(channel.on('NotifyUserAttributesAddOrUpdate', (data) =&gt; {}))](#channel接收到添加或更新用户某一属性notify回调channelonnotifyuserattributesaddorupdate-data--)
+               * [channel接收到删除用户某些属性Notify回调(channel.on('NotifyUserAttributesDelete', (data) =&gt; {}))](#channel接收到删除用户某些属性notify回调channelonnotifyuserattributesdelete-data--)
+               * [channel接收到添加或更新用户某些属性Notify回调(channel.on('NotifyUserAttributesAddOrUpdate', (data) =&gt; {}))](#channel接收到添加或更新用户某些属性notify回调channelonnotifyuserattributesaddorupdate-data--)
                * [channel接收设置频道属性Notify的回调(channel.on('NotifyChannelAttributesSet', (data) =&gt; {}))](#channel接收设置频道属性notify的回调channelonnotifychannelattributesset-data--)
-               * [channel接收到删除频道某一属性Notify回调(channel.on('NotifyChannelAttributesDelete', (data) =&gt; {}))](#channel接收到删除频道某一属性notify回调channelonnotifychannelattributesdelete-data--)
-               * [channel接收到添加或更新频道某一属性Notify回调(channel.on('NotifyChannelAttributesAddOrUpdate', (data) =&gt; {}))](#channel接收到添加或更新频道某一属性notify回调channelonnotifychannelattributesaddorupdate-data--)
-         * [getInstanceInfo获取实例信息(getInstanceInfo)](#getinstanceinfo获取实例信息getinstanceinfo)
+               * [channel接收到删除频道某些属性Notify回调(channel.on('NotifyChannelAttributesDelete', (data) =&gt; {}))](#channel接收到删除频道某些属性notify回调channelonnotifychannelattributesdelete-data--)
+               * [channel接收到添加或更新频道某些属性Notify回调(channel.on('NotifyChannelAttributesAddOrUpdate', (data) =&gt; {}))](#channel接收到添加或更新频道某些属性notify回调channelonnotifychannelattributesaddorupdate-data--)
+         * [【辅助工具】getInstanceInfo获取实例信息(getInstanceInfo)](#辅助工具getinstanceinfo获取实例信息getinstanceinfo)
          * [【辅助工具】将string编码成Utf8二进制(encodeStringToUtf8Bytes)](#辅助工具将string编码成utf8二进制encodestringtoutf8bytes)
          * [【辅助工具】将Utf8二进制解码成string类型(decodeUtf8BytesToString)](#辅助工具将utf8二进制解码成string类型decodeutf8bytestostring)
 
@@ -874,14 +874,14 @@ channel.on('NotifyJoinChannel', (data) => { console.log(data); })
 | handler | function  | 接收回调                 |
 
 
-回调参数：
+handler回调参数：
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| handler  | object  | 详细定义后面描述            |
+|         | object  | 详细定义见data定义          |
 
 
-handler data定义：
+data定义：
 
 | name             | type                    | description                                             |
 | ---------------- | ----------------------- | ------------------------------------------------------- |
@@ -907,13 +907,13 @@ channel.on('NotifyLeaveChannel', (data) => { console.log(data); })
 | handler | function  | 接收回调                 |
 
 
-handler data定义：
+handler回调参数：
 
 | name             | type                    | description                                             |
 | ---------------- | ----------------------- | ------------------------------------------------------- |
 | uids             | string[]                | UID数组                                                 |
 
-Typescript定义参考：
+参考示例：
 
 ```javascript
 {"uid":["135666911222"]}
@@ -921,7 +921,7 @@ Typescript定义参考：
 
 ##### channel接收设置用户属性Notify的回调(channel.on('NotifyUserAttributesSet', (data) => {}))
 
-接收到该频道设置用户某一属性Notify回调通知。
+接收到该频道设置用户某些属性Notify回调通知。
 
 ```
 channel.on('NotifyUserAttributesSet', (data) => { console.log(data); })
@@ -934,29 +934,30 @@ channel.on('NotifyUserAttributesSet', (data) => { console.log(data); })
 | eventName | string | 取值"NotifyUserAttributesSet" |
 | handler | function  | 接收回调                 |
 
-回调参数：
+handler回调参数：
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| handler  | object  | 详细定义后面描述            |
+|         | object  | 详细定义见data定义          |
 
 
-Message定义：
+data定义：
 
 | name             | type                    | description                                             |
 | ---------------- | ----------------------- | ------------------------------------------------------- |
 | uid             | string                   | UID                                                     |
 | attributes       | object                  | 用户属性 |
 
-Typescript定义参考：
+
+参考示例：
 
 ```javascript
 {"uid":"123","attributes":{"Name":"阿武","Description":"js_sdk测试","Bulletin":"bull","Extention":"ex"}}
 ```
 
-##### channel接收到删除用户某一属性Notify回调(channel.on('NotifyUserAttributesDelete', (data) => {}))
+##### channel接收到删除用户某些属性Notify回调(channel.on('NotifyUserAttributesDelete', (data) => {}))
 
-接收到该频道删除用户某一属性Notify回调通知
+接收到该频道删除用户某些属性Notify回调通知
 
 ```
 channel.on('NotifyUserAttributesDelete', (data) => { console.log(data); });
@@ -969,7 +970,7 @@ channel.on('NotifyUserAttributesDelete', (data) => { console.log(data); });
 | eventName | string | 取值"NotifyUserAttributesDelete" |
 | handler | function  | 接收回调                 |
 
-回调参数：
+handler回调参数：
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
@@ -991,9 +992,9 @@ Typescript定义参考：
 ```
 
 
-##### channel接收到添加或更新用户某一属性Notify回调(channel.on('NotifyUserAttributesAddOrUpdate', (data) => {}))
+##### channel接收到添加或更新用户某些属性Notify回调(channel.on('NotifyUserAttributesAddOrUpdate', (data) => {}))
 
-接收到添加或更新用户某一属性Notify回调通知
+接收到添加或更新用户某些属性Notify回调通知
 
 ```
 channel.on('NotifyUserAttributesAddOrUpdate', (data) => { console.log(data); });
@@ -1006,14 +1007,13 @@ channel.on('NotifyUserAttributesAddOrUpdate', (data) => { console.log(data); });
 | eventName | string | 取值"NotifyUserAttributesAddOrUpdate" |
 | handler | function  | 接收回调                 |
 
-回调参数：
+handler回调参数：
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
 |         | object  | 详细定义将data定义描述      |
 
-
-Message定义：
+data定义：
 
 | name             | type                    | description                                             |
 | ---------------- | ----------------------- | ------------------------------------------------------- |
@@ -1031,7 +1031,7 @@ Message定义：
 
 ##### channel接收设置频道属性Notify的回调(channel.on('NotifyChannelAttributesSet', (data) => {}))
 
-接收到该频道的某一属性Notify回调通知。
+接收设置频道属性Notify的回调通知。
 
 ```
 channel.on('NotifyChannelAttributesSet', (data) => { console.log(data); })
@@ -1044,12 +1044,11 @@ channel.on('NotifyChannelAttributesSet', (data) => { console.log(data); })
 | eventName | string | 取值"NotifyChannelAttributesSet" |
 | handler | function  | 接收回调                 |
 
-回调参数：
+handler回调参数：
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
 |         | object  | 详细定义将data定义描述      |
-
 
 data定义：
 
@@ -1065,9 +1064,9 @@ data定义：
 {"lastUpdateUid":"999888","lastUpdateTs":"1585893855556","attributes":{"Name":"awu","Bulletin":"bull","Extention":"ex","channel_name":"nginx大讲堂"}}
 ```
 
-##### channel接收到删除频道某一属性Notify回调(channel.on('NotifyChannelAttributesDelete', (data) => {}))
+##### channel接收到删除频道某些属性Notify回调(channel.on('NotifyChannelAttributesDelete', (data) => {}))
 
-接收到该频道删除用户某一属性Notify回调通知
+接收到该频道删除用户某些属性Notify回调通知
 
 ```
 channel.on('NotifyChannelAttributesDelete', (data) => { console.log(data); });
@@ -1080,7 +1079,7 @@ channel.on('NotifyChannelAttributesDelete', (data) => { console.log(data); });
 | eventName | string | 取值"NotifyChannelAttributesDelete" |
 | handler | function  | 接收回调                 |
 
-回调参数：
+handler回调参数：
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
@@ -1103,9 +1102,9 @@ data定义：
 ```
 
 
-##### channel接收到添加或更新频道某一属性Notify回调(channel.on('NotifyChannelAttributesAddOrUpdate', (data) => {}))
+##### channel接收到添加或更新频道某些属性Notify回调(channel.on('NotifyChannelAttributesAddOrUpdate', (data) => {}))
 
-接收到添加或更新频道某一属性Notify回调通知
+接收到添加或更新频道某些属性Notify回调通知
 
 ```
 channel.on('NotifyChannelAttributesAddOrUpdate', (data) => { console.log(data); });
@@ -1119,7 +1118,7 @@ channel.on('NotifyChannelAttributesAddOrUpdate', (data) => { console.log(data); 
 | handler | function  | 接收回调                 |
 
 
-回调参数：
+handler回调参数：
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
@@ -1141,7 +1140,7 @@ data定义：
 {"lastUpdateUid":"999888","lastUpdateTs":"1585893996807","attributes":{"channel_name":"nginx大讲堂","owner":"awu"}}
 ```
 
-### getInstanceInfo获取实例信息(getInstanceInfo)
+### 【辅助工具】getInstanceInfo获取实例信息(getInstanceInfo)
 
 获取实例信息的API接口，用来辅助排查实例的在线状态信息，方便用于调试。
 
