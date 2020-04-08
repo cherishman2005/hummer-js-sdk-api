@@ -20,10 +20,10 @@ npm包发布路径： https://www.npmjs.com/package/hummer-channel-sdk
                * [加入频道(joinChannel)](#加入频道joinchannel)
                * [退出频道(leaveChannel)](#退出频道leavechannel)
                * [channel发送组播消息(sendMessageToChannel)](#channel发送组播消息sendmessagetochannel)
-               * [channel设置本地用户属性(setUserAttributes)](#channel设置本地用户属性setuserattributes)
-               * [channel删除本地用户某些属性(deleteUserAttributesByKeys)](#channel删除本地用户某些属性deleteuserattributesbykeys)
-               * [channel添加或更新本地用户的属性(addOrUpdateUserAttributes)](#channel添加或更新本地用户的属性addorupdateuserattributes)
-               * [channel清空本地用户的属性(clearUserAttributes)](#channel清空本地用户的属性clearuserattributes)
+               * [channel设置本地用户属性(setLocalUserAttributes)](#channel设置本地用户属性setlocaluserattributes)
+               * [channel删除本地用户某些属性(deleteLocalUserAttributesByKeys)](#channel删除本地用户某些属性deletelocaluserattributesbykeys)
+               * [channel添加或更新本地用户的属性(addOrUpdateLocalUserAttributes)](#channel添加或更新本地用户的属性addorupdatelocaluserattributes)
+               * [channel清空本地用户的属性(clearLocalUserAttributes)](#channel清空本地用户的属性clearlocaluserattributes)
                * [channel获取频道用户列表(getChannelUserList)](#channel获取频道用户列表getchanneluserlist)
                * [channel根据用户某一属性获取频道用户列表(getChannelUserListByAtrribute)](#channel根据用户某一属性获取频道用户列表getchanneluserlistbyatrribute)
                * [channel全量设置某指定频道的属性(setChannelAttributes)](#channel全量设置某指定频道的属性setchannelattributes)
@@ -411,10 +411,10 @@ channel.sendMessageToChannel(params).then(res => {
 ```
 
 
-##### channel设置本地用户属性(setUserAttributes)
+##### channel设置本地用户属性(setLocalUserAttributes)
 
 ```js
-channel.setUserAttributes({})
+channel.setLocalUserAttributes({})
 ```
 
 请求参数：
@@ -435,18 +435,18 @@ channel.setUserAttributes({})
 示例：
 ```js
     let params = { attributes };
-    channel.setUserAttributes(params).then(res => {
-      console.log("setUserAttributes Res: ", res);
+    channel.setLocalUserAttributes(params).then(res => {
+      console.log("setLocalUserAttributes Res: ", res);
     }).catch(err => {
       console.log(err)
     })
 ```
 
 
-##### channel删除本地用户某些属性(deleteUserAttributesByKeys)
+##### channel删除本地用户某些属性(deleteLocalUserAttributesByKeys)
 
 ```js
-channel.deleteUserAttributesByKeys({})
+channel.deleteLocalUserAttributesByKeys({})
 ```
 
 请求参数：
@@ -465,17 +465,17 @@ channel.deleteUserAttributesByKeys({})
 
 示例：
 ```js
-    channel.deleteUserAttributesByKeys({ keys }).then(res => {
-      console.log("deleteUserAttributesByKeys Res: ", res);
+    channel.deleteLocalUserAttributesByKeys({ keys }).then(res => {
+      console.log("deleteLocalUserAttributesByKeys Res: ", res);
     }).catch(err => {
       console.log(err)
     })
 ```
 
-##### channel添加或更新本地用户的属性(addOrUpdateUserAttributes)
+##### channel添加或更新本地用户的属性(addOrUpdateLocalUserAttributes)
 
 ```js
-channel.addOrUpdateUserAttributes({attributes})
+channel.addOrUpdateLocalUserAttributes({attributes})
 ```
 
 请求参数：
@@ -495,18 +495,18 @@ channel.addOrUpdateUserAttributes({attributes})
 示例：
 ```js
     let params = { attributes };
-    channel.addOrUpdateUserAttributes(params).then(res => {
-      console.log("addOrUpdateUserAttributes res: ", res);
+    channel.addOrUpdateLocalUserAttributes(params).then(res => {
+      console.log("addOrUpdateLocalUserAttributes res: ", res);
     }).catch(err => {
       console.log(err)
     })
 ```
 
 
-##### channel清空本地用户的属性(clearUserAttributes)
+##### channel清空本地用户的属性(clearLocalUserAttributes)
 
 ```js
-channel.clearUserAttributes()
+channel.clearLocalUserAttributes()
 ```
 
 请求参数：
@@ -525,8 +525,8 @@ channel.clearUserAttributes()
 
 示例：
 ```js
-    channel.clearUserAttributes().then(res => {
-      console.log("clearUserAttributes res: ", res);
+    channel.clearLocalUserAttributes().then(res => {
+      console.log("clearLocalUserAttributes res: ", res);
     }).catch(err => {
       console.log(err)
     })
