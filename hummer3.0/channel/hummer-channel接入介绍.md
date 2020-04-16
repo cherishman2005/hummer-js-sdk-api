@@ -4,8 +4,8 @@
 ## hummer-channel主要接入流程
 
 	1 Hummer初始化
-		hummer = Hummer.createHummer({});;
-		需要的入参包括：appid, uid, token等信息；
+		hummer = Hummer.createHummer({appid});
+		需要的入参包括：appid等信息；
 		
 		uid和token生成方法详见：
 		https://www.sunclouds.com/cloud/v2/developer/doc.htm?serviceId=102&typeCode=FAQ&title=Python&version=2.0&parentId=852
