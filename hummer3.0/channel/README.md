@@ -8,6 +8,19 @@ https://github.com/cherishman2005/hummer-js-sdk-api/
 
 ### 动态
 
+[2019-04-16] 【hummer-channel-sdk新版本】提供hummer-channel-sdk 2.1.2版本
+
+接口调整，详见接口hummer3.0文档：《hummer3.0-channel对外接口.md》
+
+主要新增功能如下：
+
+（1）链接管理优化；
+
+（2）token过期优化；
+
+（3）login/logout/refreshToken功能优化；
+
+
 [2019-04-03] 【hummer-channel-sdk新版本】提供hummer-channel-sdk 2.1.1版本
 
 接口调整，详见接口hummer3.0文档：《hummer3.0-channel对外接口.md》

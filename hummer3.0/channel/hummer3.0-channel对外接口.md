@@ -7,8 +7,11 @@ npm包发布路径： https://www.npmjs.com/package/hummer-channel-sdk
       * [js-sdk对外接口](#js-sdk对外接口)
          * [注意事项](#注意事项)
          * [初始化Hummer](#初始化hummer)
-            * [接收链接状态的回调通知(hummer.on('ConnectStatus', (data) =&gt; {}))](#接收链接状态的回调通知hummeronconnectstatus-data--)
-            * [接收登录状态的回调通知(hummer.on('LoginStatus', (data) =&gt; {}))](#接收登录状态的回调通知hummeronloginstatus-data--)
+            * [登录(login)](#登录login)
+            * [登出(logout)](#登出logout)
+            * [接收连接状态变更的回调通知(hummer.on('ConnectionStateChange', (data) =&gt; {}))](#接收连接状态变更的回调通知hummeronconnectionstatechange-data--)
+            * [接收Token过期的回调通知(hummer.on('TokenExpired', () =&gt; {}))](#接收token过期的回调通知hummerontokenexpired---)
+            * [更新当前Token(refreshToken)](#更新当前tokenrefreshtoken)
             * [设置用户归属地(setUserRegion)](#设置用户归属地setuserregion)
          * [初始化Channel Service](#初始化channel-service)
             * [P2P的消息处理](#p2p的消息处理)
@@ -25,7 +28,8 @@ npm包发布路径： https://www.npmjs.com/package/hummer-channel-sdk
                * [channel添加或更新本地用户的属性(addOrUpdateLocalUserAttributes)](#channel添加或更新本地用户的属性addorupdatelocaluserattributes)
                * [channel清空本地用户的属性(clearLocalUserAttributes)](#channel清空本地用户的属性clearlocaluserattributes)
                * [channel获取频道用户列表(getChannelUserList)](#channel获取频道用户列表getchanneluserlist)
-               * [channel根据用户某一属性获取频道用户列表(getChannelUserListByAtrribute)](#channel根据用户某一属性获取频道用户列表getchanneluserlistbyatrribute)
+               * [channel查询某指定用户指定属性名的属性(getUserAttributesByKeys)](#channel查询某指定用户指定属性名的属性getuserattributesbykeys)
+               * [channel查询某指定用户的全部属性(getUserAttributes)](#channel查询某指定用户的全部属性getuserattributes)
                * [channel全量设置某指定频道的属性(setChannelAttributes)](#channel全量设置某指定频道的属性setchannelattributes)
                * [channel删除某指定频道的指定属性(deleteChannelAttributesByKeys)](#channel删除某指定频道的指定属性deletechannelattributesbykeys)
                * [channel更新频道属性(addOrUpdateChannelAttributes)](#channel更新频道属性addorupdatechannelattributes)
@@ -45,6 +49,7 @@ npm包发布路径： https://www.npmjs.com/package/hummer-channel-sdk
          * [【辅助工具】getInstanceInfo获取实例信息(getInstanceInfo)](#辅助工具getinstanceinfo获取实例信息getinstanceinfo)
          * [【辅助工具】将string编码成Utf8二进制(encodeStringToUtf8Bytes)](#辅助工具将string编码成utf8二进制encodestringtoutf8bytes)
          * [【辅助工具】将Utf8二进制解码成string类型(decodeUtf8BytesToString)](#辅助工具将utf8二进制解码成string类型decodeutf8bytestostring)
+
 
 
 ## js-sdk对外接口
@@ -89,60 +94,149 @@ Hummer初始化：创建hummer实例
 
 【注】hummer初始化时，通过onError回调返回来回馈初始化是否成功。
 
-#### 接收链接状态的回调通知(hummer.on('ConnectStatus', (data) => {}))
+
+#### 登录(login)
 
 ```javascript
-hummer.on('ConnectStatus', (data) => {});
+hummer.login({ uid, token });
+```
+
+请求参数：
+
+| Name      | Type                    | Description                                         |
+| --------- | ----------------------- | --------------------------------------------------- |
+| uid       | string                  |     用户UID                                         |
+| token?    | string                  |     可选的动态密钥                                  |
+
+响应数据：Promise<>
+
+| Name      | Type   | Description                 |
+| --------- | ------ | --------------------------- |
+| rescode   | number | 0：表示成功                 |
+| msg       | string | 返回描述                    |
+
+
+#### 登出(logout)
+
+```javascript
+hummer.logout();
+```
+
+请求参数：
+
+| Name      | Type                    | Description                                         |
+| --------- | ----------------------- | --------------------------------------------------- |
+|   NA      |                         |                 |                                   |
+
+
+响应数据：Promise<>
+
+| Name      | Type   | Description                 |
+| --------- | ------ | --------------------------- |
+| rescode   | number | 0：表示成功                 |
+| msg       | string | 返回描述                    |
+
+
+#### 接收连接状态变更的回调通知(hummer.on('ConnectionStateChange', (data) => {}))
+
+```javascript
+hummer.on('ConnectionStateChange', (data) => {});
 ```
 
 回调通知：
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| eventName | string | 取值"ConnectStatus" |
+| eventName | string | 取值"ConnectionStateChange" |
 | handler | function  | 接收回调                 |
 
 回调参数：
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| code | number | enum ConnectStatus：链接状态 |
-| msg | string  | 提示信息                |
+| state   | enum    | 新的连接状态                |
+| reason  | enum    | 状态改变的原因              |
 
-```javascript
-enum ConnectStatus {
-    Disconnected = 0,
-    Connecting = 1,
-    Connected = 2,
-}
+```typescript
+enum ConnectionState {
+    DISCONNECTED = "DISCONNECTED",
+    CONNECTING = "CONNECTING",
+    CONNECTED = "CONNECTED",
+    RECONNECTING = "RECONNECTING",
+};
+
+enum ConnectionChangeReason {
+    INIT = 'INIT',
+    LOGIN = "LOGIN",
+    LOGIN_SUCCESS = "LOGIN_SUCCESS",
+    LOGIN_FAILURE = "LOGIN_FAILURE",
+    LOGIN_TIMEOUT ="LOGIN_TIMEOUT",
+    INTERRUPTED ="INTERRUPTED",
+    LOGOUT = "LOGOUT",
+    REMOTE_LOGIN = "REMOTE_LOGIN"
+};
 ```
 
-#### 接收登录状态的回调通知(hummer.on('LoginStatus', (data) => {}))
+链接初始状态：{"state":"DISCONNECTED","reason":"INIT"}
+
+（1）登录过程中：
+回调通知{"state":"CONNECTING","reason":"LOGIN"}；
+
+（2）登录完成：
+回调通知{"state":"CONNECTED","reason":"LOGIN_SUCCESS"}
+
+（3）登录失败：
+回调通知{"state":"DISCONNECTED","reason":"LOGIN_FAILURE"}
+
+（4）登录超时失败：
+回调通知{"state":"DISCONNECTED","reason":"LOGIN_TIMEOUT"}
+
+（5）重连/重登：
+回调通知{"state":"RECONNECTING","reason":"INTERRUPTED"}；
+
+（6）登录被踢：（账户互踢功能：后端暂不支持web互踢）
+回调通知{"state":"DISCONNECTED","reason":"REMOTE_LOGIN"}
+
+
+#### 接收Token过期的回调通知(hummer.on('TokenExpired', () => {}))
 
 ```javascript
-hummer.on('LoginStatus', (data) => {});
+hummer.on('TokenExpired', () => {});
 ```
 
 回调通知：
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| eventName | string | 取值"LoginStatus" |
+| eventName | string | 取值"TokenExpired" |
 | handler | function  | 接收回调                 |
 
 回调参数：
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| code | number | enum LoginStatus：登录状态 |
-| msg | string  | 提示信息                |
+| NA      |         |  |                |
+
+
+#### 更新当前Token(refreshToken)
 
 ```javascript
-export enum LoginStatus {
-    Idle = -1,
-    Logined = 0,
-}
+hummer.refreshToken({ token });
 ```
+
+请求参数：
+
+| Name      | Type                    | Description                                         |
+| --------- | ----------------------- | --------------------------------------------------- |
+| token     | string                  |           动态密钥                                  |
+
+响应数据：Promise<>
+
+| Name      | Type   | Description                 |
+| --------- | ------ | --------------------------- |
+| rescode   | number | 0：表示成功                 |
+| msg       | string | 返回描述                    |
+
 
 #### 设置用户归属地(setUserRegion)
 
@@ -569,33 +663,64 @@ channel.getChannelUserList()
 {"appid":1350626568,"channelId":"test_channel","users":["123","555","233333","1356662","3300235422","3300235423","3300235499","3300235888","135666911222"],"rescode":0}
 ```
 
-##### channel根据用户某一属性获取频道用户列表(getChannelUserListByAtrribute)
+##### channel查询某指定用户指定属性名的属性(getUserAttributesByKeys)
 
 ```js
-channel.getChannelUserListByAtrribute({})
+channel.getUserAttributesByKeys({})
 ```
 
 请求参数：
 
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- |   ----------------- |
-|    key        |      string        |   用户属性key       |
-|    prop        |      string        |  用户属性value值   |
+|    uid                |      string       |  用户UID            |
+|    keys               |      string[]     |   用户属性名keys    |
 
 响应数据：Promise<>
 
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- | ----------- |
 |    appid             |      number        |     |
-|    channelId       |      string        |     |
-|    users             |      string[]          | 用户列表 |
+|    channelId         |      string        |     |
+|    attributes        |      {[k: string]: string}  | 用户属性object |
 |    rescode             |      number          | 0：表示成功|
 | msg       | string | 返回描述     |
 
 示例：
 ```javascript
-    channel.getChannelUserListByAtrribute({ key, prop }).then(res => {
-      console.log("getChannelUserListByAtrribute res:", res);
+    channel.getUserAttributesByKeys({ uid, keys }).then(res => {
+      console.log("getUserAttributesByKeys res:", res);
+    }).catch(err => {
+    });
+```
+
+
+##### channel查询某指定用户的全部属性(getUserAttributes)
+
+```js
+channel.getUserAttributes({})
+```
+
+请求参数：
+
+| Name                  | Type              |  Description |
+| --------------------- | ----------------- |   ----------------- |
+|    uid                |      string       |  用户UID            |
+
+响应数据：Promise<>
+
+| Name                  | Type              |  Description |
+| --------------------- | ----------------- | ----------- |
+|    appid             |      number        |     |
+|    channelId         |      string        |     |
+|    attributes        |      {[k: string]: string}  | 用户属性object |
+|    rescode             |      number          | 0：表示成功|
+| msg       | string | 返回描述     |
+
+示例：
+```javascript
+    channel.getUserAttributes({ uid, keys }).then(res => {
+      console.log("getUserAttributes res:", res);
     }).catch(err => {
     });
 ```
