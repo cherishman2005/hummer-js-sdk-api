@@ -11,8 +11,8 @@
 		https://www.sunclouds.com/cloud/v2/developer/doc.htm?serviceId=102&typeCode=FAQ&title=Python&version=2.0&parentId=852
 
 
-	2 Hummer登录初始化
-		hummer.login();
+	2 登录
+		hummer.login({uid, token});
 
 	3 设置用户归属地
 		hummer.setUserRegion({ region });
