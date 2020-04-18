@@ -13,43 +13,44 @@ npm包发布路径： https://www.npmjs.com/package/hummer-channel-sdk
             * [接收Token过期的回调通知(hummer.on('TokenExpired', () =&gt; {}))](#接收token过期的回调通知hummerontokenexpired---)
             * [更新当前Token(refreshToken)](#更新当前tokenrefreshtoken)
             * [设置用户归属地(setUserRegion)](#设置用户归属地setuserregion)
-         * [初始化Channel Service](#初始化channel-service)
+         * [初始化room Service](#初始化room-service)
             * [P2P的消息处理](#p2p的消息处理)
                * [发送P2P的消息(sendMessageToUser)](#发送p2p的消息sendmessagetouser)
                * [接收对端消息(client.on('MessageFromUser', (data) =&gt; {}))](#接收对端消息clientonmessagefromuser-data--)
                * [批量查询用户在线列表(queryUsersOnlineStatus)](#批量查询用户在线列表queryusersonlinestatus)
             * [频道消息处理](#频道消息处理)
-               * [创建单个频道实例(createChannel)](#创建单个频道实例createchannel)
-               * [加入频道(joinChannel)](#加入频道joinchannel)
-               * [退出频道(leaveChannel)](#退出频道leavechannel)
-               * [channel发送组播消息(sendMessageToChannel)](#channel发送组播消息sendmessagetochannel)
-               * [channel设置本地用户属性(setLocalUserAttributes)](#channel设置本地用户属性setlocaluserattributes)
-               * [channel删除本地用户某些属性(deleteLocalUserAttributesByKeys)](#channel删除本地用户某些属性deletelocaluserattributesbykeys)
-               * [channel添加或更新本地用户的属性(addOrUpdateLocalUserAttributes)](#channel添加或更新本地用户的属性addorupdatelocaluserattributes)
-               * [channel清空本地用户的属性(clearLocalUserAttributes)](#channel清空本地用户的属性clearlocaluserattributes)
-               * [channel获取频道用户列表(getChannelUserList)](#channel获取频道用户列表getchanneluserlist)
-               * [channel查询某指定用户指定属性名的属性(getUserAttributesByKeys)](#channel查询某指定用户指定属性名的属性getuserattributesbykeys)
-               * [channel查询某指定用户的全部属性(getUserAttributes)](#channel查询某指定用户的全部属性getuserattributes)
-               * [channel全量设置某指定频道的属性(setChannelAttributes)](#channel全量设置某指定频道的属性setchannelattributes)
-               * [channel删除某指定频道的指定属性(deleteChannelAttributesByKeys)](#channel删除某指定频道的指定属性deletechannelattributesbykeys)
-               * [channel更新频道属性(addOrUpdateChannelAttributes)](#channel更新频道属性addorupdatechannelattributes)
-               * [channel清空某指定频道的属性(clearChannelAttributes)](#channel清空某指定频道的属性clearchannelattributes)
-               * [channel查询某指定频道的全部属性(getChannelAttributes)](#channel查询某指定频道的全部属性getchannelattributes)
-               * [channel查询某指定频道指定属性名的属性(getChannelAttributesByKeys)](#channel查询某指定频道指定属性名的属性getchannelattributesbykeys)
-               * [channel查询单个或多个频道用户数(getChannelUserCount)](#channel查询单个或多个频道用户数getchannelusercount)
-               * [channel接收组播消息(channel.on('ChannelMessage', (data) =&gt; {}))](#channel接收组播消息channelonchannelmessage-data--)
-               * [channel接收到加入频道Notify回调(channel.on('NotifyJoinChannel', (data) =&gt; {}))](#channel接收到加入频道notify回调channelonnotifyjoinchannel-data--)
-               * [channel接收到退出频道Notify回调(channel.on('NotifyLeaveChannel', (data) =&gt; {}))](#channel接收到退出频道notify回调channelonnotifyleavechannel-data--)
-               * [channel接收设置用户属性Notify的回调(channel.on('NotifyUserAttributesSet', (data) =&gt; {}))](#channel接收设置用户属性notify的回调channelonnotifyuserattributesset-data--)
-               * [channel接收到删除用户某些属性Notify回调(channel.on('NotifyUserAttributesDelete', (data) =&gt; {}))](#channel接收到删除用户某些属性notify回调channelonnotifyuserattributesdelete-data--)
-               * [channel接收到添加或更新用户某些属性Notify回调(channel.on('NotifyUserAttributesAddOrUpdate', (data) =&gt; {}))](#channel接收到添加或更新用户某些属性notify回调channelonnotifyuserattributesaddorupdate-data--)
-               * [channel接收设置频道属性Notify的回调(channel.on('NotifyChannelAttributesSet', (data) =&gt; {}))](#channel接收设置频道属性notify的回调channelonnotifychannelattributesset-data--)
-               * [channel接收到删除频道某些属性Notify回调(channel.on('NotifyChannelAttributesDelete', (data) =&gt; {}))](#channel接收到删除频道某些属性notify回调channelonnotifychannelattributesdelete-data--)
-               * [channel接收到添加或更新频道某些属性Notify回调(channel.on('NotifyChannelAttributesAddOrUpdate', (data) =&gt; {}))](#channel接收到添加或更新频道某些属性notify回调channelonnotifychannelattributesaddorupdate-data--)
+               * [创建单个频道实例(createRoom)](#创建单个频道实例createroom)
+               * [加入频道(joinRoom)](#加入频道joinroom)
+               * [退出频道(leaveRoom)](#退出频道leaveroom)
+               * [room发送组播消息(sendMessageToRoom)](#room发送组播消息sendmessagetoroom)
+               * [room设置本地用户属性(setLocalUserAttributes)](#room设置本地用户属性setlocaluserattributes)
+               * [room删除本地用户某些属性(deleteLocalUserAttributesByKeys)](#room删除本地用户某些属性deletelocaluserattributesbykeys)
+               * [room添加或更新本地用户的属性(addOrUpdateLocalUserAttributes)](#room添加或更新本地用户的属性addorupdatelocaluserattributes)
+               * [room清空本地用户的属性(clearLocalUserAttributes)](#room清空本地用户的属性clearlocaluserattributes)
+               * [room获取频道用户列表(getRoomUserList)](#room获取频道用户列表getroomuserlist)
+               * [room查询某指定用户指定属性名的属性(getUserAttributesByKeys)](#room查询某指定用户指定属性名的属性getuserattributesbykeys)
+               * [room查询某指定用户的全部属性(getUserAttributes)](#room查询某指定用户的全部属性getuserattributes)
+               * [client全量设置某指定频道的属性(setRoomAttributes)](#client全量设置某指定频道的属性setroomattributes)
+               * [client删除某指定频道的指定属性(deleteRoomAttributesByKeys)](#client删除某指定频道的指定属性deleteroomattributesbykeys)
+               * [client更新频道属性(addOrUpdateRoomAttributes)](#client更新频道属性addorupdateroomattributes)
+               * [client清空某指定频道的属性(clearRoomAttributes)](#client清空某指定频道的属性clearroomattributes)
+               * [client查询某指定频道的全部属性(getRoomAttributes)](#client查询某指定频道的全部属性getroomattributes)
+               * [client查询某指定频道指定属性名的属性(getRoomAttributesByKeys)](#client查询某指定频道指定属性名的属性getroomattributesbykeys)
+               * [client查询单个或多个频道用户数(getRoomUserCount)](#client查询单个或多个频道用户数getroomusercount)
+               * [room接收组播消息(room.on('RoomMessage', (data) =&gt; {}))](#room接收组播消息roomonroommessage-data--)
+               * [room接收到加入频道Notify回调(room.on('NotifyJoinRoom', (data) =&gt; {}))](#room接收到加入频道notify回调roomonnotifyjoinroom-data--)
+               * [room接收到退出频道Notify回调(room.on('NotifyLeaveRoom', (data) =&gt; {}))](#room接收到退出频道notify回调roomonnotifyleaveroom-data--)
+               * [room接收设置用户属性Notify的回调(room.on('NotifyUserAttributesSet', (data) =&gt; {}))](#room接收设置用户属性notify的回调roomonnotifyuserattributesset-data--)
+               * [room接收到删除用户某些属性Notify回调(room.on('NotifyUserAttributesDelete', (data) =&gt; {}))](#room接收到删除用户某些属性notify回调roomonnotifyuserattributesdelete-data--)
+               * [room接收到清除用户某些属性Notify回调(room.on('NotifyUserAttributesClear', (data) =&gt; {}))](#room接收到清除用户某些属性notify回调roomonnotifyuserattributesclear-data--)
+               * [room接收到添加或更新用户某些属性Notify回调(room.on('NotifyUserAttributesAddOrUpdate', (data) =&gt; {}))](#room接收到添加或更新用户某些属性notify回调roomonnotifyuserattributesaddorupdate-data--)
+               * [room接收设置频道属性Notify的回调(room.on('NotifyRoomAttributesSet', (data) =&gt; {}))](#room接收设置频道属性notify的回调roomonnotifyroomattributesset-data--)
+               * [room接收到删除频道某些属性Notify回调(room.on('NotifyRoomAttributesDelete', (data) =&gt; {}))](#room接收到删除频道某些属性notify回调roomonnotifyroomattributesdelete-data--)
+               * [room接收到清除频道某些属性Notify回调(room.on('NotifyRoomAttributesClear', (data) =&gt; {}))](#room接收到清除频道某些属性notify回调roomonnotifyroomattributesclear-data--)
+               * [room接收到添加或更新频道某些属性Notify回调(room.on('NotifyRoomAttributesAddOrUpdate', (data) =&gt; {}))](#room接收到添加或更新频道某些属性notify回调roomonnotifyroomattributesaddorupdate-data--)
          * [【辅助工具】getInstanceInfo获取实例信息(getInstanceInfo)](#辅助工具getinstanceinfo获取实例信息getinstanceinfo)
          * [【辅助工具】将string编码成Utf8二进制(encodeStringToUtf8Bytes)](#辅助工具将string编码成utf8二进制encodestringtoutf8bytes)
          * [【辅助工具】将Utf8二进制解码成string类型(decodeUtf8BytesToString)](#辅助工具将utf8二进制解码成string类型decodeutf8bytestostring)
-
 
 
 ## js-sdk对外接口
@@ -60,7 +61,7 @@ npm包发布路径： https://www.npmjs.com/package/hummer-channel-sdk
 
 （2）一个浏览器只能登录一个用户（uid）。
 
-channelService区分可靠P2P；可靠组播；
+roomService区分可靠P2P；可靠组播；
     
 
 （I）白板功能调试主要场景：（时延较小，满足需求）
@@ -77,23 +78,13 @@ channelService区分可靠P2P；可靠组播；
 Hummer初始化：创建hummer实例
 
 ```javascript
-      this.hummer = Hummer.createHummer({ appid: this.appid,
-                                  uid: this.uid,
-                                  token: this.token,
-                                  onError: onError
-                                });
+      this.hummer = Hummer.createHummer({ appid: this.appid });
 ```
 入参:
 
 | Name       | Type   | Description                                                                              |
 | ---------- | ------ | ---------------------------------------------------------------------------------------- |
 | appid      | number |                                                                                          |
-| uid        | string | 64bit整型对应的字符串                                                                    |
-| token      | string |                                                                                          |
-| onError    | Function | 返回Object，如果code=0，表示成功。如{"code":0,"msg":"ok"}                         |
-
-【注】hummer初始化时，通过onError回调返回来回馈初始化是否成功。
-
 
 #### 登录(login)
 
@@ -258,7 +249,7 @@ hummer.setUserRegion({ region });
 | msg       | string | 返回描述                    |
 
 
-### 初始化Channel Service
+### 初始化room Service
 
 初始化： 创建ChanelService实例
 
@@ -270,7 +261,7 @@ client = hummer.createInstance();
 
 | Name      | Type   | Description                 |
 | --------- | ------ | --------------------------- |
-|    | Object | 返回ChannelService实例             |
+|    | Object | 返回roomService实例             |
 
 
 #### P2P的消息处理
@@ -391,12 +382,12 @@ client.queryUsersOnlineStatus({uids: uids}).then(res => {
 
 #### 频道消息处理
 
-##### 创建单个频道实例(createChannel)
+##### 创建单个频道实例(createRoom)
 
 创建单个频道实例
 
 ```js
-channel = client.createChannel({ region, channelId })
+room = client.createRoom({ region, roomId })
 ```
 
 请求参数：
@@ -404,20 +395,20 @@ channel = client.createChannel({ region, channelId })
 | Name      | Type                    | Description                                         |
 | --------- | ----------------------- | --------------------------------------------------- |
 | region    | string                  | 业务归属地（"cn"/"ap_southeast"/"ap_south" / "us" / "me_east" / "sa_east"） |
-| channelId    | string                  | 频道ID                      |
+| roomId    | string                  | 频道ID                      |
 
 响应数据：
 
 | Name      | Type   | Description                 |
 | --------- | ------ | --------------------------- |
-|    | Object | 返回Channel实例                |
+|    | Object | 返回room实例                |
 
 【注】可以创建多个频道实例，并且可以在不同的业务归属region
 
 
-##### 加入频道(joinChannel)
+##### 加入频道(joinRoom)
 ```js
-channel.joinChannel();
+room.joinRoom();
 ```
 
 请求参数：
@@ -437,13 +428,13 @@ channel.joinChannel();
 示例：
 ```js
         let params = {extra};
-        channel.joinChannel(params).then(res => {
-          console.log("joinChannel res:", res);
+        room.joinRoom(params).then(res => {
+          console.log("joinRoom res:", res);
         }).catch(err => {
         });
 ```
 
-##### 退出频道(leaveChannel)
+##### 退出频道(leaveRoom)
 
 请求参数：
 
@@ -462,17 +453,17 @@ channel.joinChannel();
 示例：
 ```js
         let params = {extra};
-        channel.leaveChannel(params).then(res => {
-          console.log("leaveChannel res:", res);
+        room.leaveRoom(params).then(res => {
+          console.log("leaveRoom res:", res);
         }).catch(err => {
         });
 ```
 
 
-##### channel发送组播消息(sendMessageToChannel)
+##### room发送组播消息(sendMessageToRoom)
 
 ```js
-channel.sendMessageToChannel({})
+room.sendMessageToRoom({})
 ```
 
 请求参数：
@@ -493,7 +484,7 @@ channel.sendMessageToChannel({})
 示例：
 ```javascript
 let params = { type, content }
-channel.sendMessageToChannel(params).then(res => {
+room.sendMessageToRoom(params).then(res => {
   console.log("res: " + JSON.stringify(res));
 }).catch(err => {
   console.log(err);
@@ -505,10 +496,10 @@ channel.sendMessageToChannel(params).then(res => {
 ```
 
 
-##### channel设置本地用户属性(setLocalUserAttributes)
+##### room设置本地用户属性(setLocalUserAttributes)
 
 ```js
-channel.setLocalUserAttributes({})
+room.setLocalUserAttributes({})
 ```
 
 请求参数：
@@ -529,7 +520,7 @@ channel.setLocalUserAttributes({})
 示例：
 ```js
     let params = { attributes };
-    channel.setLocalUserAttributes(params).then(res => {
+    room.setLocalUserAttributes(params).then(res => {
       console.log("setLocalUserAttributes Res: ", res);
     }).catch(err => {
       console.log(err)
@@ -537,10 +528,10 @@ channel.setLocalUserAttributes({})
 ```
 
 
-##### channel删除本地用户某些属性(deleteLocalUserAttributesByKeys)
+##### room删除本地用户某些属性(deleteLocalUserAttributesByKeys)
 
 ```js
-channel.deleteLocalUserAttributesByKeys({})
+room.deleteLocalUserAttributesByKeys({})
 ```
 
 请求参数：
@@ -559,17 +550,17 @@ channel.deleteLocalUserAttributesByKeys({})
 
 示例：
 ```js
-    channel.deleteLocalUserAttributesByKeys({ keys }).then(res => {
+    room.deleteLocalUserAttributesByKeys({ keys }).then(res => {
       console.log("deleteLocalUserAttributesByKeys Res: ", res);
     }).catch(err => {
       console.log(err)
     })
 ```
 
-##### channel添加或更新本地用户的属性(addOrUpdateLocalUserAttributes)
+##### room添加或更新本地用户的属性(addOrUpdateLocalUserAttributes)
 
 ```js
-channel.addOrUpdateLocalUserAttributes({attributes})
+room.addOrUpdateLocalUserAttributes({attributes})
 ```
 
 请求参数：
@@ -589,7 +580,7 @@ channel.addOrUpdateLocalUserAttributes({attributes})
 示例：
 ```js
     let params = { attributes };
-    channel.addOrUpdateLocalUserAttributes(params).then(res => {
+    room.addOrUpdateLocalUserAttributes(params).then(res => {
       console.log("addOrUpdateLocalUserAttributes res: ", res);
     }).catch(err => {
       console.log(err)
@@ -597,10 +588,10 @@ channel.addOrUpdateLocalUserAttributes({attributes})
 ```
 
 
-##### channel清空本地用户的属性(clearLocalUserAttributes)
+##### room清空本地用户的属性(clearLocalUserAttributes)
 
 ```js
-channel.clearLocalUserAttributes()
+room.clearLocalUserAttributes()
 ```
 
 请求参数：
@@ -619,7 +610,7 @@ channel.clearLocalUserAttributes()
 
 示例：
 ```js
-    channel.clearLocalUserAttributes().then(res => {
+    room.clearLocalUserAttributes().then(res => {
       console.log("clearLocalUserAttributes res: ", res);
     }).catch(err => {
       console.log(err)
@@ -627,10 +618,10 @@ channel.clearLocalUserAttributes()
 ```
 
 
-##### channel获取频道用户列表(getChannelUserList)
+##### room获取频道用户列表(getRoomUserList)
 
 ```js
-channel.getChannelUserList()
+room.getRoomUserList()
 ```
 
 请求参数：
@@ -644,29 +635,27 @@ channel.getChannelUserList()
 
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- | ----------- |
-|    appid             |      number        |     |
-|    channelId       |      string        |     |
-|    users             |      string[]        | 用户列表 |
+|    uids             |      string[]        | 用户列表 |
 |    rescode             |      number          | 0：表示成功|
 | msg       | string | 返回描述     |
 
 示例：
 ```javascript
-        channel.getChannelUserList().then(res => {
-          console.log("getChannelUserList res:", res);
+        room.getRoomUserList().then(res => {
+          console.log("getRoomUserList res:", res);
         }).catch(err => {
         });
 ```
 
 响应：
 ```javascript
-{"appid":1350626568,"channelId":"test_channel","users":["123","555","233333","1356662","3300235422","3300235423","3300235499","3300235888","135666911222"],"rescode":0}
+{"appid":1350626568,"roomId":"test_room","users":["123","555","233333","1356662","3300235422","3300235423","3300235499","3300235888","135666911222"],"rescode":0}
 ```
 
-##### channel查询某指定用户指定属性名的属性(getUserAttributesByKeys)
+##### room查询某指定用户指定属性名的属性(getUserAttributesByKeys)
 
 ```js
-channel.getUserAttributesByKeys({})
+room.getUserAttributesByKeys({})
 ```
 
 请求参数：
@@ -681,24 +670,24 @@ channel.getUserAttributesByKeys({})
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- | ----------- |
 |    appid             |      number        |     |
-|    channelId         |      string        |     |
+|    roomId         |      string        |     |
 |    attributes        |      {[k: string]: string}  | 用户属性object |
 |    rescode             |      number          | 0：表示成功|
 | msg       | string | 返回描述     |
 
 示例：
 ```javascript
-    channel.getUserAttributesByKeys({ uid, keys }).then(res => {
+    room.getUserAttributesByKeys({ uid, keys }).then(res => {
       console.log("getUserAttributesByKeys res:", res);
     }).catch(err => {
     });
 ```
 
 
-##### channel查询某指定用户的全部属性(getUserAttributes)
+##### room查询某指定用户的全部属性(getUserAttributes)
 
 ```js
-channel.getUserAttributes({})
+room.getUserAttributes({})
 ```
 
 请求参数：
@@ -712,29 +701,31 @@ channel.getUserAttributes({})
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- | ----------- |
 |    appid             |      number        |     |
-|    channelId         |      string        |     |
+|    roomId         |      string        |     |
 |    attributes        |      {[k: string]: string}  | 用户属性object |
 |    rescode             |      number          | 0：表示成功|
 | msg       | string | 返回描述     |
 
 示例：
 ```javascript
-    channel.getUserAttributes({ uid, keys }).then(res => {
+    room.getUserAttributes({ uid, keys }).then(res => {
       console.log("getUserAttributes res:", res);
     }).catch(err => {
     });
 ```
 
-##### channel全量设置某指定频道的属性(setChannelAttributes)
+##### client全量设置某指定频道的属性(setRoomAttributes)
 
 ```js
-channel.setChannelAttributes({})
+client.setroomAttributes({})
 ```
 
 请求参数：
 
 | Name | Type   | Description |
 | ---- | ------ | ----------- |
+| region    | string                  | 业务归属地（"cn"/"ap_southeast"/"ap_south" / "us" / "me_east" / "sa_east"） |
+| roomId    | string                  | 频道ID                      |
 | attributes | {[k: string]: string} | 频道属性key-value键值对 |
 
 
@@ -748,25 +739,27 @@ channel.setChannelAttributes({})
 
 示例：
 ```js
-    let params = { attributes };
-    channel.setChannelAttributes(params).then(res => {
-      console.log("setChannelAttributes Res: ", res);
+    let params = { region, roomId, attributes };
+    room.setroomAttributes(params).then(res => {
+      console.log("setroomAttributes Res: ", res);
     }).catch(err => {
       console.log(err)
     })
 ```
 
 
-##### channel删除某指定频道的指定属性(deleteChannelAttributesByKeys)
+##### client删除某指定频道的指定属性(deleteRoomAttributesByKeys)
 
 ```js
-channel.deleteChannelAttributesByKeys({})
+client.deleteRoomAttributesByKeys({})
 ```
 
 请求参数：
 
 | Name | Type   | Description |
 | ---- | ------ | ----------- |
+| region    | string                  | 业务归属地（"cn"/"ap_southeast"/"ap_south" / "us" / "me_east" / "sa_east"） |
+| roomId    | string                  | 频道ID                      |
 | keys | string[] | 频道属性key数组 |
 
 
@@ -779,23 +772,25 @@ channel.deleteChannelAttributesByKeys({})
 
 示例：
 ```js
-    channel.deleteChannelAttributesByKeys({ keys }).then(res => {
-      console.log("deleteChannelAttributesByKeys Res: ", res);
+    client.deleteroomAttributesByKeys({ keys }).then(res => {
+      console.log("deleteroomAttributesByKeys Res: ", res);
     }).catch(err => {
       console.log(err)
     })
 ```
 
-##### channel更新频道属性(addOrUpdateChannelAttributes)
+##### client更新频道属性(addOrUpdateRoomAttributes)
 
 ```js
-channel.addOrUpdateChannelAttributes({attributes})
+client.addOrUpdateRoomAttributes({})
 ```
 
 请求参数：
 
 | Name | Type   | Description |
 | ---- | ------ | ----------- |
+| region    | string                  | 业务归属地（"cn"/"ap_southeast"/"ap_south" / "us" / "me_east" / "sa_east"） |
+| roomId    | string                  | 频道ID                      |
 | attributes | {[k: string]: string} | 频道属性key-value键值对 |
 
 响应数据：Promise<>
@@ -808,25 +803,26 @@ channel.addOrUpdateChannelAttributes({attributes})
 示例：
 ```js
     let params = { attributes };
-    channel.addOrUpdateChannelAttributes(params).then(res => {
-      console.log("addOrUpdateChannelAttributes res: ", res);
+    room.addOrUpdateRoomAttributes(params).then(res => {
+      console.log("addOrUpdateRoomAttributes res: ", res);
     }).catch(err => {
       console.log(err)
     })
 ```
 
 
-##### channel清空某指定频道的属性(clearChannelAttributes)
+##### client清空某指定频道的属性(clearRoomAttributes)
 
 ```js
-channel.clearChannelAttributes()
+client.clearRoomAttributes()
 ```
 
 请求参数：
 
 | Name | Type   | Description |
 | ---- | ------ | ----------- |
-| NA | | | |
+| region?    | string                  | 业务归属地（"cn"/"ap_southeast"/"ap_south" / "us" / "me_east" / "sa_east"） |
+| roomId    | string                  | 频道ID                      |
 
 
 响应数据：Promise<>
@@ -838,25 +834,26 @@ channel.clearChannelAttributes()
 
 示例：
 ```js
-    channel.clearChannelAttributes().then(res => {
-      console.log("clearChannelAttributes res: ", res);
+    client.clearRoomAttributes().then(res => {
+      console.log("clearRoomAttributes res: ", res);
     }).catch(err => {
       console.log(err)
     })
 ```
 
 
-##### channel查询某指定频道的全部属性(getChannelAttributes)
+##### client查询某指定频道的全部属性(getRoomAttributes)
 
 ```js
-channel.getChannelAttributes()
+client.getRoomAttributes({})
 ```
 
 请求参数：
 
 | Name | Type   | Description |
 | ---- | ------ | ----------- |
-| NA | | | |
+| region?    | string                  | 业务归属地（"cn"/"ap_southeast"/"ap_south" / "us" / "me_east" / "sa_east"） |
+| roomId    | string                  | 频道ID                      |
 
 
 响应数据：Promise<>
@@ -869,24 +866,26 @@ channel.getChannelAttributes()
 
 示例：
 ```js
-    channel.getChannelAttributes().then(res => {
-      console.log("getChannelAttributes res: ", res);
+    client.getRoomAttributes({region, roomId}).then(res => {
+      console.log("getRoomAttributes res: ", res);
     }).catch(err => {
       console.log(err)
     })
 ```
 
 
-##### channel查询某指定频道指定属性名的属性(getChannelAttributesByKeys)
+##### client查询某指定频道指定属性名的属性(getRoomAttributesByKeys)
 
 ```js
-channel.getChannelAttributesByKeys()
+client.getRoomAttributesByKeys({regin, roomId})
 ```
 
 请求参数：
 
 | Name | Type   | Description |
 | ---- | ------ | ----------- |
+| region?    | string                  | 业务归属地（"cn"/"ap_southeast"/"ap_south" / "us" / "me_east" / "sa_east"） |
+| roomId    | string                  | 频道ID                      |
 | keys | string[] | 频道属性key数组 |
 
 
@@ -900,40 +899,41 @@ channel.getChannelAttributesByKeys()
 
 示例：
 ```js
-    channel.getChannelAttributesByKeys({keys}).then(res => {
-      console.log("getChannelAttributesByKeys res: ", res);
+    client.getRoomAttributesByKeys({region, roomId, keys}).then(res => {
+      console.log("getRoomAttributesByKeys res: ", res);
     }).catch(err => {
       console.log(err)
     })
 ```
 
 
-##### channel查询单个或多个频道用户数(getChannelUserCount)
+##### client查询单个或多个频道用户数(getRoomUserCount)
 
-在预先设定的区域，channel查询单个或多个频道用户数
+在预先设定的区域，查询单个或多个频道用户数
 
 ```js
-channel.getChannelUserCount({})
+client.getRoomUserCount({})
 ```
 
 请求参数：
 
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- |   ----------------- |
-|    channelIds        |      string[]        |   同一区域的频道列表       |
+| region?    | string                  | 业务归属地（"cn"/"ap_southeast"/"ap_south" / "us" / "me_east" / "sa_east"） |
+|    roomIds        |      string[]        |   同一区域的频道列表       |
 
 响应数据：Promise<>
 
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- | ----------- |
 |    appid             |      number        |     |
-|    channelIdCount       |      {[channelId:string]:number}     |     |
+|    userCount       |      {[roomId:string]:number}     |     |
 |    rescode             |      number          | 0：表示成功|
 | msg       | string | 返回描述     |
 
 示例：
 ```javascript
-    channel.getChannelUserCount({ channelIds: channelIds }).then(res => {
+    client.getRoomUserCount({ region, roomIds }).then(res => {
       console.log("res:", res);
     }).catch(err => {
     });
@@ -941,21 +941,21 @@ channel.getChannelUserCount({})
 
 响应示例：
 ```javascript
-{"appid":1350626568,"channelIdCount":{"test123":0,"test999":3},"rescode":0,"msg":""}
+{"appid":1350626568,"userCount":{"test123":0,"test999":3},"rescode":0,"msg":""}
 ```
 
 
-##### channel接收组播消息(channel.on('ChannelMessage', (data) => {}))
+##### room接收组播消息(room.on('RoomMessage', (data) => {}))
 接收指定频道的消息
 ```javascript
-channel.on('ChannelMessage', (data) => { console.log(data); })
+room.on('RoomMessage', (data) => { console.log(data); })
 ```
 
 回调通知：
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| eventName | string | 取值"ChannelMessage"       |
+| eventName | string | 取值"RoomMessage"       |
 | handler | function  | 接收回调                 |
 
 
@@ -976,7 +976,7 @@ Message定义：
 | appExtras        | { [k: string]: string } | 可选参数。 用户自定义的数据。 键和值为string的json-object。  |
 
 ```typescript
-interface ChannelMessage {
+interface RoomMessage {
     message: {
         type: string;
         data: Uint8Array;
@@ -986,19 +986,19 @@ interface ChannelMessage {
 }
 ```
 
-##### channel接收到加入频道Notify回调(channel.on('NotifyJoinChannel', (data) => {}))
+##### room接收到加入频道Notify回调(room.on('NotifyJoinRoom', (data) => {}))
 
 接收加入频道的用户列表通知。
 
 ```
-channel.on('NotifyJoinChannel', (data) => { console.log(data); })
+room.on('NotifyJoinRoom', (data) => { console.log(data); })
 ```
 
 回调通知：
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| eventName | string | 取值"NotifyJoinChannel"    |
+| eventName | string | 取值"NotifyJoinRoom"    |
 | handler | function  | 接收回调                 |
 
 
@@ -1019,19 +1019,19 @@ data定义：
 {"uid":["555"]}
 ```
 
-##### channel接收到退出频道Notify回调(channel.on('NotifyLeaveChannel', (data) => {}))
+##### room接收到退出频道Notify回调(room.on('NotifyLeaveRoom', (data) => {}))
 
 接收退出频道的用户列表通知。
 
 ```
-channel.on('NotifyLeaveChannel', (data) => { console.log(data); })
+room.on('NotifyLeaveRoom', (data) => { console.log(data); })
 ```
 
 回调通知：
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| eventName | string | 取值"NotifyLeaveChannel"   |
+| eventName | string | 取值"NotifyLeaveRoom"   |
 | handler | function  | 接收回调                 |
 
 
@@ -1047,12 +1047,12 @@ handler回调参数：
 {"uid":["135666911222"]}
 ```
 
-##### channel接收设置用户属性Notify的回调(channel.on('NotifyUserAttributesSet', (data) => {}))
+##### room接收设置用户属性Notify的回调(room.on('NotifyUserAttributesSet', (data) => {}))
 
 接收到该频道设置用户某些属性Notify回调通知。
 
 ```
-channel.on('NotifyUserAttributesSet', (data) => { console.log(data); })
+room.on('NotifyUserAttributesSet', (data) => { console.log(data); })
 ```
 
 回调通知：
@@ -1083,12 +1083,12 @@ data定义：
 {"uid":"123","attributes":{"Name":"阿武","Description":"js_sdk测试","Bulletin":"bull","Extention":"ex"}}
 ```
 
-##### channel接收到删除用户某些属性Notify回调(channel.on('NotifyUserAttributesDelete', (data) => {}))
+##### room接收到删除用户某些属性Notify回调(room.on('NotifyUserAttributesDelete', (data) => {}))
 
 接收到该频道删除用户某些属性Notify回调通知
 
 ```
-channel.on('NotifyUserAttributesDelete', (data) => { console.log(data); });
+room.on('NotifyUserAttributesDelete', (data) => { console.log(data); });
 ```
 
 回调通知：
@@ -1116,16 +1116,51 @@ Message定义：
 Typescript定义参考：
 
 ```javascript
-{"uid":"999888","lastUpdateTs":"1585895009875","attributes":{"channel_role_name":"student"}}
+{"uid":"999888","lastUpdateTs":"1585895009875","attributes":{"room_role_name":"student"}}
 ```
 
+##### room接收到清除用户某些属性Notify回调(room.on('NotifyUserAttributesClear', (data) => {}))
 
-##### channel接收到添加或更新用户某些属性Notify回调(channel.on('NotifyUserAttributesAddOrUpdate', (data) => {}))
+接收到该频道清除用户某些属性Notify回调通知
+
+```
+room.on('NotifyUserAttributesClear', (data) => { console.log(data); });
+```
+
+回调通知：
+
+| name    | type    | description                 |
+| ------- | ------- | --------------------------- |
+| eventName | string | 取值"NotifyUserAttributesClear" |
+| handler | function  | 接收回调                 |
+
+handler回调参数：
+
+| name    | type    | description                 |
+| ------- | ------- | --------------------------- |
+|         | object  | 详细定义后面描述            |
+
+
+Message定义：
+
+| name             | type                    | description                                             |
+| ---------------- | ----------------------- | ------------------------------------------------------- |
+| uid             | string                   | UID                                                     |
+| lastUpdateTs     | string                  | 用户属性最近一次删除的时间戳（毫秒） |
+| attributes       | {[k:string]: string}    | 用户属性 |
+
+Typescript定义参考：
+
+```javascript
+{"uid":"999888","lastUpdateTs":"1585895009875","attributes":{"room_role_name":"student"}}
+```
+
+##### room接收到添加或更新用户某些属性Notify回调(room.on('NotifyUserAttributesAddOrUpdate', (data) => {}))
 
 接收到添加或更新用户某些属性Notify回调通知
 
 ```
-channel.on('NotifyUserAttributesAddOrUpdate', (data) => { console.log(data); });
+room.on('NotifyUserAttributesAddOrUpdate', (data) => { console.log(data); });
 ```
 
 回调通知：
@@ -1153,23 +1188,23 @@ data定义：
 参考示例：
 
 ```javascript
-{"uid":"999888","lastUpdateTs":"1585894858984","attributes":{"Name":"awu","channel_role_name":"student"}}
+{"uid":"999888","lastUpdateTs":"1585894858984","attributes":{"Name":"awu","room_role_name":"student"}}
 ```
 
 
-##### channel接收设置频道属性Notify的回调(channel.on('NotifyChannelAttributesSet', (data) => {}))
+##### room接收设置频道属性Notify的回调(room.on('NotifyRoomAttributesSet', (data) => {}))
 
 接收设置频道属性Notify的回调通知。
 
 ```
-channel.on('NotifyChannelAttributesSet', (data) => { console.log(data); })
+room.on('NotifyRoomAttributesSet', (data) => { console.log(data); })
 ```
 
 回调通知：
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| eventName | string | 取值"NotifyChannelAttributesSet" |
+| eventName | string | 取值"NotifyRoomAttributesSet" |
 | handler | function  | 接收回调                 |
 
 handler回调参数：
@@ -1189,22 +1224,22 @@ data定义：
 参考示例：
 
 ```javascript
-{"lastUpdateUid":"999888","lastUpdateTs":"1585893855556","attributes":{"Name":"awu","Bulletin":"bull","Extention":"ex","channel_name":"nginx大讲堂"}}
+{"lastUpdateUid":"999888","lastUpdateTs":"1585893855556","attributes":{"Name":"awu","Bulletin":"bull","Extention":"ex","room_name":"nginx大讲堂"}}
 ```
 
-##### channel接收到删除频道某些属性Notify回调(channel.on('NotifyChannelAttributesDelete', (data) => {}))
+##### room接收到删除频道某些属性Notify回调(room.on('NotifyRoomAttributesDelete', (data) => {}))
 
 接收到该频道删除用户某些属性Notify回调通知
 
 ```
-channel.on('NotifyChannelAttributesDelete', (data) => { console.log(data); });
+room.on('NotifyRoomAttributesDelete', (data) => { console.log(data); });
 ```
 
 回调通知：
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| eventName | string | 取值"NotifyChannelAttributesDelete" |
+| eventName | string | 取值"NotifyRoomAttributesDelete" |
 | handler | function  | 接收回调                 |
 
 handler回调参数：
@@ -1223,26 +1258,59 @@ data定义：
 | attributes       | {[k:string]: string}    | 频道属性 |
 
 
-参考示例：
+##### room接收到清除频道某些属性Notify回调(room.on('NotifyRoomAttributesClear', (data) => {}))
 
-```javascript
-{"lastUpdateUid":"999888","lastUpdateTs":"1585893904930","attributes":{"channel_name":"nginx大讲堂"}}
-```
-
-
-##### channel接收到添加或更新频道某些属性Notify回调(channel.on('NotifyChannelAttributesAddOrUpdate', (data) => {}))
-
-接收到添加或更新频道某些属性Notify回调通知
+接收到该频道清除用户某些属性Notify回调通知
 
 ```
-channel.on('NotifyChannelAttributesAddOrUpdate', (data) => { console.log(data); });
+room.on('NotifyRoomAttributesClear', (data) => { console.log(data); });
 ```
 
 回调通知：
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| eventName | string | 取值"NotifyChannelAttributesAddOrUpdate" |
+| eventName | string | 取值"NotifyRoomAttributesClear" |
+| handler | function  | 接收回调                 |
+
+handler回调参数：
+
+| name    | type    | description                 |
+| ------- | ------- | --------------------------- |
+|         | object  | 详细定义将data定义描述      |
+
+
+data定义：
+
+| name             | type                    | description                                             |
+| ---------------- | ----------------------- | ------------------------------------------------------- |
+| lastUpdateUid    | string                  | 最近一次变更频道属性的用户UID |
+| lastUpdateTs     | string                  | 频道属性最近一次删除的时间戳（毫秒） |
+| attributes       | {[k:string]: string}    | 频道属性 |
+
+
+
+
+参考示例：
+
+```javascript
+{"lastUpdateUid":"999888","lastUpdateTs":"1585893904930","attributes":{"room_name":"nginx大讲堂"}}
+```
+
+
+##### room接收到添加或更新频道某些属性Notify回调(room.on('NotifyRoomAttributesAddOrUpdate', (data) => {}))
+
+接收到添加或更新频道某些属性Notify回调通知
+
+```
+room.on('NotifyRoomAttributesAddOrUpdate', (data) => { console.log(data); });
+```
+
+回调通知：
+
+| name    | type    | description                 |
+| ------- | ------- | --------------------------- |
+| eventName | string | 取值"NotifyRoomAttributesAddOrUpdate" |
 | handler | function  | 接收回调                 |
 
 
@@ -1265,7 +1333,7 @@ data定义：
 参考示例：
 
 ```javascript
-{"lastUpdateUid":"999888","lastUpdateTs":"1585893996807","attributes":{"channel_name":"nginx大讲堂","owner":"awu"}}
+{"lastUpdateUid":"999888","lastUpdateTs":"1585893996807","attributes":{"room_name":"nginx大讲堂","owner":"awu"}}
 ```
 
 ### 【辅助工具】getInstanceInfo获取实例信息(getInstanceInfo)

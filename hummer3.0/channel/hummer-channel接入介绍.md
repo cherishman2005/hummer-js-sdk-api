@@ -1,7 +1,7 @@
 
-# hummer-channel接入流程
+# hummer-Room接入流程
 
-## hummer-channel主要接入流程
+## hummer-Room主要接入流程
 
 	1 Hummer初始化
 		hummer = Hummer.createHummer({appid});
@@ -17,7 +17,7 @@
 	3 设置用户归属地
 		hummer.setUserRegion({ region });
 
-	4 ChannelService初始化
+	4 RoomService初始化
 		client = hummer.createInstance();
 
 	5 P2P的消息处理
@@ -34,52 +34,52 @@
 	6 频道消息处理
 	
 		6.1 先要创建一个频道实例；
-			channel = client.createChannel({ region, channelId })
+			room = client.createRoom({ region, RoomId })
 		
 		6.2 加入频道；
-			channel.joinChannel()
+			room.joinRoom()
 		
-		6.3 给指定channel发送组播消息
-			channel.sendMessageToChannel({})
+		6.3 给指定Room发送组播消息
+			room.sendMessageToRoom({})
 
 		6.4 设置用户属性(setUserAttributes)
-			channel.setUserAttributes({})
+			room.setUserAttributes({})
 		
 		6.5 删除用户某些属性(deleteUserAttributesByKeys)
-			channel.deleteUserAttributesByKeys({})
+			room.deleteUserAttributesByKeys({})
 
-		6.6 获取频道用户列表(getChannelUserList)
-			channel.getChannelUserList({})
+		6.6 获取频道用户列表(getRoomUserList)
+			room.getRoomUserList({})
 		
 		6.7 获取指定用户指定属性名的属性(getUserAttributesByKeys)
-			channel.getUserAttributesByKeys({})
+			room.getUserAttributesByKeys({})
 
 		6.8 获取指定用户的全部属性(getUserAttributes)
-			channel.getUserAttributes({})
+			room.getUserAttributes({})
 		
-		6.9 查询单个或多个频道用户数(getChannelUserCount)
-			channel.getChannelUserCount({ channelIds: channelIds });
+		6.9 查询单个或多个频道用户数(getRoomUserCount)
+			client.getRoomUserCount({ region, roomIds });
 		
 		6.10 接收组播消息
-			channel.on('ChannelMessage', (data) => { console.log(data); });
+			room.on('RoomMessage', (data) => { console.log(data); });
 		
 		6.11 接收加入频道通知
-			channel.on('NotifyJoinChannel', (data) => { console.log(data); });
+			room.on('NotifyJoinRoom', (data) => { console.log(data); });
 		
 		6.12 接收离开频道通知
-			channel.on('NotifyLeaveChannel', (data) => { console.log(data); });
+			room.on('NotifyLeaveRoom', (data) => { console.log(data); });
 		
 		6.13 接收用户属性设置通知
-			channel.on('NotifyUserAttributesSet', (data) => { console.log(data); });
+			room.on('NotifyUserAttributesSet', (data) => { console.log(data); });
 		
 		6.14 接收用户属性删除通知
-			channel.on('NotifyUserAttributesDelete', (data) => { console.log(data); });
+			room.on('NotifyUserAttributesDelete', (data) => { console.log(data); });
 		
 		6.15 接收用户数变更通知
-			channel.on('NotifyUserCountChange', (data) => { console.log(data); });
+			room.on('NotifyUserCountChange', (data) => { console.log(data); });
 		
-		6.16 退出channel
-			channel.leaveChannel()
+		6.16 退出Room
+			room.leaveRoom()
 		
 
 
