@@ -34,30 +34,11 @@ hummer-channel-sdk npm包下载地址：
 https://www.npmjs.com/package/hummer-channel-sdk
 
 
-## hummer-channel 
-
-channel npm包下载地址：
-
-https://www.npmjs.com/package/hummer-channel
-
-## hummer-signal
-
-signal npm包下载地址：
-
-https://www.npmjs.com/package/hummer-signal
-
 ## hummer-im 
 
 im npm包下载地址：
 
 https://www.npmjs.com/package/hummer-im
-
-
-## hummer-chatroom 
-
-chatroom npm包下载地址：
-
-https://www.npmjs.com/package/hummer-chatroom
 
 ## hummer vue-demo
 
