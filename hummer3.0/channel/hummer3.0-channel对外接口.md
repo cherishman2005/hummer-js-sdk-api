@@ -92,13 +92,13 @@ roomService区分可靠P2P；可靠组播；
 Hummer初始化：创建hummer实例
 
 ```javascript
-      this.hummer = Hummer.createHummer({ appid: this.appid });
+    hummer = Hummer.createHummer({ appid });
 ```
 入参:
 
 | Name       | Type   | Description                                                                              |
 | ---------- | ------ | ---------------------------------------------------------------------------------------- |
-| appid      | number |                                                                                          |
+| appid      | number |  项目的appid                                                                             |
 
 #### 登录(login)
 
@@ -119,6 +119,9 @@ hummer.login({ uid, token });
 | --------- | ------ | --------------------------- |
 | rescode   | number | 0：表示成功                 |
 | msg       | string | 返回描述                    |
+
+
+token支持3种模式：appid模式、token模式、临时token模式
 
 
 #### 登出(logout)
@@ -223,6 +226,9 @@ hummer.on('TokenExpired', () => {});
 | NA      |         |  |                |
 
 
+断链重连时token过期才会回调通知。
+
+
 #### 更新当前Token(refreshToken)
 
 ```javascript
@@ -263,7 +269,7 @@ hummer.setUserRegion({ region });
 | msg       | string | 返回描述                    |
 
 
-### 初始化room Service
+### 初始化Room Service
 
 初始化： 创建ChanelService实例
 
