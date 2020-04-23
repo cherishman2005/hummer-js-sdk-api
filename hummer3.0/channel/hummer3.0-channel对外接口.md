@@ -4,6 +4,7 @@ npm包发布路径： https://www.npmjs.com/package/hummer-channel-sdk
 
 
    * [Hummer Channel Service js-sdk](#hummer-channel-service-js-sdk)
+      * [js-sdk主要功能](#js-sdk主要功能)
       * [js-sdk对外接口](#js-sdk对外接口)
          * [注意事项](#注意事项)
          * [初始化Hummer](#初始化hummer)
@@ -51,6 +52,19 @@ npm包发布路径： https://www.npmjs.com/package/hummer-channel-sdk
          * [【辅助工具】getInstanceInfo获取实例信息(getInstanceInfo)](#辅助工具getinstanceinfo获取实例信息getinstanceinfo)
          * [【辅助工具】将string编码成Utf8二进制(encodeStringToUtf8Bytes)](#辅助工具将string编码成utf8二进制encodestringtoutf8bytes)
          * [【辅助工具】将Utf8二进制解码成string类型(decodeUtf8BytesToString)](#辅助工具将utf8二进制解码成string类型decodeutf8bytestostring)
+
+
+## js-sdk主要功能
+
+	登录登出、更新Token
+	点对点消息
+	查询用户在线状态
+	加入离开频道相关
+	频道消息
+	频道内用户属性增删改查
+	频道属性增删改查
+	查询单个或多个频道的成员人数
+	获取频道成员列表
 
 
 ## js-sdk对外接口
