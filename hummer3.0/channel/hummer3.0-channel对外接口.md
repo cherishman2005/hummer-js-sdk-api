@@ -271,17 +271,17 @@ hummer.setUserRegion({ region });
 
 ### 初始化Room Service
 
-初始化： 创建ChanelService实例
+初始化： 创建RoomService实例
 
 ```javascript
-client = hummer.createInstance();
+client = hummer.createClient();
 ```
 
 响应数据：
 
 | Name      | Type   | Description                 |
 | --------- | ------ | --------------------------- |
-|    | Object | 返回roomService实例             |
+|           | Object | 返回RoomService实例         |
 
 
 #### P2P的消息处理
@@ -384,7 +384,7 @@ client.queryUsersOnlineStatus({ uids: uids })
 | -------- | ------- | ------------ |
 | rescode  | number  | 0：表示成功  |
 | msg      | string  | 返回描述     |
-| onlineUids | string[]  | 在线的uid列表      |
+| onlineStatus | {[uid: string]: boolean} | 用户/在线状态键值对      |
 
 示例：
 ```js
@@ -397,7 +397,7 @@ client.queryUsersOnlineStatus({uids: uids}).then(res => {
 
 响应：
 ```js
-{"rescode":0,"msg":"ok","onlineUids":["999000"]}
+{"rescode":0,"msg":"ok","onlineStatus":{"999000":true}}
 ```
 
 #### 频道消息处理
@@ -426,9 +426,9 @@ room = client.createRoom({ region, roomId })
 【注】可以创建多个频道实例，并且可以在不同的业务归属region
 
 
-##### 加入频道(joinRoom)
+##### 加入频道(join)
 ```js
-room.joinRoom();
+room.join();
 ```
 
 请求参数：
@@ -448,13 +448,13 @@ room.joinRoom();
 示例：
 ```js
         let params = {extra};
-        room.joinRoom(params).then(res => {
-          console.log("joinRoom res:", res);
+        room.join(params).then(res => {
+          console.log("join res:", res);
         }).catch(err => {
         });
 ```
 
-##### 退出频道(leaveRoom)
+##### 退出频道(leave)
 
 请求参数：
 
@@ -473,17 +473,17 @@ room.joinRoom();
 示例：
 ```js
         let params = {extra};
-        room.leaveRoom(params).then(res => {
-          console.log("leaveRoom res:", res);
+        room.leave(params).then(res => {
+          console.log("leave res:", res);
         }).catch(err => {
         });
 ```
 
 
-##### room发送组播消息(sendMessageToRoom)
+##### room发送组播消息(sendMessage)
 
 ```js
-room.sendMessageToRoom({})
+room.sendMessage({})
 ```
 
 请求参数：
@@ -504,7 +504,7 @@ room.sendMessageToRoom({})
 示例：
 ```javascript
 let params = { type, content }
-room.sendMessageToRoom(params).then(res => {
+room.sendMessage(params).then(res => {
   console.log("res: " + JSON.stringify(res));
 }).catch(err => {
   console.log(err);
@@ -516,10 +516,10 @@ room.sendMessageToRoom(params).then(res => {
 ```
 
 
-##### room设置本地用户属性(setLocalUserAttributes)
+##### room设置本地用户属性(setUserAttributes)
 
 ```js
-room.setLocalUserAttributes({})
+room.setUserAttributes({})
 ```
 
 请求参数：
@@ -540,18 +540,18 @@ room.setLocalUserAttributes({})
 示例：
 ```js
     let params = { attributes };
-    room.setLocalUserAttributes(params).then(res => {
-      console.log("setLocalUserAttributes Res: ", res);
+    room.setUserAttributes(params).then(res => {
+      console.log("setUserAttributes Res: ", res);
     }).catch(err => {
       console.log(err)
     })
 ```
 
 
-##### room删除本地用户某些属性(deleteLocalUserAttributesByKeys)
+##### room删除本地用户某些属性(deleteUserAttributesByKeys)
 
 ```js
-room.deleteLocalUserAttributesByKeys({})
+room.deleteUserAttributesByKeys({})
 ```
 
 请求参数：
@@ -570,17 +570,17 @@ room.deleteLocalUserAttributesByKeys({})
 
 示例：
 ```js
-    room.deleteLocalUserAttributesByKeys({ keys }).then(res => {
-      console.log("deleteLocalUserAttributesByKeys Res: ", res);
+    room.deleteUserAttributesByKeys({ keys }).then(res => {
+      console.log("deleteUserAttributesByKeys res: ", res);
     }).catch(err => {
       console.log(err)
     })
 ```
 
-##### room添加或更新本地用户的属性(addOrUpdateLocalUserAttributes)
+##### room添加或更新本地用户的属性(addOrUpdateUserAttributes)
 
 ```js
-room.addOrUpdateLocalUserAttributes({attributes})
+room.addOrUpdateUserAttributes({attributes})
 ```
 
 请求参数：
@@ -600,18 +600,18 @@ room.addOrUpdateLocalUserAttributes({attributes})
 示例：
 ```js
     let params = { attributes };
-    room.addOrUpdateLocalUserAttributes(params).then(res => {
-      console.log("addOrUpdateLocalUserAttributes res: ", res);
+    room.addOrUpdateUserAttributes(params).then(res => {
+      console.log("addOrUpdateUserAttributes res:", res);
     }).catch(err => {
       console.log(err)
     })
 ```
 
 
-##### room清空本地用户的属性(clearLocalUserAttributes)
+##### room清空本地用户的属性(clearUserAttributes)
 
 ```js
-room.clearLocalUserAttributes()
+room.clearUserAttributes()
 ```
 
 请求参数：
@@ -630,18 +630,18 @@ room.clearLocalUserAttributes()
 
 示例：
 ```js
-    room.clearLocalUserAttributes().then(res => {
-      console.log("clearLocalUserAttributes res: ", res);
+    room.clearUserAttributes().then(res => {
+      console.log("clearUserAttributes res: ", res);
     }).catch(err => {
       console.log(err)
     })
 ```
 
 
-##### room获取频道用户列表(getRoomUserList)
+##### room获取频道用户列表(geMembers)
 
 ```js
-room.getRoomUserList()
+room.geMembers()
 ```
 
 请求参数：
@@ -661,15 +661,15 @@ room.getRoomUserList()
 
 示例：
 ```javascript
-        room.getRoomUserList().then(res => {
-          console.log("getRoomUserList res:", res);
+        room.geMembers().then(res => {
+          console.log("geMembers res:", res);
         }).catch(err => {
         });
 ```
 
 响应：
 ```javascript
-{"appid":1350626568,"roomId":"test_room","users":["123","555","233333","1356662","3300235422","3300235423","3300235499","3300235888","135666911222"],"rescode":0}
+{"appid":1350626568,"roomId":"test_room","uids":["123","555","233333","1356662","3300235422","3300235423","3300235499","3300235888","135666911222"],"rescode":0}
 ```
 
 ##### room查询某指定用户指定属性名的属性(getUserAttributesByKeys)
@@ -734,18 +734,16 @@ room.getUserAttributes({})
     });
 ```
 
-##### client全量设置某指定频道的属性(setRoomAttributes)
+##### room全量设置某指定频道的属性(setRoomAttributes)
 
 ```js
-client.setroomAttributes({})
+room.setroomAttributes({})
 ```
 
 请求参数：
 
 | Name | Type   | Description |
 | ---- | ------ | ----------- |
-| region    | string                  | 业务归属地（"cn"/"ap_southeast"/"ap_south" / "us" / "me_east" / "sa_east"） |
-| roomId    | string                  | 频道ID                      |
 | attributes | {[k: string]: string} | 频道属性key-value键值对 |
 
 
@@ -759,27 +757,25 @@ client.setroomAttributes({})
 
 示例：
 ```js
-    let params = { region, roomId, attributes };
+    let params = { attributes };
     room.setroomAttributes(params).then(res => {
-      console.log("setroomAttributes Res: ", res);
+      console.log("setroomAttributes res:", res);
     }).catch(err => {
       console.log(err)
     })
 ```
 
 
-##### client删除某指定频道的指定属性(deleteRoomAttributesByKeys)
+##### room删除某指定频道的指定属性(deleteRoomAttributesByKeys)
 
 ```js
-client.deleteRoomAttributesByKeys({})
+room.deleteRoomAttributesByKeys({})
 ```
 
 请求参数：
 
 | Name | Type   | Description |
 | ---- | ------ | ----------- |
-| region    | string                  | 业务归属地（"cn"/"ap_southeast"/"ap_south" / "us" / "me_east" / "sa_east"） |
-| roomId    | string                  | 频道ID                      |
 | keys | string[] | 频道属性key数组 |
 
 
@@ -792,25 +788,23 @@ client.deleteRoomAttributesByKeys({})
 
 示例：
 ```js
-    client.deleteroomAttributesByKeys({ keys }).then(res => {
+    room.deleteroomAttributesByKeys({ keys }).then(res => {
       console.log("deleteroomAttributesByKeys Res: ", res);
     }).catch(err => {
       console.log(err)
     })
 ```
 
-##### client更新频道属性(addOrUpdateRoomAttributes)
+##### room更新频道属性(addOrUpdateRoomAttributes)
 
 ```js
-client.addOrUpdateRoomAttributes({})
+room.addOrUpdateRoomAttributes({})
 ```
 
 请求参数：
 
 | Name | Type   | Description |
 | ---- | ------ | ----------- |
-| region    | string                  | 业务归属地（"cn"/"ap_southeast"/"ap_south" / "us" / "me_east" / "sa_east"） |
-| roomId    | string                  | 频道ID                      |
 | attributes | {[k: string]: string} | 频道属性key-value键值对 |
 
 响应数据：Promise<>
@@ -831,18 +825,17 @@ client.addOrUpdateRoomAttributes({})
 ```
 
 
-##### client清空某指定频道的属性(clearRoomAttributes)
+##### room清空某指定频道的属性(clearRoomAttributes)
 
 ```js
-client.clearRoomAttributes()
+room.clearRoomAttributes()
 ```
 
 请求参数：
 
 | Name | Type   | Description |
 | ---- | ------ | ----------- |
-| region?    | string                  | 业务归属地（"cn"/"ap_southeast"/"ap_south" / "us" / "me_east" / "sa_east"） |
-| roomId    | string                  | 频道ID                      |
+| NA   |        |   |         |
 
 
 响应数据：Promise<>
@@ -854,7 +847,7 @@ client.clearRoomAttributes()
 
 示例：
 ```js
-    client.clearRoomAttributes().then(res => {
+    room.clearRoomAttributes().then(res => {
       console.log("clearRoomAttributes res: ", res);
     }).catch(err => {
       console.log(err)
@@ -862,18 +855,17 @@ client.clearRoomAttributes()
 ```
 
 
-##### client查询某指定频道的全部属性(getRoomAttributes)
+##### room查询某指定频道的全部属性(getRoomAttributes)
 
 ```js
-client.getRoomAttributes({})
+room.getRoomAttributes()
 ```
 
 请求参数：
 
 | Name | Type   | Description |
 | ---- | ------ | ----------- |
-| region?    | string                  | 业务归属地（"cn"/"ap_southeast"/"ap_south" / "us" / "me_east" / "sa_east"） |
-| roomId    | string                  | 频道ID                      |
+| NA   |        | |           |
 
 
 响应数据：Promise<>
@@ -886,7 +878,7 @@ client.getRoomAttributes({})
 
 示例：
 ```js
-    client.getRoomAttributes({region, roomId}).then(res => {
+    room.getRoomAttributes().then(res => {
       console.log("getRoomAttributes res: ", res);
     }).catch(err => {
       console.log(err)
@@ -894,18 +886,16 @@ client.getRoomAttributes({})
 ```
 
 
-##### client查询某指定频道指定属性名的属性(getRoomAttributesByKeys)
+##### room查询某指定频道指定属性名的属性(getRoomAttributesByKeys)
 
 ```js
-client.getRoomAttributesByKeys({regin, roomId})
+room.getRoomAttributesByKeys()
 ```
 
 请求参数：
 
 | Name | Type   | Description |
 | ---- | ------ | ----------- |
-| region?    | string                  | 业务归属地（"cn"/"ap_southeast"/"ap_south" / "us" / "me_east" / "sa_east"） |
-| roomId    | string                  | 频道ID                      |
 | keys | string[] | 频道属性key数组 |
 
 
@@ -919,7 +909,7 @@ client.getRoomAttributesByKeys({regin, roomId})
 
 示例：
 ```js
-    client.getRoomAttributesByKeys({region, roomId, keys}).then(res => {
+    room.getRoomAttributesByKeys({ keys }).then(res => {
       console.log("getRoomAttributesByKeys res: ", res);
     }).catch(err => {
       console.log(err)
@@ -946,7 +936,6 @@ client.getRoomUserCount({})
 
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- | ----------- |
-|    appid             |      number        |     |
 |    userCount       |      {[roomId:string]:number}     |     |
 |    rescode             |      number          | 0：表示成功|
 | msg       | string | 返回描述     |

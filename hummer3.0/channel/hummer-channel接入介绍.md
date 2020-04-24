@@ -18,7 +18,7 @@
 		hummer.setUserRegion({ region });
 
 	4 RoomService初始化
-		client = hummer.createInstance();
+		client = hummer.createClient();
 
 	5 P2P的消息处理
 		5.1 发送P2P的消息
