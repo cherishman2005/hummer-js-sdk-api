@@ -12,73 +12,70 @@
 
 
 	2 登录
-		hummer.login({uid, token});
+		hummer.login({region, uid, token});
 
-	3 设置用户归属地
-		hummer.setUserRegion({ region });
-
-	4 RoomService初始化
+	3 RoomService初始化
 		client = hummer.createClient();
 
-	5 P2P的消息处理
-		5.1 发送P2P的消息
+	4 P2P的消息处理
+		4.1 发送P2P的消息
 			client.sendMessageToUser({});
 
-		5.2 接收对端消息
+		4.2 接收对端消息
 			client.on('MessageFromUser', (data) => { console.log(data); });
 		
-		5.3 批量查询用户在线
+		4.3 批量查询用户在线
 			client.queryUsersOnlineStatus({ uids: uids })
 
 
-	6 频道消息处理
+	5 频道消息处理
 	
-		6.1 先要创建一个频道实例；
+		5.1 先要创建一个频道实例；
 			room = client.createRoom({ region, RoomId })
 		
-		6.2 加入频道；
+		5.2 加入频道；
 			room.joinRoom()
 		
-		6.3 给指定Room发送组播消息
+		5.3 给指定Room发送组播消息
 			room.sendMessageToRoom({})
 
-		6.4 设置用户属性(setUserAttributes)
+		5.4 设置用户属性(setUserAttributes)
 			room.setUserAttributes({})
 		
-		6.5 删除用户某些属性(deleteUserAttributesByKeys)
+		5.5 删除用户某些属性(deleteUserAttributesByKeys)
 			room.deleteUserAttributesByKeys({})
 
-		6.6 获取频道用户列表(getRoomUserList)
+		5.6 获取频道用户列表(getRoomUserList)
 			room.getRoomUserList({})
 		
-		6.7 获取指定用户指定属性名的属性(getUserAttributesByKeys)
+		5.7 获取指定用户指定属性名的属性(getUserAttributesByKeys)
 			room.getUserAttributesByKeys({})
 
-		6.8 获取指定用户的全部属性(getUserAttributes)
+		5.8 获取指定用户的全部属性(getUserAttributes)
 			room.getUserAttributes({})
 		
-		6.9 查询单个或多个频道用户数(getRoomUserCount)
+		5.9 查询单个或多个频道用户数(getRoomUserCount)
 			client.getRoomUserCount({ region, roomIds });
 		
-		6.10 接收组播消息
+		5.10 接收组播消息
 			room.on('RoomMessage', (data) => { console.log(data); });
 		
-		6.11 接收加入频道通知
+		5.11 接收加入频道通知
 			room.on('NotifyJoinRoom', (data) => { console.log(data); });
 		
-		6.12 接收离开频道通知
+		5.12 接收离开频道通知
 			room.on('NotifyLeaveRoom', (data) => { console.log(data); });
 		
-		6.13 接收用户属性设置通知
+		5.13 接收用户属性设置通知
 			room.on('NotifyUserAttributesSet', (data) => { console.log(data); });
 		
-		6.14 接收用户属性删除通知
+		5.14 接收用户属性删除通知
 			room.on('NotifyUserAttributesDelete', (data) => { console.log(data); });
 		
-		6.15 接收用户数变更通知
+		5.15 接收用户数变更通知
 			room.on('NotifyUserCountChange', (data) => { console.log(data); });
 		
-		6.16 退出Room
+		5.16 退出Room
 			room.leaveRoom()
 		
 

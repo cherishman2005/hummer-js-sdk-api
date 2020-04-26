@@ -103,13 +103,14 @@ Hummer初始化：创建hummer实例
 #### 登录(login)
 
 ```javascript
-hummer.login({ uid, token });
+hummer.login({ region, uid, token });
 ```
 
 请求参数：
 
 | Name      | Type                    | Description                                         |
 | --------- | ----------------------- | --------------------------------------------------- |
+| region?   | string                  |     用户归属地region                                |
 | uid       | string                  |     用户UID                                         |
 | token?    | string                  |     可选的动态密钥                                  |
 
@@ -145,17 +146,17 @@ hummer.logout();
 | msg       | string | 返回描述                    |
 
 
-#### 接收连接状态变更的回调通知(hummer.on('ConnectionStateChange', (data) => {}))
+#### 接收连接状态变更的回调通知(hummer.on('ConnectionStateChanged', (data) => {}))
 
 ```javascript
-hummer.on('ConnectionStateChange', (data) => {});
+hummer.on('ConnectionStateChanged', (data) => {});
 ```
 
 回调通知：
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| eventName | string | 取值"ConnectionStateChange" |
+| eventName | string | 取值"ConnectionStateChanged" |
 | handler | function  | 接收回调                 |
 
 回调参数：
@@ -240,26 +241,6 @@ hummer.refreshToken({ token });
 | Name      | Type                    | Description                                         |
 | --------- | ----------------------- | --------------------------------------------------- |
 | token     | string                  |           动态密钥                                  |
-
-响应数据：Promise<>
-
-| Name      | Type   | Description                 |
-| --------- | ------ | --------------------------- |
-| rescode   | number | 0：表示成功                 |
-| msg       | string | 返回描述                    |
-
-
-#### 设置用户归属地(setUserRegion)
-
-```javascript
-hummer.setUserRegion({ region });
-```
-
-请求参数：
-
-| Name      | Type                    | Description                                         |
-| --------- | ----------------------- | --------------------------------------------------- |
-| region    | string                  | 用户归属地（"cn"/"ap_southeast"/"ap_south" / "us" / "me_east" / "sa_east"）                      |
 
 响应数据：Promise<>
 
@@ -638,10 +619,10 @@ room.clearUserAttributes()
 ```
 
 
-##### room获取频道用户列表(geMembers)
+##### room获取频道用户列表(getMembers)
 
 ```js
-room.geMembers()
+room.getMembers()
 ```
 
 请求参数：
@@ -661,8 +642,8 @@ room.geMembers()
 
 示例：
 ```javascript
-        room.geMembers().then(res => {
-          console.log("geMembers res:", res);
+        room.getMembers().then(res => {
+          console.log("getMembers res:", res);
         }).catch(err => {
         });
 ```
@@ -737,7 +718,7 @@ room.getUserAttributes({})
 ##### room全量设置某指定频道的属性(setRoomAttributes)
 
 ```js
-room.setroomAttributes({})
+room.setRoomAttributes({})
 ```
 
 请求参数：
@@ -758,8 +739,8 @@ room.setroomAttributes({})
 示例：
 ```js
     let params = { attributes };
-    room.setroomAttributes(params).then(res => {
-      console.log("setroomAttributes res:", res);
+    room.setRoomAttributes(params).then(res => {
+      console.log("setRoomAttributes res:", res);
     }).catch(err => {
       console.log(err)
     })
@@ -917,12 +898,12 @@ room.getRoomAttributesByKeys()
 ```
 
 
-##### client查询单个或多个频道用户数(getRoomUserCount)
+##### client查询单个或多个频道用户数(getRoomMemberCount)
 
 在预先设定的区域，查询单个或多个频道用户数
 
 ```js
-client.getRoomUserCount({})
+client.getRoomMemberCount({})
 ```
 
 请求参数：
@@ -936,13 +917,13 @@ client.getRoomUserCount({})
 
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- | ----------- |
-|    userCount       |      {[roomId:string]:number}     |     |
+|    userCount       |      {[roomId: string]: number}     |     |
 |    rescode             |      number          | 0：表示成功|
 | msg       | string | 返回描述     |
 
 示例：
 ```javascript
-    client.getRoomUserCount({ region, roomIds }).then(res => {
+    client.getRoomMemberCount({ region, roomIds }).then(res => {
       console.log("res:", res);
     }).catch(err => {
     });
@@ -995,19 +976,19 @@ interface RoomMessage {
 }
 ```
 
-##### room接收到加入频道Notify回调(room.on('NotifyJoinRoom', (data) => {}))
+##### room接收到加入频道Notify回调(room.on('MemberJoined', (data) => {}))
 
 接收加入频道的用户列表通知。
 
 ```
-room.on('NotifyJoinRoom', (data) => { console.log(data); })
+room.on('MemberJoined', (data) => { console.log(data); })
 ```
 
 回调通知：
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| eventName | string | 取值"NotifyJoinRoom"    |
+| eventName | string | 取值"MemberJoined"    |
 | handler | function  | 接收回调                 |
 
 
@@ -1028,19 +1009,19 @@ data定义：
 {"uid":["555"]}
 ```
 
-##### room接收到退出频道Notify回调(room.on('NotifyLeaveRoom', (data) => {}))
+##### room接收到退出频道Notify回调(room.on('MemberLeft', (data) => {}))
 
 接收退出频道的用户列表通知。
 
 ```
-room.on('NotifyLeaveRoom', (data) => { console.log(data); })
+room.on('MemberLeft', (data) => { console.log(data); })
 ```
 
 回调通知：
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| eventName | string | 取值"NotifyLeaveRoom"   |
+| eventName | string | 取值"MemberLeft"   |
 | handler | function  | 接收回调                 |
 
 
@@ -1056,19 +1037,19 @@ handler回调参数：
 {"uid":["135666911222"]}
 ```
 
-##### room接收设置用户属性Notify的回调(room.on('NotifyUserAttributesSet', (data) => {}))
+##### room接收设置用户属性Notify的回调(room.on('MemberAttributesSet', (data) => {}))
 
 接收到该频道设置用户某些属性Notify回调通知。
 
 ```
-room.on('NotifyUserAttributesSet', (data) => { console.log(data); })
+room.on('MemberAttributesSet', (data) => { console.log(data); })
 ```
 
 回调通知：
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| eventName | string | 取值"NotifyUserAttributesSet" |
+| eventName | string | 取值"MemberAttributesSet" |
 | handler | function  | 接收回调                 |
 
 handler回调参数：
@@ -1092,19 +1073,19 @@ data定义：
 {"uid":"123","attributes":{"Name":"阿武","Description":"js_sdk测试","Bulletin":"bull","Extention":"ex"}}
 ```
 
-##### room接收到删除用户某些属性Notify回调(room.on('NotifyUserAttributesDelete', (data) => {}))
+##### room接收到删除用户某些属性Notify回调(room.on('MemberAttributesDeleted', (data) => {}))
 
 接收到该频道删除用户某些属性Notify回调通知
 
 ```
-room.on('NotifyUserAttributesDelete', (data) => { console.log(data); });
+room.on('MemberAttributesDeleted', (data) => { console.log(data); });
 ```
 
 回调通知：
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| eventName | string | 取值"NotifyUserAttributesDelete" |
+| eventName | string | 取值"MemberAttributesDeleted" |
 | handler | function  | 接收回调                 |
 
 handler回调参数：
@@ -1128,19 +1109,19 @@ Typescript定义参考：
 {"uid":"999888","lastUpdateTs":"1585895009875","attributes":{"room_role_name":"student"}}
 ```
 
-##### room接收到清除用户某些属性Notify回调(room.on('NotifyUserAttributesClear', (data) => {}))
+##### room接收到清除用户某些属性Notify回调(room.on('MemberAttributesCleared', (data) => {}))
 
 接收到该频道清除用户某些属性Notify回调通知
 
 ```
-room.on('NotifyUserAttributesClear', (data) => { console.log(data); });
+room.on('MemberAttributesCleared', (data) => { console.log(data); });
 ```
 
 回调通知：
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| eventName | string | 取值"NotifyUserAttributesClear" |
+| eventName | string | 取值"MemberAttributesCleared" |
 | handler | function  | 接收回调                 |
 
 handler回调参数：
@@ -1164,19 +1145,19 @@ Typescript定义参考：
 {"uid":"999888","lastUpdateTs":"1585895009875","attributes":{"room_role_name":"student"}}
 ```
 
-##### room接收到添加或更新用户某些属性Notify回调(room.on('NotifyUserAttributesAddOrUpdate', (data) => {}))
+##### room接收到添加或更新用户某些属性Notify回调(room.on('MemberAttributesAddedOrUpdated', (data) => {}))
 
 接收到添加或更新用户某些属性Notify回调通知
 
 ```
-room.on('NotifyUserAttributesAddOrUpdate', (data) => { console.log(data); });
+room.on('MemberAttributesAddedOrUpdated', (data) => { console.log(data); });
 ```
 
 回调通知：
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| eventName | string | 取值"NotifyUserAttributesAddOrUpdate" |
+| eventName | string | 取值"MemberAttributesAddedOrUpdated" |
 | handler | function  | 接收回调                 |
 
 handler回调参数：
@@ -1201,19 +1182,19 @@ data定义：
 ```
 
 
-##### room接收设置频道属性Notify的回调(room.on('NotifyRoomAttributesSet', (data) => {}))
+##### room接收设置频道属性Notify的回调(room.on('RoomAttributesSet', (data) => {}))
 
 接收设置频道属性Notify的回调通知。
 
 ```
-room.on('NotifyRoomAttributesSet', (data) => { console.log(data); })
+room.on('RoomAttributesSet', (data) => { console.log(data); })
 ```
 
 回调通知：
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| eventName | string | 取值"NotifyRoomAttributesSet" |
+| eventName | string | 取值"RoomAttributesSet" |
 | handler | function  | 接收回调                 |
 
 handler回调参数：
@@ -1236,19 +1217,19 @@ data定义：
 {"lastUpdateUid":"999888","lastUpdateTs":"1585893855556","attributes":{"Name":"awu","Bulletin":"bull","Extention":"ex","room_name":"nginx大讲堂"}}
 ```
 
-##### room接收到删除频道某些属性Notify回调(room.on('NotifyRoomAttributesDelete', (data) => {}))
+##### room接收到删除频道某些属性Notify回调(room.on('RoomAttributesDeleted', (data) => {}))
 
 接收到该频道删除用户某些属性Notify回调通知
 
 ```
-room.on('NotifyRoomAttributesDelete', (data) => { console.log(data); });
+room.on('RoomAttributesDeleted', (data) => { console.log(data); });
 ```
 
 回调通知：
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| eventName | string | 取值"NotifyRoomAttributesDelete" |
+| eventName | string | 取值"RoomAttributesDeleted" |
 | handler | function  | 接收回调                 |
 
 handler回调参数：
@@ -1267,19 +1248,19 @@ data定义：
 | attributes       | {[k:string]: string}    | 频道属性 |
 
 
-##### room接收到清除频道某些属性Notify回调(room.on('NotifyRoomAttributesClear', (data) => {}))
+##### room接收到清除频道某些属性Notify回调(room.on('RoomAttributesCleared', (data) => {}))
 
 接收到该频道清除用户某些属性Notify回调通知
 
 ```
-room.on('NotifyRoomAttributesClear', (data) => { console.log(data); });
+room.on('RoomAttributesCleared', (data) => { console.log(data); });
 ```
 
 回调通知：
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| eventName | string | 取值"NotifyRoomAttributesClear" |
+| eventName | string | 取值"RoomAttributesCleared" |
 | handler | function  | 接收回调                 |
 
 handler回调参数：
@@ -1307,19 +1288,19 @@ data定义：
 ```
 
 
-##### room接收到添加或更新频道某些属性Notify回调(room.on('NotifyRoomAttributesAddOrUpdate', (data) => {}))
+##### room接收到添加或更新频道某些属性Notify回调(room.on('RoomAttributesAddedOrUpdated', (data) => {}))
 
 接收到添加或更新频道某些属性Notify回调通知
 
 ```
-room.on('NotifyRoomAttributesAddOrUpdate', (data) => { console.log(data); });
+room.on('RoomAttributesAddedOrUpdated', (data) => { console.log(data); });
 ```
 
 回调通知：
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| eventName | string | 取值"NotifyRoomAttributesAddOrUpdate" |
+| eventName | string | 取值"RoomAttributesAddedOrUpdated" |
 | handler | function  | 接收回调                 |
 
 
