@@ -1,7 +1,7 @@
 # hummer-api
 hummer channel/chatroom/im接口文档
 
-## hummer3.x
+## hummer3.x js-sdk
 
 ### hummer-channel-sdk 2.1.2版本（最新版本）
 
