@@ -1,4 +1,4 @@
-# Hummer Channel Service js-sdk
+# Hummer Real-Time Signal Service js-sdk
 
 npm包发布路径： https://www.npmjs.com/package/hummer-channel-sdk
 
@@ -75,7 +75,7 @@ npm包发布路径： https://www.npmjs.com/package/hummer-channel-sdk
 
 （2）一个浏览器只能登录一个用户（uid）。
 
-roomService区分可靠P2P；可靠组播；
+RtsService区分可靠P2P；可靠组播；
     
 
 （I）白板功能调试主要场景：（时延较小，满足需求）
@@ -250,19 +250,19 @@ hummer.refreshToken({ token });
 | msg       | string | 返回描述                    |
 
 
-### 初始化Room Service
+### 初始化Rts Service
 
 初始化： 创建RoomService实例
 
 ```javascript
-client = hummer.createClient();
+client = hummer.createRts();
 ```
 
 响应数据：
 
 | Name      | Type   | Description                 |
 | --------- | ------ | --------------------------- |
-|           | Object | 返回RoomService实例         |
+|           | Object | 返回RtsService实例         |
 
 
 #### P2P的消息处理
