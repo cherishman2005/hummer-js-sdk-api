@@ -1,57 +1,57 @@
 # Hummer Real-Time Signal Service js-sdk
 
-npm包发布路径： https://www.npmjs.com/package/hummer-channel-sdk
+npm包发布路径： https://www.npmjs.com/package/hummer-rts-sdk
 
 
-   * [Hummer Channel Service js-sdk](#hummer-channel-service-js-sdk)
+   * [Hummer Real-Time Signal Service js-sdk](#hummer-real-time-signal-service-js-sdk)
       * [js-sdk主要功能](#js-sdk主要功能)
       * [js-sdk对外接口](#js-sdk对外接口)
          * [注意事项](#注意事项)
          * [初始化Hummer](#初始化hummer)
             * [登录(login)](#登录login)
             * [登出(logout)](#登出logout)
-            * [接收连接状态变更的回调通知(hummer.on('ConnectionStateChange', (data) =&gt; {}))](#接收连接状态变更的回调通知hummeronconnectionstatechange-data--)
+            * [接收连接状态变更的回调通知(hummer.on('ConnectionStateChanged', (data) =&gt; {}))](#接收连接状态变更的回调通知hummeronconnectionstatechanged-data--)
             * [接收Token过期的回调通知(hummer.on('TokenExpired', () =&gt; {}))](#接收token过期的回调通知hummerontokenexpired---)
             * [更新当前Token(refreshToken)](#更新当前tokenrefreshtoken)
-            * [设置用户归属地(setUserRegion)](#设置用户归属地setuserregion)
-         * [初始化room Service](#初始化room-service)
+         * [初始化Rts Service](#初始化rts-service)
             * [P2P的消息处理](#p2p的消息处理)
                * [发送P2P的消息(sendMessageToUser)](#发送p2p的消息sendmessagetouser)
                * [接收对端消息(client.on('MessageFromUser', (data) =&gt; {}))](#接收对端消息clientonmessagefromuser-data--)
                * [批量查询用户在线列表(queryUsersOnlineStatus)](#批量查询用户在线列表queryusersonlinestatus)
             * [频道消息处理](#频道消息处理)
                * [创建单个频道实例(createRoom)](#创建单个频道实例createroom)
-               * [加入频道(joinRoom)](#加入频道joinroom)
-               * [退出频道(leaveRoom)](#退出频道leaveroom)
-               * [room发送组播消息(sendMessageToRoom)](#room发送组播消息sendmessagetoroom)
-               * [room设置本地用户属性(setLocalUserAttributes)](#room设置本地用户属性setlocaluserattributes)
-               * [room删除本地用户某些属性(deleteLocalUserAttributesByKeys)](#room删除本地用户某些属性deletelocaluserattributesbykeys)
-               * [room添加或更新本地用户的属性(addOrUpdateLocalUserAttributes)](#room添加或更新本地用户的属性addorupdatelocaluserattributes)
-               * [room清空本地用户的属性(clearLocalUserAttributes)](#room清空本地用户的属性clearlocaluserattributes)
-               * [room获取频道用户列表(getRoomUserList)](#room获取频道用户列表getroomuserlist)
+               * [加入频道(join)](#加入频道join)
+               * [退出频道(leave)](#退出频道leave)
+               * [room发送组播消息(sendMessage)](#room发送组播消息sendmessage)
+               * [room设置本地用户属性(setUserAttributes)](#room设置本地用户属性setuserattributes)
+               * [room删除本地用户某些属性(deleteUserAttributesByKeys)](#room删除本地用户某些属性deleteuserattributesbykeys)
+               * [room添加或更新本地用户的属性(addOrUpdateUserAttributes)](#room添加或更新本地用户的属性addorupdateuserattributes)
+               * [room清空本地用户的属性(clearUserAttributes)](#room清空本地用户的属性clearuserattributes)
+               * [room获取频道用户列表(getMembers)](#room获取频道用户列表getmembers)
                * [room查询某指定用户指定属性名的属性(getUserAttributesByKeys)](#room查询某指定用户指定属性名的属性getuserattributesbykeys)
                * [room查询某指定用户的全部属性(getUserAttributes)](#room查询某指定用户的全部属性getuserattributes)
-               * [client全量设置某指定频道的属性(setRoomAttributes)](#client全量设置某指定频道的属性setroomattributes)
-               * [client删除某指定频道的指定属性(deleteRoomAttributesByKeys)](#client删除某指定频道的指定属性deleteroomattributesbykeys)
-               * [client更新频道属性(addOrUpdateRoomAttributes)](#client更新频道属性addorupdateroomattributes)
-               * [client清空某指定频道的属性(clearRoomAttributes)](#client清空某指定频道的属性clearroomattributes)
-               * [client查询某指定频道的全部属性(getRoomAttributes)](#client查询某指定频道的全部属性getroomattributes)
-               * [client查询某指定频道指定属性名的属性(getRoomAttributesByKeys)](#client查询某指定频道指定属性名的属性getroomattributesbykeys)
-               * [client查询单个或多个频道用户数(getRoomUserCount)](#client查询单个或多个频道用户数getroomusercount)
+               * [room全量设置某指定频道的属性(setRoomAttributes)](#room全量设置某指定频道的属性setroomattributes)
+               * [room删除某指定频道的指定属性(deleteRoomAttributesByKeys)](#room删除某指定频道的指定属性deleteroomattributesbykeys)
+               * [room更新频道属性(addOrUpdateRoomAttributes)](#room更新频道属性addorupdateroomattributes)
+               * [room清空某指定频道的属性(clearRoomAttributes)](#room清空某指定频道的属性clearroomattributes)
+               * [room查询某指定频道的全部属性(getRoomAttributes)](#room查询某指定频道的全部属性getroomattributes)
+               * [room查询某指定频道指定属性名的属性(getRoomAttributesByKeys)](#room查询某指定频道指定属性名的属性getroomattributesbykeys)
+               * [client查询单个或多个频道用户数(getRoomMemberCount)](#client查询单个或多个频道用户数getroommembercount)
                * [room接收组播消息(room.on('RoomMessage', (data) =&gt; {}))](#room接收组播消息roomonroommessage-data--)
-               * [room接收到加入频道Notify回调(room.on('NotifyJoinRoom', (data) =&gt; {}))](#room接收到加入频道notify回调roomonnotifyjoinroom-data--)
-               * [room接收到退出频道Notify回调(room.on('NotifyLeaveRoom', (data) =&gt; {}))](#room接收到退出频道notify回调roomonnotifyleaveroom-data--)
-               * [room接收设置用户属性Notify的回调(room.on('NotifyUserAttributesSet', (data) =&gt; {}))](#room接收设置用户属性notify的回调roomonnotifyuserattributesset-data--)
-               * [room接收到删除用户某些属性Notify回调(room.on('NotifyUserAttributesDelete', (data) =&gt; {}))](#room接收到删除用户某些属性notify回调roomonnotifyuserattributesdelete-data--)
-               * [room接收到清除用户某些属性Notify回调(room.on('NotifyUserAttributesClear', (data) =&gt; {}))](#room接收到清除用户某些属性notify回调roomonnotifyuserattributesclear-data--)
-               * [room接收到添加或更新用户某些属性Notify回调(room.on('NotifyUserAttributesAddOrUpdate', (data) =&gt; {}))](#room接收到添加或更新用户某些属性notify回调roomonnotifyuserattributesaddorupdate-data--)
-               * [room接收设置频道属性Notify的回调(room.on('NotifyRoomAttributesSet', (data) =&gt; {}))](#room接收设置频道属性notify的回调roomonnotifyroomattributesset-data--)
-               * [room接收到删除频道某些属性Notify回调(room.on('NotifyRoomAttributesDelete', (data) =&gt; {}))](#room接收到删除频道某些属性notify回调roomonnotifyroomattributesdelete-data--)
-               * [room接收到清除频道某些属性Notify回调(room.on('NotifyRoomAttributesClear', (data) =&gt; {}))](#room接收到清除频道某些属性notify回调roomonnotifyroomattributesclear-data--)
-               * [room接收到添加或更新频道某些属性Notify回调(room.on('NotifyRoomAttributesAddOrUpdate', (data) =&gt; {}))](#room接收到添加或更新频道某些属性notify回调roomonnotifyroomattributesaddorupdate-data--)
+               * [room接收到加入频道Notify回调(room.on('MemberJoined', (data) =&gt; {}))](#room接收到加入频道notify回调roomonmemberjoined-data--)
+               * [room接收到退出频道Notify回调(room.on('MemberLeft', (data) =&gt; {}))](#room接收到退出频道notify回调roomonmemberleft-data--)
+               * [room接收设置用户属性Notify的回调(room.on('MemberAttributesSet', (data) =&gt; {}))](#room接收设置用户属性notify的回调roomonmemberattributesset-data--)
+               * [room接收到删除用户某些属性Notify回调(room.on('MemberAttributesDeleted', (data) =&gt; {}))](#room接收到删除用户某些属性notify回调roomonmemberattributesdeleted-data--)
+               * [room接收到清除用户某些属性Notify回调(room.on('MemberAttributesCleared', (data) =&gt; {}))](#room接收到清除用户某些属性notify回调roomonmemberattributescleared-data--)
+               * [room接收到添加或更新用户某些属性Notify回调(room.on('MemberAttributesAddedOrUpdated', (data) =&gt; {}))](#room接收到添加或更新用户某些属性notify回调roomonmemberattributesaddedorupdated-data--)
+               * [room接收设置频道属性Notify的回调(room.on('RoomAttributesSet', (data) =&gt; {}))](#room接收设置频道属性notify的回调roomonroomattributesset-data--)
+               * [room接收到删除频道某些属性Notify回调(room.on('RoomAttributesDeleted', (data) =&gt; {}))](#room接收到删除频道某些属性notify回调roomonroomattributesdeleted-data--)
+               * [room接收到清除频道某些属性Notify回调(room.on('RoomAttributesCleared', (data) =&gt; {}))](#room接收到清除频道某些属性notify回调roomonroomattributescleared-data--)
+               * [room接收到添加或更新频道某些属性Notify回调(room.on('RoomAttributesAddedOrUpdated', (data) =&gt; {}))](#room接收到添加或更新频道某些属性notify回调roomonroomattributesaddedorupdated-data--)
          * [【辅助工具】getInstanceInfo获取实例信息(getInstanceInfo)](#辅助工具getinstanceinfo获取实例信息getinstanceinfo)
          * [【辅助工具】将string编码成Utf8二进制(encodeStringToUtf8Bytes)](#辅助工具将string编码成utf8二进制encodestringtoutf8bytes)
          * [【辅助工具】将Utf8二进制解码成string类型(decodeUtf8BytesToString)](#辅助工具将utf8二进制解码成string类型decodeutf8bytestostring)
+
 
 
 ## js-sdk主要功能
@@ -252,10 +252,10 @@ hummer.refreshToken({ token });
 
 ### 初始化Rts Service
 
-初始化： 创建RoomService实例
+初始化： 创建RtsService实例
 
 ```javascript
-client = hummer.createRts();
+client = hummer.createRTSInstance();
 ```
 
 响应数据：
@@ -1100,13 +1100,12 @@ Message定义：
 | name             | type                    | description                                             |
 | ---------------- | ----------------------- | ------------------------------------------------------- |
 | uid             | string                   | UID                                                     |
-| lastUpdateTs     | string                  | 用户属性最近一次删除的时间戳（毫秒） |
 | attributes       | {[k:string]: string}    | 用户属性 |
 
 Typescript定义参考：
 
 ```javascript
-{"uid":"999888","lastUpdateTs":"1585895009875","attributes":{"room_role_name":"student"}}
+{"uid":"999888","attributes":{"room_role_name":"student"}}
 ```
 
 ##### room接收到清除用户某些属性Notify回调(room.on('MemberAttributesCleared', (data) => {}))
@@ -1136,13 +1135,12 @@ Message定义：
 | name             | type                    | description                                             |
 | ---------------- | ----------------------- | ------------------------------------------------------- |
 | uid             | string                   | UID                                                     |
-| lastUpdateTs     | string                  | 用户属性最近一次删除的时间戳（毫秒） |
 | attributes       | {[k:string]: string}    | 用户属性 |
 
 Typescript定义参考：
 
 ```javascript
-{"uid":"999888","lastUpdateTs":"1585895009875","attributes":{"room_role_name":"student"}}
+{"uid":"999888","attributes":{"room_role_name":"student"}}
 ```
 
 ##### room接收到添加或更新用户某些属性Notify回调(room.on('MemberAttributesAddedOrUpdated', (data) => {}))
@@ -1171,14 +1169,13 @@ data定义：
 | name             | type                    | description                                             |
 | ---------------- | ----------------------- | ------------------------------------------------------- |
 | uid             | string                   | UID                                                     |
-| lastUpdateTs     | string                  | 用户属性最近一次更新的时间戳（毫秒） |
 | attributes       | {[k:string]: string}    | 用户属性 |
 
 
 参考示例：
 
 ```javascript
-{"uid":"999888","lastUpdateTs":"1585894858984","attributes":{"Name":"awu","room_role_name":"student"}}
+{"uid":"999888","attributes":{"Name":"awu","room_role_name":"student"}}
 ```
 
 
@@ -1208,13 +1205,12 @@ data定义：
 | name             | type                    | description                                             |
 | ---------------- | ----------------------- | ------------------------------------------------------- |
 | lastUpdateUid    | string                  | 最近一次变更频道属性的用户UID |
-| lastUpdateTs     | string                  | 频道属性最近一次设置的时间戳（毫秒） |
 | attributes       | {[k:string]: string}    | 频道属性 |
 
 参考示例：
 
 ```javascript
-{"lastUpdateUid":"999888","lastUpdateTs":"1585893855556","attributes":{"Name":"awu","Bulletin":"bull","Extention":"ex","room_name":"nginx大讲堂"}}
+{"lastUpdateUid":"999888","attributes":{"Name":"awu","Bulletin":"bull","Extention":"ex","room_name":"nginx大讲堂"}}
 ```
 
 ##### room接收到删除频道某些属性Notify回调(room.on('RoomAttributesDeleted', (data) => {}))
@@ -1244,7 +1240,6 @@ data定义：
 | name             | type                    | description                                             |
 | ---------------- | ----------------------- | ------------------------------------------------------- |
 | lastUpdateUid    | string                  | 最近一次变更频道属性的用户UID |
-| lastUpdateTs     | string                  | 频道属性最近一次删除的时间戳（毫秒） |
 | attributes       | {[k:string]: string}    | 频道属性 |
 
 
@@ -1275,7 +1270,6 @@ data定义：
 | name             | type                    | description                                             |
 | ---------------- | ----------------------- | ------------------------------------------------------- |
 | lastUpdateUid    | string                  | 最近一次变更频道属性的用户UID |
-| lastUpdateTs     | string                  | 频道属性最近一次删除的时间戳（毫秒） |
 | attributes       | {[k:string]: string}    | 频道属性 |
 
 
@@ -1284,7 +1278,7 @@ data定义：
 参考示例：
 
 ```javascript
-{"lastUpdateUid":"999888","lastUpdateTs":"1585893904930","attributes":{"room_name":"nginx大讲堂"}}
+{"lastUpdateUid":"999888","attributes":{"room_name":"nginx大讲堂"}}
 ```
 
 
@@ -1316,14 +1310,13 @@ data定义：
 | name             | type                    | description                                             |
 | ---------------- | ----------------------- | ------------------------------------------------------- |
 | lastUpdateUid    | string                  | 最近一次变更频道属性的用户UID |
-| lastUpdateTs     | string                  | 频道属性最近一次更新的时间戳（毫秒） |
 | attributes       | {[k:string]: string}    | 频道属性 |
 
 
 参考示例：
 
 ```javascript
-{"lastUpdateUid":"999888","lastUpdateTs":"1585893996807","attributes":{"room_name":"nginx大讲堂","owner":"awu"}}
+{"lastUpdateUid":"999888","attributes":{"room_name":"nginx大讲堂","owner":"awu"}}
 ```
 
 ### 【辅助工具】getInstanceInfo获取实例信息(getInstanceInfo)
