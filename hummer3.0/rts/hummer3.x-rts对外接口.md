@@ -87,6 +87,14 @@ RtsService区分可靠P2P；可靠组播；
 （II）另外一个场景是1对多，老师禁掉其他学生的声音的控制；采用可靠p2p
 
 
+Hummer RTS JS SDK 是通过 HTML 网页加载的 JavaScript 库。Hummer RTS JS SDK 库在网页浏览器中通过 API 调用Hummer的实时信令服务。
+
+
+创建Hummer账号并获取AppId。
+
+在编译和启动实例程序前，您需要首先获取一个可用的App ID。
+
+
 ### 初始化Hummer
 
 Hummer初始化：创建hummer实例
@@ -99,6 +107,8 @@ Hummer初始化：创建hummer实例
 | Name       | Type   | Description                                                                              |
 | ---------- | ------ | ---------------------------------------------------------------------------------------- |
 | appid      | number |  项目的appid                                                                             |
+
+传入项目的appid，32bit number 类型。
 
 #### 登录(login)
 
@@ -147,6 +157,10 @@ hummer.logout();
 
 
 #### 接收连接状态变更的回调通知(hummer.on('ConnectionStateChanged', (data) => {}))
+
+| 事件            | 描述                 |
+| --------------- | --------------------------- |
+| ConnectionStateChanged | 通知 SDK 与 Hummer RTS 系统的连接状态发生了改变。 |
 
 ```javascript
 hummer.on('ConnectionStateChanged', (data) => {});
@@ -745,6 +759,13 @@ room.setRoomAttributes({})
       console.log(err)
     })
 ```
+
+全量设置某指定频道的属性。
+
+Note
+
+你无需加入指定频道即可为该频道设置频道属性。
+当某频道处于空频道状态（无人状态）数分钟后，该频道的频道属性将被清空。
 
 
 ##### room删除某指定频道的指定属性(deleteRoomAttributesByKeys)
