@@ -1,12 +1,19 @@
 [TOC]
 
-# Hummer Channel js-sdk
+# Hummer RTS js-sdk
 
 https://github.com/cherishman2005/hummer-js-sdk-api/
 
 ## FAQ
 
 ### 动态
+
+[2019-05-08] 【hummer-rts-sdk新版本】提供hummer-rts-sdk 2.1.3版本
+
+接口调整，详见接口hummer3.x文档：《hummer3.0-rts对外接口.md》
+
+RTS: real-time signal
+
 
 [2019-04-16] 【hummer-channel-sdk新版本】提供hummer-channel-sdk 2.1.2版本
 
@@ -69,26 +76,26 @@ https://github.com/cherishman2005/hummer-js-sdk-api/
 
 ## hummer-channel-sdk js-sdk安装配置
 
-npm包路径：https://www.npmjs.com/package/hummer-channel-sdk
+npm包路径：https://www.npmjs.com/package/hummer-rts-sdk
 
 （1）npm包
 
-npm install hummer-channel-sdk
+npm install hummer-rts-sdk
 
 ```javascript
-import Hummer from 'humer-channel-sdk'
+import Hummer from 'humer-rts-sdk'
 ```
 
 （2）采用http方式引用聊天室js_sdk
 ```javascript
-<script charset="utf-8" src="./path/hummer-channel-sdk-x.x.x.js"></script>
+<script charset="utf-8" src="./path/hummer-rts-sdk-x.x.x.js"></script>
 ```
 使用js-sdk的业务部署在后端服务器。
 
 
 ## 线上demo
 
-https://hummer-test.sunclouds.com/room-channel-test/channel-test
+https://hummer-test.sunclouds.com/room-rts-test/rts-test
 
 ## 调试示例demo
 

@@ -1,9 +1,16 @@
 # hummer-api
-hummer channel/chatroom/im接口文档
+hummer rts/chatroom/im接口文档
 
 ## hummer3.x js-sdk
 
-### hummer-channel-sdk 2.1.2版本（最新版本）
+### hummer-rts-sdk 2.1.3版本（最新版本）
+
+[2019-05-08] 【hummer-rts-sdk新版本】提供hummer-rts-sdk 2.1.3版本
+
+接口调整，详见接口hummer3.x文档：《hummer3.0-rts对外接口.md》
+
+RTS: real-time signal
+
 
 [2019-04-16] 【hummer-channel-sdk新版本】提供hummer-channel-sdk 2.1.2版本
 
@@ -29,9 +36,10 @@ hummer channel/chatroom/im接口文档
 	4.登录/登出API接口
 	5.试 js-sdk端与移动端sdk的消息互通
 
-hummer-channel-sdk npm包下载地址：
 
-https://www.npmjs.com/package/hummer-channel-sdk
+hummer-rts-sdk npm包下载地址：
+
+https://www.npmjs.com/package/hummer-rts-sdk
 
 
 ## hummer-im 

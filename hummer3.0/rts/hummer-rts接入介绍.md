@@ -14,8 +14,8 @@
 	2 登录
 		hummer.login({region, uid, token});
 
-	3 RoomService初始化
-		client = hummer.createClient();
+	3 RtsService初始化
+		client = hummer.createRTSInstance();
 
 	4 P2P的消息处理
 		4.1 发送P2P的消息
