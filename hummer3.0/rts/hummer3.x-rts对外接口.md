@@ -94,14 +94,16 @@ Hummer RTS JS SDK 是通过 HTML 网页加载的 JavaScript 库。Hummer RTS JS 
 
 在编译和启动实例程序前，您需要首先获取一个可用的App ID。
 
+### 创建Hummer实例
 
-### 初始化Hummer
+#### 初始化Hummer
 
 Hummer初始化：创建hummer实例
 
 ```javascript
     hummer = Hummer.createHummer({ appid });
 ```
+
 入参:
 
 | Name       | Type   | Description                                                                              |
@@ -109,6 +111,34 @@ Hummer初始化：创建hummer实例
 | appid      | number |  项目的appid                                                                             |
 
 传入项目的appid，32bit number 类型。
+
+#### getState
+
+获取SDK当前状态
+
+```javascript
+hummer.getState();
+```
+
+请求参数：
+
+| Name      | Type                    | Description                                         |
+| --------- | ----------------------- | --------------------------------------------------- |
+| NA        |                         |                                                     |
+
+响应数据：
+
+| Name      | Type   | Description                 |
+| --------- | ------ | --------------------------- |
+|           | enum   |                             |
+
+| 枚举值 | 含义 |
+| :--- | :--- |
+| DISCONNECTED | 未连接 |
+| CONNECTING | 连接中 |
+| RECONNECTING | 重连中 |
+| CONNECTED | 已连接 |
+
 
 #### 登录(login)
 
@@ -1058,11 +1088,34 @@ handler回调参数：
 {"uid":["135666911222"]}
 ```
 
+##### room接收当前用户断线超时离开房间回调(room.on('RoomMemberOffline', () => {}))
+
+接收退出频道的用户列表通知。
+
+```javascript
+room.on('RoomMemberOffline', () => {})
+```
+
+回调通知：
+
+| name    | type    | description                 |
+| ------- | ------- | --------------------------- |
+| eventName | string | 取值"RoomMemberOffline"   |
+| handler | function  | 接收回调                 |
+
+
+handler回调参数：
+
+| name             | type                    | description                                             |
+| ---------------- | ----------------------- | ------------------------------------------------------- |
+|      NA        |                 |                                                  |
+
+
 ##### room接收设置用户属性Notify的回调(room.on('MemberAttributesSet', (data) => {}))
 
 接收到该频道设置用户某些属性Notify回调通知。
 
-```
+```javascript
 room.on('MemberAttributesSet', (data) => { console.log(data); })
 ```
 
@@ -1340,7 +1393,9 @@ data定义：
 {"lastUpdateUid":"999888","attributes":{"room_name":"nginx大讲堂","owner":"awu"}}
 ```
 
-### 【辅助工具】getInstanceInfo获取实例信息(getInstanceInfo)
+### 辅助工具
+
+#### getInstanceInfo获取实例信息(getInstanceInfo)
 
 获取实例信息的API接口，用来辅助排查实例的在线状态信息，方便用于调试。
 
@@ -1372,7 +1427,7 @@ hummer.getInstanceInfo().then(res => {
 { "uid": "123", "instanceId": 3114848827, "isAnonymous": false, "appid": 1350626568 }
 ```
 
-### 【辅助工具】将string编码成Utf8二进制(encodeStringToUtf8Bytes)
+#### 将string编码成Utf8二进制(encodeStringToUtf8Bytes)
 
 请求参数：
 
@@ -1388,11 +1443,11 @@ hummer.getInstanceInfo().then(res => {
 
 
 示例：
-```js
+```javascript
 Hummer.Utify.encodeStringToUtf8Bytes(content);
 ```
 
-### 【辅助工具】将Utf8二进制解码成string类型(decodeUtf8BytesToString)
+#### 将Utf8二进制解码成string类型(decodeUtf8BytesToString)
 
 请求参数：
 
@@ -1407,6 +1462,6 @@ Hummer.Utify.encodeStringToUtf8Bytes(content);
 |          | string |     |      |
 
 示例：
-```js
+```javascript
 Hummer.Utify.decodeUtf8BytesToString(content);
 ```
