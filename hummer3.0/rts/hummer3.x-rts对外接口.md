@@ -8,7 +8,9 @@ npm包发布路径： https://www.npmjs.com/package/hummer-rts-sdk
       * [js-sdk对外接口](#js-sdk对外接口)
          * [注意事项](#注意事项)
          * [创建Hummer实例](#创建hummer实例)
+            * [VERSION](#version)
             * [初始化Hummer](#初始化hummer)
+            * [setLogLevel](#setloglevel)
             * [getState](#getstate)
             * [登录(login)](#登录login)
             * [登出(logout)](#登出logout)
@@ -100,6 +102,14 @@ Hummer RTS JS SDK 是通过 HTML 网页加载的 JavaScript 库。Hummer RTS JS 
 
 ### 创建Hummer实例
 
+#### VERSION
+
+获取Hummer SDK版本号
+
+```javascript
+    const version = Hummer.VERSION;
+```
+
 #### 初始化Hummer
 
 Hummer初始化：创建hummer实例
@@ -115,6 +125,46 @@ Hummer初始化：创建hummer实例
 | appid      | number |  项目的appid                                                                             |
 
 传入项目的appid，32bit number 类型。
+
+#### setLogLevel
+
+设置打印日志级别
+
+```javascript
+hummer.setLogLevel(level);
+```
+
+请求参数：
+
+| Name      | Type                    | Description                                         |
+| --------- | ----------------------- | --------------------------------------------------- |
+|   level   |     enum                |    日志等级                                         |
+
+响应数据：
+
+| Name      | Type   | Description                 |
+| --------- | ------ | --------------------------- |
+|    NA     | void   |                             |
+
+
+| 枚举值 | 含义 |
+| :--- | :--- |
+| DEBUG(-1) | debug |
+| LOG(0) | log |
+| INFO(1) | info |
+| WARN(2) | warn |
+| ERROR(3) | error |
+
+```typescript
+enum LOGLEVEL {
+	DEBUG = -1,
+	LOG = 0,
+	INFO = 1,
+	WARN = 2,
+	ERROR = 3
+}
+```
+
 
 #### getState
 
