@@ -19,40 +19,40 @@ npm包发布路径： https://www.npmjs.com/package/hummer-rts-sdk
             * [更新当前Token(refreshToken)](#更新当前tokenrefreshtoken)
          * [初始化Rts Service](#初始化rts-service)
             * [P2P的消息处理](#p2p的消息处理)
-               * [发送P2P的消息(sendMessageToUser)](#发送p2p的消息sendmessagetouser)
+               * [发送点对点的消息(sendMessageToUser)](#发送点对点的消息sendmessagetouser)
                * [接收对端消息(client.on('MessageFromUser', (data) =&gt; {}))](#接收对端消息clientonmessagefromuser-data--)
                * [批量查询用户在线列表(queryUsersOnlineStatus)](#批量查询用户在线列表queryusersonlinestatus)
-            * [频道消息处理](#频道消息处理)
-               * [创建单个频道实例(createRoom)](#创建单个频道实例createroom)
-               * [加入频道(join)](#加入频道join)
-               * [退出频道(leave)](#退出频道leave)
+            * [房间消息处理](#房间消息处理)
+               * [创建单个房间实例(createRoom)](#创建单个房间实例createroom)
+               * [加入房间(join)](#加入房间join)
+               * [退出房间(leave)](#退出房间leave)
                * [room发送组播消息(sendMessage)](#room发送组播消息sendmessage)
                * [room设置本地用户属性(setUserAttributes)](#room设置本地用户属性setuserattributes)
                * [room删除本地用户某些属性(deleteUserAttributesByKeys)](#room删除本地用户某些属性deleteuserattributesbykeys)
                * [room添加或更新本地用户的属性(addOrUpdateUserAttributes)](#room添加或更新本地用户的属性addorupdateuserattributes)
                * [room清空本地用户的属性(clearUserAttributes)](#room清空本地用户的属性clearuserattributes)
-               * [room获取频道用户列表(getMembers)](#room获取频道用户列表getmembers)
+               * [room获取房间用户列表(getMembers)](#room获取房间用户列表getmembers)
                * [room查询某指定用户指定属性名的属性(getUserAttributesByKeys)](#room查询某指定用户指定属性名的属性getuserattributesbykeys)
                * [room查询某指定用户的全部属性(getUserAttributes)](#room查询某指定用户的全部属性getuserattributes)
-               * [room全量设置某指定频道的属性(setRoomAttributes)](#room全量设置某指定频道的属性setroomattributes)
-               * [room删除某指定频道的指定属性(deleteRoomAttributesByKeys)](#room删除某指定频道的指定属性deleteroomattributesbykeys)
-               * [room更新频道属性(addOrUpdateRoomAttributes)](#room更新频道属性addorupdateroomattributes)
-               * [room清空某指定频道的属性(clearRoomAttributes)](#room清空某指定频道的属性clearroomattributes)
-               * [room查询某指定频道的全部属性(getRoomAttributes)](#room查询某指定频道的全部属性getroomattributes)
-               * [room查询某指定频道指定属性名的属性(getRoomAttributesByKeys)](#room查询某指定频道指定属性名的属性getroomattributesbykeys)
-               * [client查询单个或多个频道用户数(getRoomMemberCount)](#client查询单个或多个频道用户数getroommembercount)
+               * [room全量设置某指定房间的属性(setRoomAttributes)](#room全量设置某指定房间的属性setroomattributes)
+               * [room删除某指定房间的指定属性(deleteRoomAttributesByKeys)](#room删除某指定房间的指定属性deleteroomattributesbykeys)
+               * [room更新房间属性(addOrUpdateRoomAttributes)](#room更新房间属性addorupdateroomattributes)
+               * [room清空某指定房间的属性(clearRoomAttributes)](#room清空某指定房间的属性clearroomattributes)
+               * [room查询某指定房间的全部属性(getRoomAttributes)](#room查询某指定房间的全部属性getroomattributes)
+               * [room查询某指定房间指定属性名的属性(getRoomAttributesByKeys)](#room查询某指定房间指定属性名的属性getroomattributesbykeys)
+               * [client查询单个或多个房间用户数(getRoomMemberCount)](#client查询单个或多个房间用户数getroommembercount)
                * [room接收组播消息(room.on('RoomMessage', (data) =&gt; {}))](#room接收组播消息roomonroommessage-data--)
-               * [room接收到加入频道Notify回调(room.on('MemberJoined', (data) =&gt; {}))](#room接收到加入频道notify回调roomonmemberjoined-data--)
-               * [room接收到退出频道Notify回调(room.on('MemberLeft', (data) =&gt; {}))](#room接收到退出频道notify回调roomonmemberleft-data--)
+               * [room接收到加入房间Notify回调(room.on('MemberJoined', (data) =&gt; {}))](#room接收到加入房间notify回调roomonmemberjoined-data--)
+               * [room接收到退出房间Notify回调(room.on('MemberLeft', (data) =&gt; {}))](#room接收到退出房间notify回调roomonmemberleft-data--)
                * [room接收当前用户断线超时离开房间回调(room.on('RoomMemberOffline', () =&gt; {}))](#room接收当前用户断线超时离开房间回调roomonroommemberoffline---)
                * [room接收设置用户属性Notify的回调(room.on('MemberAttributesSet', (data) =&gt; {}))](#room接收设置用户属性notify的回调roomonmemberattributesset-data--)
                * [room接收到删除用户某些属性Notify回调(room.on('MemberAttributesDeleted', (data) =&gt; {}))](#room接收到删除用户某些属性notify回调roomonmemberattributesdeleted-data--)
                * [room接收到清除用户某些属性Notify回调(room.on('MemberAttributesCleared', (data) =&gt; {}))](#room接收到清除用户某些属性notify回调roomonmemberattributescleared-data--)
                * [room接收到添加或更新用户某些属性Notify回调(room.on('MemberAttributesAddedOrUpdated', (data) =&gt; {}))](#room接收到添加或更新用户某些属性notify回调roomonmemberattributesaddedorupdated-data--)
-               * [room接收设置频道属性Notify的回调(room.on('RoomAttributesSet', (data) =&gt; {}))](#room接收设置频道属性notify的回调roomonroomattributesset-data--)
-               * [room接收到删除频道某些属性Notify回调(room.on('RoomAttributesDeleted', (data) =&gt; {}))](#room接收到删除频道某些属性notify回调roomonroomattributesdeleted-data--)
-               * [room接收到清除频道某些属性Notify回调(room.on('RoomAttributesCleared', (data) =&gt; {}))](#room接收到清除频道某些属性notify回调roomonroomattributescleared-data--)
-               * [room接收到添加或更新频道某些属性Notify回调(room.on('RoomAttributesAddedOrUpdated', (data) =&gt; {}))](#room接收到添加或更新频道某些属性notify回调roomonroomattributesaddedorupdated-data--)
+               * [room接收设置房间属性Notify的回调(room.on('RoomAttributesSet', (data) =&gt; {}))](#room接收设置房间属性notify的回调roomonroomattributesset-data--)
+               * [room接收到删除房间某些属性Notify回调(room.on('RoomAttributesDeleted', (data) =&gt; {}))](#room接收到删除房间某些属性notify回调roomonroomattributesdeleted-data--)
+               * [room接收到清除房间某些属性Notify回调(room.on('RoomAttributesCleared', (data) =&gt; {}))](#room接收到清除房间某些属性notify回调roomonroomattributescleared-data--)
+               * [room接收到添加或更新房间某些属性Notify回调(room.on('RoomAttributesAddedOrUpdated', (data) =&gt; {}))](#room接收到添加或更新房间某些属性notify回调roomonroomattributesaddedorupdated-data--)
                * [room接收到房间用户数变更Notify回调(room.on('MemberCountUpdated', (data) =&gt; {}))](#room接收到房间用户数变更notify回调roomonmembercountupdated-data--)
          * [辅助工具](#辅助工具)
             * [getInstanceInfo获取实例信息(getInstanceInfo)](#getinstanceinfo获取实例信息getinstanceinfo)
@@ -60,17 +60,18 @@ npm包发布路径： https://www.npmjs.com/package/hummer-rts-sdk
             * [将Utf8二进制解码成string类型(decodeUtf8BytesToString)](#将utf8二进制解码成string类型decodeutf8bytestostring)
 
 
+
 ## js-sdk主要功能
 
 	登录登出、更新Token
 	点对点消息
 	查询用户在线状态
-	加入离开频道相关
-	频道消息
-	频道内用户属性增删改查
-	频道属性增删改查
-	查询单个或多个频道的成员人数
-	获取频道成员列表
+	加入离开房间相关
+	房间消息
+	房间内用户属性增删改查
+	房间属性增删改查
+	查询单个或多个房间的成员人数
+	获取房间成员列表
 
 
 ## js-sdk对外接口
@@ -365,9 +366,10 @@ client = hummer.createRTSInstance();
 
 #### P2P的消息处理
 
-##### 发送P2P的消息(sendMessageToUser)
+##### 发送点对点的消息(sendMessageToUser)
 
 发送P2P的消息
+
 ```javascript
 client.sendMessageToUser({})；
 ```
@@ -479,11 +481,11 @@ client.queryUsersOnlineStatus({uids: uids}).then(res => {
 {"rescode":0,"msg":"ok","onlineStatus":{"999000":true}}
 ```
 
-#### 频道消息处理
+#### 房间消息处理
 
-##### 创建单个频道实例(createRoom)
+##### 创建单个房间实例(createRoom)
 
-创建单个频道实例
+创建单个房间实例
 
 ```js
 room = client.createRoom({ region, roomId })
@@ -494,7 +496,7 @@ room = client.createRoom({ region, roomId })
 | Name      | Type                    | Description                                         |
 | --------- | ----------------------- | --------------------------------------------------- |
 | region    | string                  | 业务归属地（"cn"/"ap_southeast"/"ap_south" / "us" / "me_east" / "sa_east"） |
-| roomId    | string                  | 频道ID                      |
+| roomId    | string                  | 房间ID                      |
 
 响应数据：
 
@@ -502,10 +504,10 @@ room = client.createRoom({ region, roomId })
 | --------- | ------ | --------------------------- |
 |    | Object | 返回room实例                |
 
-【注】可以创建多个频道实例，并且可以在不同的业务归属region
+【注】可以创建多个房间实例，并且可以在不同的业务归属region
 
 
-##### 加入频道(join)
+##### 加入房间(join)
 ```js
 room.join();
 ```
@@ -533,7 +535,7 @@ room.join();
         });
 ```
 
-##### 退出频道(leave)
+##### 退出房间(leave)
 
 请求参数：
 
@@ -717,7 +719,7 @@ room.clearUserAttributes()
 ```
 
 
-##### room获取频道用户列表(getMembers)
+##### room获取房间用户列表(getMembers)
 
 ```js
 room.getMembers()
@@ -813,7 +815,7 @@ room.getUserAttributes({})
     });
 ```
 
-##### room全量设置某指定频道的属性(setRoomAttributes)
+##### room全量设置某指定房间的属性(setRoomAttributes)
 
 ```js
 room.setRoomAttributes({})
@@ -823,7 +825,7 @@ room.setRoomAttributes({})
 
 | Name | Type   | Description |
 | ---- | ------ | ----------- |
-| attributes | {[k: string]: string} | 频道属性key-value键值对 |
+| attributes | {[k: string]: string} | 房间属性key-value键值对 |
 
 
 响应数据：Promise<>
@@ -844,15 +846,15 @@ room.setRoomAttributes({})
     })
 ```
 
-全量设置某指定频道的属性。
+全量设置某指定房间的属性。
 
 Note
 
-你无需加入指定频道即可为该频道设置频道属性。
-当某频道处于空频道状态（无人状态）数分钟后，该频道的频道属性将被清空。
+你无需加入指定房间即可为该房间设置房间属性。
+当某房间处于空房间状态（无人状态）数分钟后，该房间的房间属性将被清空。
 
 
-##### room删除某指定频道的指定属性(deleteRoomAttributesByKeys)
+##### room删除某指定房间的指定属性(deleteRoomAttributesByKeys)
 
 ```js
 room.deleteRoomAttributesByKeys({})
@@ -862,7 +864,7 @@ room.deleteRoomAttributesByKeys({})
 
 | Name | Type   | Description |
 | ---- | ------ | ----------- |
-| keys | string[] | 频道属性key数组 |
+| keys | string[] | 房间属性key数组 |
 
 
 响应数据：Promise<>
@@ -881,7 +883,7 @@ room.deleteRoomAttributesByKeys({})
     })
 ```
 
-##### room更新频道属性(addOrUpdateRoomAttributes)
+##### room更新房间属性(addOrUpdateRoomAttributes)
 
 ```js
 room.addOrUpdateRoomAttributes({})
@@ -891,7 +893,7 @@ room.addOrUpdateRoomAttributes({})
 
 | Name | Type   | Description |
 | ---- | ------ | ----------- |
-| attributes | {[k: string]: string} | 频道属性key-value键值对 |
+| attributes | {[k: string]: string} | 房间属性key-value键值对 |
 
 响应数据：Promise<>
 
@@ -911,7 +913,7 @@ room.addOrUpdateRoomAttributes({})
 ```
 
 
-##### room清空某指定频道的属性(clearRoomAttributes)
+##### room清空某指定房间的属性(clearRoomAttributes)
 
 ```js
 room.clearRoomAttributes()
@@ -941,7 +943,7 @@ room.clearRoomAttributes()
 ```
 
 
-##### room查询某指定频道的全部属性(getRoomAttributes)
+##### room查询某指定房间的全部属性(getRoomAttributes)
 
 ```js
 room.getRoomAttributes()
@@ -960,7 +962,7 @@ room.getRoomAttributes()
 | -------- | ------- | ------------ |
 |  rescode | number  |   0:成功     |
 | msg       | string | 返回描述     |
-| attributes | {[k: string]: string} | 频道属性key-value键值对 |
+| attributes | {[k: string]: string} | 房间属性key-value键值对 |
 
 示例：
 ```js
@@ -972,7 +974,7 @@ room.getRoomAttributes()
 ```
 
 
-##### room查询某指定频道指定属性名的属性(getRoomAttributesByKeys)
+##### room查询某指定房间指定属性名的属性(getRoomAttributesByKeys)
 
 ```js
 room.getRoomAttributesByKeys()
@@ -982,7 +984,7 @@ room.getRoomAttributesByKeys()
 
 | Name | Type   | Description |
 | ---- | ------ | ----------- |
-| keys | string[] | 频道属性key数组 |
+| keys | string[] | 房间属性key数组 |
 
 
 响应数据：Promise<>
@@ -991,7 +993,7 @@ room.getRoomAttributesByKeys()
 | -------- | ------- | ------------ |
 |  rescode | number  |   0:成功     |
 | msg       | string | 返回描述     |
-| attributes | {[k: string]: string} | 频道属性key-value键值对 |
+| attributes | {[k: string]: string} | 房间属性key-value键值对 |
 
 示例：
 ```js
@@ -1003,9 +1005,9 @@ room.getRoomAttributesByKeys()
 ```
 
 
-##### client查询单个或多个频道用户数(getRoomMemberCount)
+##### client查询单个或多个房间用户数(getRoomMemberCount)
 
-在预先设定的区域，查询单个或多个频道用户数
+在预先设定的区域，查询单个或多个房间用户数
 
 ```js
 client.getRoomMemberCount({})
@@ -1016,7 +1018,7 @@ client.getRoomMemberCount({})
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- |   ----------------- |
 | region?    | string                  | 业务归属地（"cn"/"ap_southeast"/"ap_south" / "us" / "me_east" / "sa_east"） |
-|    roomIds        |      string[]        |   同一区域的频道列表       |
+|    roomIds        |      string[]        |   同一区域的房间列表       |
 
 响应数据：Promise<>
 
@@ -1041,7 +1043,7 @@ client.getRoomMemberCount({})
 
 
 ##### room接收组播消息(room.on('RoomMessage', (data) => {}))
-接收指定频道的消息
+接收指定房间的消息
 ```javascript
 room.on('RoomMessage', (data) => { console.log(data); })
 ```
@@ -1058,7 +1060,7 @@ handler回调参数：
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| message | Message | 频道消息对象                |
+| message | Message | 房间消息对象                |
 | fromUid | string  | 发送者的uid                 |
 
 
@@ -1081,9 +1083,9 @@ interface RoomMessage {
 }
 ```
 
-##### room接收到加入频道Notify回调(room.on('MemberJoined', (data) => {}))
+##### room接收到加入房间Notify回调(room.on('MemberJoined', (data) => {}))
 
-接收加入频道的用户列表通知。
+接收加入房间的用户列表通知。
 
 ```
 room.on('MemberJoined', (data) => { console.log(data); })
@@ -1114,9 +1116,9 @@ data定义：
 {"uid":["555"]}
 ```
 
-##### room接收到退出频道Notify回调(room.on('MemberLeft', (data) => {}))
+##### room接收到退出房间Notify回调(room.on('MemberLeft', (data) => {}))
 
-接收退出频道的用户列表通知。
+接收退出房间的用户列表通知。
 
 ```
 room.on('MemberLeft', (data) => { console.log(data); })
@@ -1144,7 +1146,7 @@ handler回调参数：
 
 ##### room接收当前用户断线超时离开房间回调(room.on('RoomMemberOffline', () => {}))
 
-接收退出频道的用户列表通知。
+接收退出房间的用户列表通知。
 
 ```javascript
 room.on('RoomMemberOffline', () => {})
@@ -1167,7 +1169,7 @@ handler回调参数：
 
 ##### room接收设置用户属性Notify的回调(room.on('MemberAttributesSet', (data) => {}))
 
-接收到该频道设置用户某些属性Notify回调通知。
+接收到该房间设置用户某些属性Notify回调通知。
 
 ```javascript
 room.on('MemberAttributesSet', (data) => { console.log(data); })
@@ -1203,7 +1205,7 @@ data定义：
 
 ##### room接收到删除用户某些属性Notify回调(room.on('MemberAttributesDeleted', (data) => {}))
 
-接收到该频道删除用户某些属性Notify回调通知
+接收到该房间删除用户某些属性Notify回调通知
 
 ```
 room.on('MemberAttributesDeleted', (data) => { console.log(data); });
@@ -1238,7 +1240,7 @@ Typescript定义参考：
 
 ##### room接收到清除用户某些属性Notify回调(room.on('MemberAttributesCleared', (data) => {}))
 
-接收到该频道清除用户某些属性Notify回调通知
+接收到该房间清除用户某些属性Notify回调通知
 
 ```
 room.on('MemberAttributesCleared', (data) => { console.log(data); });
@@ -1307,9 +1309,9 @@ data定义：
 ```
 
 
-##### room接收设置频道属性Notify的回调(room.on('RoomAttributesSet', (data) => {}))
+##### room接收设置房间属性Notify的回调(room.on('RoomAttributesSet', (data) => {}))
 
-接收设置频道属性Notify的回调通知。
+接收设置房间属性Notify的回调通知。
 
 ```
 room.on('RoomAttributesSet', (data) => { console.log(data); })
@@ -1332,8 +1334,8 @@ data定义：
 
 | name             | type                    | description                                             |
 | ---------------- | ----------------------- | ------------------------------------------------------- |
-| lastUpdateUid    | string                  | 最近一次变更频道属性的用户UID |
-| attributes       | {[k:string]: string}    | 频道属性 |
+| lastUpdateUid    | string                  | 最近一次变更房间属性的用户UID |
+| attributes       | {[k:string]: string}    | 房间属性 |
 
 参考示例：
 
@@ -1341,9 +1343,9 @@ data定义：
 {"lastUpdateUid":"999888","attributes":{"Name":"awu","Bulletin":"bull","Extention":"ex","room_name":"nginx大讲堂"}}
 ```
 
-##### room接收到删除频道某些属性Notify回调(room.on('RoomAttributesDeleted', (data) => {}))
+##### room接收到删除房间某些属性Notify回调(room.on('RoomAttributesDeleted', (data) => {}))
 
-接收到该频道删除用户某些属性Notify回调通知
+接收到该房间删除用户某些属性Notify回调通知
 
 ```
 room.on('RoomAttributesDeleted', (data) => { console.log(data); });
@@ -1367,13 +1369,13 @@ data定义：
 
 | name             | type                    | description                                             |
 | ---------------- | ----------------------- | ------------------------------------------------------- |
-| lastUpdateUid    | string                  | 最近一次变更频道属性的用户UID |
-| attributes       | {[k:string]: string}    | 频道属性 |
+| lastUpdateUid    | string                  | 最近一次变更房间属性的用户UID |
+| attributes       | {[k:string]: string}    | 房间属性 |
 
 
-##### room接收到清除频道某些属性Notify回调(room.on('RoomAttributesCleared', (data) => {}))
+##### room接收到清除房间某些属性Notify回调(room.on('RoomAttributesCleared', (data) => {}))
 
-接收到该频道清除用户某些属性Notify回调通知
+接收到该房间清除用户某些属性Notify回调通知
 
 ```
 room.on('RoomAttributesCleared', (data) => { console.log(data); });
@@ -1397,8 +1399,8 @@ data定义：
 
 | name             | type                    | description                                             |
 | ---------------- | ----------------------- | ------------------------------------------------------- |
-| lastUpdateUid    | string                  | 最近一次变更频道属性的用户UID |
-| attributes       | {[k:string]: string}    | 频道属性 |
+| lastUpdateUid    | string                  | 最近一次变更房间属性的用户UID |
+| attributes       | {[k:string]: string}    | 房间属性 |
 
 
 
@@ -1410,9 +1412,9 @@ data定义：
 ```
 
 
-##### room接收到添加或更新频道某些属性Notify回调(room.on('RoomAttributesAddedOrUpdated', (data) => {}))
+##### room接收到添加或更新房间某些属性Notify回调(room.on('RoomAttributesAddedOrUpdated', (data) => {}))
 
-接收到添加或更新频道某些属性Notify回调通知
+接收到添加或更新房间某些属性Notify回调通知
 
 ```
 room.on('RoomAttributesAddedOrUpdated', (data) => { console.log(data); });
@@ -1437,8 +1439,8 @@ data定义：
 
 | name             | type                    | description                                             |
 | ---------------- | ----------------------- | ------------------------------------------------------- |
-| lastUpdateUid    | string                  | 最近一次变更频道属性的用户UID |
-| attributes       | {[k:string]: string}    | 频道属性 |
+| lastUpdateUid    | string                  | 最近一次变更房间属性的用户UID |
+| attributes       | {[k:string]: string}    | 房间属性 |
 
 
 参考示例：
@@ -1449,7 +1451,7 @@ data定义：
 
 ##### room接收到房间用户数变更Notify回调(room.on('MemberCountUpdated', (data) => {}))
 
-接收到添加或更新频道某些属性Notify回调通知
+接收到添加或更新房间某些属性Notify回调通知
 
 ```
 room.on('MemberCountUpdated', (data) => { console.log(data); });
