@@ -7,7 +7,9 @@ npm包发布路径： https://www.npmjs.com/package/hummer-rts-sdk
       * [js-sdk主要功能](#js-sdk主要功能)
       * [js-sdk对外接口](#js-sdk对外接口)
          * [注意事项](#注意事项)
-         * [初始化Hummer](#初始化hummer)
+         * [创建Hummer实例](#创建hummer实例)
+            * [初始化Hummer](#初始化hummer)
+            * [getState](#getstate)
             * [登录(login)](#登录login)
             * [登出(logout)](#登出logout)
             * [接收连接状态变更的回调通知(hummer.on('ConnectionStateChanged', (data) =&gt; {}))](#接收连接状态变更的回调通知hummeronconnectionstatechanged-data--)
@@ -40,6 +42,7 @@ npm包发布路径： https://www.npmjs.com/package/hummer-rts-sdk
                * [room接收组播消息(room.on('RoomMessage', (data) =&gt; {}))](#room接收组播消息roomonroommessage-data--)
                * [room接收到加入频道Notify回调(room.on('MemberJoined', (data) =&gt; {}))](#room接收到加入频道notify回调roomonmemberjoined-data--)
                * [room接收到退出频道Notify回调(room.on('MemberLeft', (data) =&gt; {}))](#room接收到退出频道notify回调roomonmemberleft-data--)
+               * [room接收当前用户断线超时离开房间回调(room.on('RoomMemberOffline', () =&gt; {}))](#room接收当前用户断线超时离开房间回调roomonroommemberoffline---)
                * [room接收设置用户属性Notify的回调(room.on('MemberAttributesSet', (data) =&gt; {}))](#room接收设置用户属性notify的回调roomonmemberattributesset-data--)
                * [room接收到删除用户某些属性Notify回调(room.on('MemberAttributesDeleted', (data) =&gt; {}))](#room接收到删除用户某些属性notify回调roomonmemberattributesdeleted-data--)
                * [room接收到清除用户某些属性Notify回调(room.on('MemberAttributesCleared', (data) =&gt; {}))](#room接收到清除用户某些属性notify回调roomonmemberattributescleared-data--)
@@ -48,9 +51,10 @@ npm包发布路径： https://www.npmjs.com/package/hummer-rts-sdk
                * [room接收到删除频道某些属性Notify回调(room.on('RoomAttributesDeleted', (data) =&gt; {}))](#room接收到删除频道某些属性notify回调roomonroomattributesdeleted-data--)
                * [room接收到清除频道某些属性Notify回调(room.on('RoomAttributesCleared', (data) =&gt; {}))](#room接收到清除频道某些属性notify回调roomonroomattributescleared-data--)
                * [room接收到添加或更新频道某些属性Notify回调(room.on('RoomAttributesAddedOrUpdated', (data) =&gt; {}))](#room接收到添加或更新频道某些属性notify回调roomonroomattributesaddedorupdated-data--)
-         * [【辅助工具】getInstanceInfo获取实例信息(getInstanceInfo)](#辅助工具getinstanceinfo获取实例信息getinstanceinfo)
-         * [【辅助工具】将string编码成Utf8二进制(encodeStringToUtf8Bytes)](#辅助工具将string编码成utf8二进制encodestringtoutf8bytes)
-         * [【辅助工具】将Utf8二进制解码成string类型(decodeUtf8BytesToString)](#辅助工具将utf8二进制解码成string类型decodeutf8bytestostring)
+         * [辅助工具](#辅助工具)
+            * [getInstanceInfo获取实例信息(getInstanceInfo)](#getinstanceinfo获取实例信息getinstanceinfo)
+            * [将string编码成Utf8二进制(encodeStringToUtf8Bytes)](#将string编码成utf8二进制encodestringtoutf8bytes)
+            * [将Utf8二进制解码成string类型(decodeUtf8BytesToString)](#将utf8二进制解码成string类型decodeutf8bytestostring)
 
 
 

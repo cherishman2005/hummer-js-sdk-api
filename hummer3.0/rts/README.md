@@ -2,11 +2,7 @@
 
 # Hummer RTS js-sdk
 
-https://github.com/cherishman2005/hummer-js-sdk-api/
-
-## FAQ
-
-### 动态
+## 动态
 
 [2019-05-08] 【hummer-rts-sdk新版本】提供hummer-rts-sdk 2.1.3版本
 
@@ -74,7 +70,7 @@ RTS: real-time signal
 	5.试 js-sdk端与移动端sdk的消息互通
 
 
-## hummer-channel-sdk js-sdk安装配置
+## hummer-rts-sdk js-sdk安装配置
 
 npm包路径：https://www.npmjs.com/package/hummer-rts-sdk
 
@@ -97,11 +93,11 @@ import Hummer from 'humer-rts-sdk'
 
 https://hummer-test.sunclouds.com/room-rts-test/rts-test
 
-## 调试示例demo
+## 调试示例demo源码
 
 https://github.com/cherishman2005/vue-room
 
-### channel-demo配置
+### room-demo配置
 
 nginx.conf
 ```javascript
