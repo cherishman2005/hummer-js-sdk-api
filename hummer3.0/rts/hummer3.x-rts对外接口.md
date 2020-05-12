@@ -53,11 +53,11 @@ npm包发布路径： https://www.npmjs.com/package/hummer-rts-sdk
                * [room接收到删除频道某些属性Notify回调(room.on('RoomAttributesDeleted', (data) =&gt; {}))](#room接收到删除频道某些属性notify回调roomonroomattributesdeleted-data--)
                * [room接收到清除频道某些属性Notify回调(room.on('RoomAttributesCleared', (data) =&gt; {}))](#room接收到清除频道某些属性notify回调roomonroomattributescleared-data--)
                * [room接收到添加或更新频道某些属性Notify回调(room.on('RoomAttributesAddedOrUpdated', (data) =&gt; {}))](#room接收到添加或更新频道某些属性notify回调roomonroomattributesaddedorupdated-data--)
+               * [room接收到房间用户数变更Notify回调(room.on('MemberCountUpdated', (data) =&gt; {}))](#room接收到房间用户数变更notify回调roomonmembercountupdated-data--)
          * [辅助工具](#辅助工具)
             * [getInstanceInfo获取实例信息(getInstanceInfo)](#getinstanceinfo获取实例信息getinstanceinfo)
             * [将string编码成Utf8二进制(encodeStringToUtf8Bytes)](#将string编码成utf8二进制encodestringtoutf8bytes)
             * [将Utf8二进制解码成string类型(decodeUtf8BytesToString)](#将utf8二进制解码成string类型decodeutf8bytestostring)
-
 
 
 ## js-sdk主要功能
@@ -1446,6 +1446,43 @@ data定义：
 ```javascript
 {"lastUpdateUid":"999888","attributes":{"room_name":"nginx大讲堂","owner":"awu"}}
 ```
+
+##### room接收到房间用户数变更Notify回调(room.on('MemberCountUpdated', (data) => {}))
+
+接收到添加或更新频道某些属性Notify回调通知
+
+```
+room.on('MemberCountUpdated', (data) => { console.log(data); });
+```
+
+回调通知：
+
+| name    | type    | description                 |
+| ------- | ------- | --------------------------- |
+| eventName | string | 取值"MemberCountUpdated" |
+| handler | function  | 接收回调                 |
+
+
+handler回调参数：
+
+| name    | type    | description                 |
+| ------- | ------- | --------------------------- |
+|         | object  | 详细定义将data定义描述      |
+
+
+data定义：
+
+| name             | type                    | description                                             |
+| ---------------- | ----------------------- | ------------------------------------------------------- |
+| count    | number                  | 房间内用户数 |
+
+
+参考示例：
+
+```javascript
+{"count":1}
+```
+
 
 ### 辅助工具
 
