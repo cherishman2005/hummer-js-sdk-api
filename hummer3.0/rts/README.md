@@ -91,7 +91,7 @@ import Hummer from 'humer-rts-sdk'
 
 ## 线上demo
 
-https://hummer-test.sunclouds.com/room-rts-test/rts-test
+https://hummer-test.sunclouds.com/room/rts-test
 
 ## 调试示例demo源码
 
