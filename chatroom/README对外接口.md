@@ -1,4 +1,40 @@
-[TOC]
+<!-- TOC -->
+
+- [Hummer chatroom js-sdk](#hummer-chatroom-js-sdk)
+    - [js-sdk对外接口](#js-sdk对外接口)
+        - [初始化Hummer](#初始化hummer)
+            - [createChatRoomId创建聊天室RoomId](#createchatroomid创建聊天室roomid)
+        - [hummer刷新Token](#hummer刷新token)
+        - [初始化ChatRoom](#初始化chatroom)
+        - [设置接收消息的回调](#设置接收消息的回调)
+        - [发送请求消息的接口](#发送请求消息的接口)
+            - [getInstance获取实例](#getinstance获取实例)
+            - [joinChatRoom加入聊天室](#joinchatroom加入聊天室)
+            - [leaveChatRoom离开聊天室](#leavechatroom离开聊天室)
+            - [sendGroupBc客户端发送群组消息](#sendgroupbc客户端发送群组消息)
+            - [sendSingleUserData客户端给B用户发消息](#sendsingleuserdata客户端给b用户发消息)
+            - [sendTextChat客户端发送公屏](#sendtextchat客户端发送公屏)
+            - [getChatRoomInfo获取聊天室信息](#getchatroominfo获取聊天室信息)
+            - [getChatRoomManager获取聊天室所有管理员](#getchatroommanager获取聊天室所有管理员)
+            - [getUserCount聊天室在线人数](#getusercount聊天室在线人数)
+            - [getUserList获取聊天室用户列表](#getuserlist获取聊天室用户列表)
+            - [setUserAttributes设置用户属性](#setuserattributes设置用户属性)
+            - [getUserAttributesList获取用户属性列表](#getuserattributeslist获取用户属性列表)
+        - [接收消息的接口](#接收消息的接口)
+            - [onRecvSingleUserData接收对端消息](#onrecvsingleuserdata接收对端消息)
+            - [onDismissChatRoomBc接收删除聊天室消息](#ondismisschatroombc接收删除聊天室消息)
+            - [onUpdateChatRoomInfoBc接收更新聊天室消息](#onupdatechatroominfobc接收更新聊天室消息)
+            - [onKickOffUserBc接收踢人消息](#onkickoffuserbc接收踢人消息)
+            - [onSendGroupBc接收群组消息](#onsendgroupbc接收群组消息)
+            - [onTextChatBc接收公屏消息](#ontextchatbc接收公屏消息)
+            - [onUserCountBc接收用户数更新消息](#onusercountbc接收用户数更新消息)
+            - [onUserOnlineChangeBc接收在线用户变更消息](#onuseronlinechangebc接收在线用户变更消息)
+            - [onNotifyUserAttributesSet接收用户属性设置通知](#onnotifyuserattributesset接收用户属性设置通知)
+    - [调试示例demo](#调试示例demo)
+        - [chatroom-demo配置](#chatroom-demo配置)
+
+<!-- /TOC -->
+
 # Hummer chatroom js-sdk
 
 ## js-sdk对外接口
