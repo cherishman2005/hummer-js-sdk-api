@@ -2,7 +2,12 @@
 
 # Hummer RTS js-sdk
 
+
 ## 动态
+
+[2019-05-25] hummer-rts-sdk
+
+将hummer-rts-sdk 2.1.3版本命名为3.1.3
 
 [2019-05-08] 【hummer-rts-sdk新版本】提供hummer-rts-sdk 2.1.3版本
 
@@ -76,7 +81,16 @@ npm包路径：https://www.npmjs.com/package/hummer-rts-sdk
 
 （1）npm包
 
+最新版本引入:
+```javascript
 npm install hummer-rts-sdk
+```
+
+指定版本引入：
+```javascript
+npm install hummer-rts-sdk@x.x.x
+```
+
 
 ```javascript
 import Hummer from 'humer-rts-sdk'
@@ -91,13 +105,13 @@ import Hummer from 'humer-rts-sdk'
 
 ## 线上demo
 
-https://hummer-test.sunclouds.com/room/rts-test
+https://hummer-test.sunclouds.com/rts-test/rts-test
 
-## 调试示例demo源码
+## 调试示例demo
 
 https://github.com/cherishman2005/vue-room
 
-### room-demo配置
+### rts-demo配置
 
 nginx.conf
 ```javascript
