@@ -5,6 +5,10 @@
 
 ## 动态
 
+[2019-05-27] hummer-rts-sdk 3.1.6
+
+发布hummer-rts-sdk 3.1.6版本
+
 [2019-05-25] hummer-rts-sdk
 
 将hummer-rts-sdk 2.1.3版本命名为3.1.3
