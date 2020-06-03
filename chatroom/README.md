@@ -1,6 +1,8 @@
-https://github.com/cherishman2005/hummer-js-sdk-api
-
 # 修改点
+
+## [2020-06-03]hummer-chatroom js-sdk1.1.2更新发布（针对shopline）
+	对外接口不变：
+	（1）sdk内部优化；
 
 ## [2020-02-13]hummer-chatroom js-sdk1.1.1更新发布
 	对外接口不变：
