@@ -2,9 +2,13 @@
 
 ## 动态
 
-[2019-05-13] 【hummer-chatroom-sdk新版本】hummer-chatroom-sdk 2.0.3版本
+[2020-06-02] hummer-chatroom-sdk 2.1.0
 
-[2019-04-23] hummer-chatroom-sdk 2.0.2版本
+chatroom js-sdk对外发布首个版本 2.1.0
+
+[2020-05-13] hummer-chatroom-sdk 2.0.3版本
+
+[2020-04-23] hummer-chatroom-sdk 2.0.2版本
 
 hummer-chatroom-sdk hummer3.x-beta版本
 
@@ -34,7 +38,7 @@ import Hummer from 'humer-chatroom-sdk'
 
 ## 线上demo
 
-https://hummer-test.sunclouds.com/room/chat-test
+https://hummer-test.sunclouds.com/chatroom-test/chat-test
 
 ## 调试示例demo
 
