@@ -499,8 +499,6 @@ hummer.createChatRoom(options).then((res) => {
         })
 ```
 
-
-
 #### getChatRoomAttributes获取聊天室属性
 请求参数：
 
@@ -947,13 +945,13 @@ handler回调参数：
 
 ## 调试示例demo
 
-https://service-test.sunclouds.com/room/chat
+https://service-test.sunclouds.com/chatroom-test/chat-test
 
 ### chatroom-demo配置
 
 采用http(CDN)方式引用聊天室js_sdk
 ```javascript
-<script charset="utf-8" src=" https://***.**.com/hummer-chatroom-x.x.x.js"></script>
+<script charset="utf-8" src=" https://***.**.com/hummer-chatroom-sdk-x.x.x.js"></script>
 ```
 使用js-sdk的业务部署在后端服务器。
 
