@@ -5,22 +5,24 @@
 
 ## 动态
 
-[2019-05-27] hummer-rts-sdk 3.1.6
+[2020-06-11] hummer-rts-sdk 3.1.7
+
+[2020-05-27] hummer-rts-sdk 3.1.6
 
 发布hummer-rts-sdk 3.1.6版本
 
-[2019-05-25] hummer-rts-sdk
+[2020-05-25] hummer-rts-sdk
 
 将hummer-rts-sdk 2.1.3版本命名为3.1.3
 
-[2019-05-08] 【hummer-rts-sdk新版本】提供hummer-rts-sdk 2.1.3版本
+[2020-05-08] 【hummer-rts-sdk新版本】提供hummer-rts-sdk 2.1.3版本
 
 接口调整，详见接口hummer3.x文档：《hummer3.0-rts对外接口.md》
 
 RTS: real-time signal
 
 
-[2019-04-16] 【hummer-channel-sdk新版本】提供hummer-channel-sdk 2.1.2版本
+[2020-04-16] 【hummer-channel-sdk新版本】提供hummer-channel-sdk 2.1.2版本
 
 接口调整，详见接口hummer3.0文档：《hummer3.0-channel对外接口.md》
 
@@ -33,7 +35,7 @@ RTS: real-time signal
 （3）login/logout/refreshToken功能优化；
 
 
-[2019-04-03] 【hummer-channel-sdk新版本】提供hummer-channel-sdk 2.1.1版本
+[2020-04-03] 【hummer-channel-sdk新版本】提供hummer-channel-sdk 2.1.1版本
 
 接口调整，详见接口hummer3.0文档：《hummer3.0-channel对外接口.md》
 
@@ -54,7 +56,7 @@ RTS: real-time signal
 	getChannelAttributesByKeys	查询某指定频道指定属性名的属性
 
 
-[2019-03-25] 【hummer-channel-sdk新版本】提供hummer-channel-sdk 2.1.0版本
+[2020-03-25] 【hummer-channel-sdk新版本】提供hummer-channel-sdk 2.1.0版本
 
 接口调整，详见接口hummer3.0文档：《hummer3.0-channel对外接口.md》
 
@@ -64,7 +66,7 @@ RTS: real-time signal
 	2.token功能；
 
 
-[2019-03-03] 【hummer-channel-sdk新版本】提供hummer-channel-sdk.js  2.0.0版本
+[2020-03-03] 【hummer-channel-sdk新版本】提供hummer-channel-sdk.js  2.0.0版本
 
 【重点】在hummer-channel.js  1.0.5版本的基础上做了接口调整。新业务请使用“hummer-channel-sdk”版本。
 

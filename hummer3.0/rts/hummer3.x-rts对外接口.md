@@ -1147,8 +1147,6 @@ handler回调参数：
 
 ##### room接收当前用户断线超时离开房间回调(room.on('RoomMemberOffline', () => {}))
 
-接收退出房间的用户列表通知。
-
 ```javascript
 room.on('RoomMemberOffline', () => {})
 ```
