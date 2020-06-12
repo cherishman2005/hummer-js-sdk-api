@@ -83,18 +83,6 @@ npm包发布路径： https://www.npmjs.com/package/hummer-rts-sdk
 
 （2）一个浏览器只能登录一个用户（uid）。
 
-RtsService区分可靠P2P；可靠组播；
-    
-
-（I）白板功能调试主要场景：（时延较小，满足需求）
-
-    （a）【1对1白板授课】可靠的p2p；
-
-    （b）【1对多白板授课】可靠的组播；
-
-（II）另外一个场景是1对多，老师禁掉其他学生的声音的控制；采用可靠p2p
-
-
 Hummer RTS JS SDK 是通过 HTML 网页加载的 JavaScript 库。Hummer RTS JS SDK 库在网页浏览器中通过 API 调用Hummer的实时信令服务。
 
 
