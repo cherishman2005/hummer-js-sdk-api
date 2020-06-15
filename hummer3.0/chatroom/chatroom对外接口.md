@@ -141,7 +141,7 @@ hummer.login({ region, uid, token });
 
 | Name      | Type                    | Description                                         |
 | --------- | ----------------------- | --------------------------------------------------- |
-| region?   | string                  |     用户归属地region                                |
+| region?   | string                  |     用户归属地region （"cn"/"ap_southeast"/"ap_south" / "us" / "me_east" / "sa_east"）               |
 | uid       | string                  |     用户UID                                         |
 | token?    | string                  |     可选的动态密钥                                  |
 
@@ -331,7 +331,8 @@ hummer.createChatRoom(options).then((res) => {
 
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- |   ----------------- |
-|          NA           |                |  ||
+| region   | string                  |     region （"cn"/"ap_southeast"/"ap_south" / "us" / "me_east" / "sa_east"） |
+| uid       | string                  |     用户UID                                         |
 
 
 响应数据：
@@ -343,7 +344,7 @@ hummer.createChatRoom(options).then((res) => {
 
 示例：
 ```javascript
-  hummer.getChatRoomUserCount().then((res) => {
+  hummer.getChatRoomUserCount({region, uid}).then((res) => {
     console.log("getChatRoomUserCount Res: " + JSON.stringify(res));
   }).catch(err => {
     console.log(err)
@@ -749,8 +750,8 @@ handler回调参数：
 | Name                  | Type              |  Description |
 | --------------------- | --------------- | ----------- |
 |    uid                |      string          | 发送者uid|
-|    content             |      string          | 消息内容|
-|    kvExtra                    |     {[k: string]: string}           |  |
+|    content            |      string          | 消息内容|
+|    kvExtra            |     {[k: string]: string}           |  |
 
 示例：
 ```javascript
