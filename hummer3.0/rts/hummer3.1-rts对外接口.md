@@ -194,7 +194,7 @@ hummer.login({ region, uid, token });
 
 | Name      | Type                    | Description                                         |
 | --------- | ----------------------- | --------------------------------------------------- |
-| region?   | string                  |     用户归属地region                                |
+| region?   | string                  |     用户归属地region （"cn"/"ap_southeast"/"ap_south" / "us" / "me_east" / "sa_east"）               |
 | uid       | string                  |     用户UID                                         |
 | token?    | string                  |     可选的动态密钥                                  |
 
@@ -205,9 +205,9 @@ hummer.login({ region, uid, token });
 | rescode   | number | 0：表示成功                 |
 | msg       | string | 返回描述                    |
 
-
-token支持3种模式：appid模式、token模式、临时token模式
-
+【注】
+* token支持3种模式：appid模式、token模式、临时token模式
+* 在appid模式下，不用填token；其他模式下必须填token
 
 #### 登出(logout)
 

@@ -152,9 +152,9 @@ hummer.login({ region, uid, token });
 | rescode   | number | 0：表示成功                 |
 | msg       | string | 返回描述                    |
 
-
-token支持3种模式：appid模式、token模式、临时token模式
-
+【注】
+* token支持3种模式：appid模式、token模式、临时token模式
+* 在appid模式下，不用填token；其他模式下必须填token
 
 #### 登出(logout)
 
@@ -252,18 +252,17 @@ hummer.on('TokenExpired', () => {});
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| eventName | string | 取值"TokenExpired" |
-| handler | function  | 接收回调                 |
+| eventName | string    | 取值"TokenExpired"       |
+| handler   | function  | 接收回调                 |
 
 回调参数：
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| NA      |         |  |                |
+| NA      |         |  只用监听事件，data为空       |
 
-
-断链重连时token过期才会回调通知。
-
+【注】
+* 断链重连时token过期才会回调通知。
 
 #### 更新当前Token(refreshToken)
 
@@ -327,6 +326,7 @@ hummer.createChatRoom(options).then((res) => {
 ```
 
 #### getChatRoomUserCount查询聊天室在线人数
+
 请求参数：
 
 | Name                  | Type              |  Description |
