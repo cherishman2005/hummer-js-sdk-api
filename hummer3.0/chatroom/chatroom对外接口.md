@@ -2,7 +2,7 @@
 
 - [Hummer chatroom js-sdk](#hummer-chatroom-js-sdk)
     - [js-sdk对外接口](#js-sdk对外接口)
-        - [创建Hummer实例](#创建hummer实例)
+        - [Hummer](#hummer)
             - [setLogLevel](#setloglevel)
             - [getState](#getstate)
             - [登录(login)](#登录login)
@@ -26,7 +26,7 @@
             - [getUserAttributesList获取用户属性列表](#getuserattributeslist获取用户属性列表)
             - [muteUser禁言操作](#muteuser禁言操作)
             - [getMutedUserList获取聊天室禁言用户列表](#getmuteduserlist获取聊天室禁言用户列表)
-        - [接收消息的接口](#接收消息的接口)
+        - [接收消息的监听接口](#接收消息的监听接口)
                 - [接收单播消息(chatroom.on('SingleUserMessage', (data) => {}))](#接收单播消息chatroomonsingleusermessage-data--)
             - [接收公屏消息(chatroom.on('TextChat', (data) => {}))](#接收公屏消息chatroomontextchat-data--)
             - [接收广播消息(chatroom.on('GroupMessage', (data) => {}))](#接收广播消息chatroomongroupmessage-data--)
@@ -47,7 +47,7 @@
 
 ## js-sdk对外接口
 
-### 创建Hummer实例
+### Hummer
 
 Hummer初始化：创建hummer实例
 
@@ -453,7 +453,7 @@ hummer.createChatRoom(options).then((res) => {
 
 | Name                  | Type              |  Description |
 | --------------------- |   --------------  |  ----------  |
-| rescode               |      number       | 0：表示成功   |
+| rescode               | number            | 0：表示成功   |
 | msg                   | string            | 返回描述      |
 
 
@@ -713,7 +713,7 @@ hummer.createChatRoom(options).then((res) => {
 {"appid":1504984159,"roomid":1704994373,"rescode":0,"uids":["123"]}
 ```
 
-### 接收消息的接口
+### 接收消息的监听接口
 | 监听事件                            | 含义                                                         |
 | :-------------------------------- | :----------------------------------------------------------- |
 | SingleUserMessage                 | 接收单播消息                                                  |
