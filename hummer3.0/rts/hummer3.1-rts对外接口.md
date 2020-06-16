@@ -312,7 +312,7 @@ hummer.on('TokenExpired', () => {});
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| NA      |         |  |                |
+| NA      |         |  只用监听事件，data为空       |
 
 
 断链重连时token过期才会回调通知。
