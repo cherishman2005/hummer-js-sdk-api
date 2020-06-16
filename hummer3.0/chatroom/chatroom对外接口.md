@@ -332,19 +332,19 @@ hummer.createChatRoom(options).then((res) => {
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- |   ----------------- |
 | region   | string                  |     region （"cn"/"ap_southeast"/"ap_south" / "us" / "me_east" / "sa_east"） |
-| uid       | string                  |     用户UID                                         |
+| roomid   | number                  |  聊天室ID      |
 
 
 响应数据：
 
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- | ----------- |
-|    rescode            |      number          | 0：表示成功|
-|    totalCount         |      number        | |
+|    rescode            |      number       | 0：表示成功  |
+|    totalCount         |      number       | |
 
 示例：
 ```javascript
-  hummer.getChatRoomUserCount({region, uid}).then((res) => {
+  hummer.getChatRoomUserCount({region, roomid}).then((res) => {
     console.log("getChatRoomUserCount Res: " + JSON.stringify(res));
   }).catch(err => {
     console.log(err)
