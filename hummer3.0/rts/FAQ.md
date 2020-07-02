@@ -12,4 +12,6 @@ hummer.on('TokenExpired'，() => {
 });
 ```
 
-
+## key-value限定条件
+key值不要支持非可见字符（如中文）； key只需要支持可见字符
+`[a-zA-Z0-9_-]`
