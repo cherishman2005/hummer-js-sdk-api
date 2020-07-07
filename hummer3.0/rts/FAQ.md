@@ -12,6 +12,14 @@ hummer.on('TokenExpired'，() => {
 });
 ```
 
+## RoomMemberOffline 监听事件的回调处理
+
+```javascript
+room.on('RoomMemberOffline'，() => {
+  //需要业务捕捉到这个监听，网络恢复正常后调用hummer.join({});重新加入房间才能继续收这个房间的消息
+});
+```
+
 ## key-value限定条件
 key值不要支持非可见字符（如中文）； key只需要支持可见字符
 `[a-zA-Z0-9_-]`
