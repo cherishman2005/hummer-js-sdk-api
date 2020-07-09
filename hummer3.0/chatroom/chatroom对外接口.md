@@ -2,30 +2,30 @@
 
 - [Hummer chatroom js-sdk](#hummer-chatroom-js-sdk)
     - [js-sdk对外接口](#js-sdk对外接口)
-        - [Hummer](#hummer)
+        - [createHummer](#createhummer)
             - [setLogLevel](#setloglevel)
             - [getState](#getstate)
-            - [登录(login)](#登录login)
-            - [登出(logout)](#登出logout)
+            - [login](#login)
+            - [logout](#logout)
             - [接收连接状态变更的回调通知(hummer.on('ConnectionStateChanged', (data) => {}))](#接收连接状态变更的回调通知hummeronconnectionstatechanged-data--)
             - [接收Token过期的回调通知(hummer.on('TokenExpired', () => {}))](#接收token过期的回调通知hummerontokenexpired---)
-            - [更新当前Token(refreshToken)](#更新当前tokenrefreshtoken)
-            - [createChatRoom创建聊天室](#createchatroom创建聊天室)
-            - [getChatRoomUserCount查询聊天室在线人数](#getchatroomusercount查询聊天室在线人数)
+            - [refreshToken](#refreshtoken)
+            - [createChatRoom](#createchatroom)
+            - [getChatRoomUserCount](#getchatroomusercount)
         - [ChatRoom](#chatroom)
-            - [创建ChatRoom聊天室实例](#创建chatroom聊天室实例)
-            - [joinChatRoom加入聊天室](#joinchatroom加入聊天室)
-            - [leaveChatRoom离开聊天室](#leavechatroom离开聊天室)
-            - [sendGroupMessage发送群组消息](#sendgroupmessage发送群组消息)
-            - [sendSingleUserMessage发送单播消息](#sendsingleusermessage发送单播消息)
-            - [sendTextChat发送公屏](#sendtextchat发送公屏)
-            - [getChatRoomAttributes获取聊天室属性](#getchatroomattributes获取聊天室属性)
-            - [getChatRoomManager获取聊天室所有管理员](#getchatroommanager获取聊天室所有管理员)
-            - [getUserList获取聊天室用户列表](#getuserlist获取聊天室用户列表)
-            - [setUserAttributes设置用户属性](#setuserattributes设置用户属性)
-            - [getUserAttributesList获取用户属性列表](#getuserattributeslist获取用户属性列表)
-            - [muteUser禁言操作](#muteuser禁言操作)
-            - [getMutedUserList获取聊天室禁言用户列表](#getmuteduserlist获取聊天室禁言用户列表)
+            - [createChatRoomInstance](#createchatroominstance)
+            - [joinChatRoom](#joinchatroom)
+            - [leaveChatRoom](#leavechatroom)
+            - [sendGroupMessage](#sendgroupmessage)
+            - [sendSingleUserMessage](#sendsingleusermessage)
+            - [sendTextChat](#sendtextchat)
+            - [getChatRoomAttributes](#getchatroomattributes)
+            - [getChatRoomManager](#getchatroommanager)
+            - [getUserList](#getuserlist)
+            - [setUserAttributes](#setuserattributes)
+            - [getUserAttributesList](#getuserattributeslist)
+            - [muteUser](#muteuser)
+            - [getMutedUserList](#getmuteduserlist)
         - [接收消息的监听接口](#接收消息的监听接口)
                 - [接收单播消息(chatroom.on('SingleUserMessage', (data) => {}))](#接收单播消息chatroomonsingleusermessage-data--)
             - [接收公屏消息(chatroom.on('TextChat', (data) => {}))](#接收公屏消息chatroomontextchat-data--)
@@ -47,7 +47,7 @@
 
 ## js-sdk对外接口
 
-### Hummer
+### createHummer
 
 Hummer初始化：创建hummer实例
 
@@ -77,13 +77,6 @@ hummer.setLogLevel(level);
 | --------- | ----------------------- | --------------------------------------------------- |
 |   level   |     enum                |    日志等级                                         |
 
-响应数据：
-
-| Name      | Type   | Description                 |
-| --------- | ------ | --------------------------- |
-|    NA     | void   |                             |
-
-
 | 枚举值 | 含义 |
 | :--- | :--- |
 | DEBUG(-1) | debug |
@@ -91,6 +84,8 @@ hummer.setLogLevel(level);
 | INFO(1) | info |
 | WARN(2) | warn |
 | ERROR(3) | error |
+
+响应数据：（无）
 
 ```typescript
 enum LOGLEVEL {
@@ -101,7 +96,6 @@ enum LOGLEVEL {
 	ERROR = 3
 }
 ```
-
 
 #### getState
 
@@ -131,7 +125,9 @@ hummer.getState();
 | CONNECTED | 已连接 |
 
 
-#### 登录(login)
+#### login
+
+登录
 
 ```javascript
 hummer.login({ region, uid, token });
@@ -156,7 +152,9 @@ hummer.login({ region, uid, token });
 * token支持3种模式：appid模式、token模式、临时token模式
 * 在appid模式下，不用填token；其他模式下必须填token
 
-#### 登出(logout)
+#### logout
+
+登出
 
 ```javascript
 hummer.logout();
@@ -264,7 +262,9 @@ hummer.on('TokenExpired', () => {});
 【注】
 * 断链重连时token过期才会回调通知。
 
-#### 更新当前Token(refreshToken)
+#### refreshToken
+
+更新当前Token
 
 ```javascript
 hummer.refreshToken({ token });
@@ -284,7 +284,14 @@ hummer.refreshToken({ token });
 | msg       | string | 返回描述                    |
 
 
-#### createChatRoom创建聊天室
+#### createChatRoom
+
+创建聊天室
+
+```javascript
+  hummer.createChatRoom({})
+```
+
 请求参数：
 
 
@@ -325,7 +332,9 @@ hummer.createChatRoom(options).then((res) => {
 {appid: 1504984159, uid: "123", roomid: 1704984183, rescode: 0, props: {…}, …}
 ```
 
-#### getChatRoomUserCount查询聊天室在线人数
+#### getChatRoomUserCount
+
+查询聊天室在线人数
 
 请求参数：
 
@@ -358,13 +367,21 @@ hummer.createChatRoom(options).then((res) => {
 
 ### ChatRoom
 
-#### 创建ChatRoom聊天室实例
+#### createChatRoomInstance
+
+创建ChatRoom聊天室实例
 
 ```javascript
 	chatroom = hummer.createChatRoomInstance({region, roomid});
 ```
 
-#### joinChatRoom加入聊天室
+#### joinChatRoom
+
+加入聊天室
+
+```javascript
+	chatroom.joinChatRoom({});
+```
 
 请求参数：
 
@@ -390,14 +407,15 @@ hummer.createChatRoom(options).then((res) => {
         })
 ```
 
-#### leaveChatRoom离开聊天室
+#### leaveChatRoom
 
-请求参数：
+离开聊天室
 
-| Name                  | Type              |
-| --------------------- | ----------------- |
-|    NA                 |                ||
+```javascript
+	chatroom.leaveChatRoom();
+```
 
+请求参数：（无）
 
 响应数据：
 
@@ -415,7 +433,30 @@ hummer.createChatRoom(options).then((res) => {
         })
 ```
 
-#### sendGroupMessage发送群组消息
+响应数据：
+
+| Name                  | Type              |  Description |
+| --------------------- | ----------------- |  ----------  |
+| rescode               |      number       | 0：表示成功   |
+| msg                   | string            | 返回描述      |
+
+示例：
+```javascript
+        chatroom.leaveChatRoom().then((res) => {
+          console.log("LeaveChatRoom Res: " + JSON.stringify(res));
+        }).catch((err) => {
+          console.log(err)
+        })
+```
+
+#### sendGroupMessage
+
+发送群组消息
+
+```javascript
+	chatroom.sendGroupMessage({});
+```
+
 请求参数：
 
 | Name                  | Type              |  Description |
@@ -441,7 +482,14 @@ hummer.createChatRoom(options).then((res) => {
   })
 ```
 
-#### sendSingleUserMessage发送单播消息
+#### sendSingleUserMessage
+
+发送单播消息
+
+```javascript
+	chatroom.sendSingleUserMessage({});
+```
+
 请求参数：
 
 | Name                  | Type              |  Description |
@@ -468,14 +516,21 @@ hummer.createChatRoom(options).then((res) => {
         })
 ```
 
-#### sendTextChat发送公屏
+#### sendTextChat
+
+发送公屏
+
+```javascript
+	chatroom.sendTextChat({});
+```
+
 请求参数：
 
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- |   ----------------- |
 |    chat                |     string           | 内容 |
-|    extra          |     string          |  |
-|    kvExtra        |     {[k: string]: string}           |  |
+|    extra          |     string          |  扩展字段(新版本已废弃) |
+|    kvExtra        |     {[k: string]: string}           | 扩展字段key-value键值对  |
 
 
 响应数据：
@@ -500,14 +555,17 @@ hummer.createChatRoom(options).then((res) => {
         })
 ```
 
-#### getChatRoomAttributes获取聊天室属性
-请求参数：
+#### getChatRoomAttributes
 
-| Name                  | Type              |  Description |
-| --------------------- | ----------------- |   ----------------- |
-|    NA                 |                |  | |
+获取聊天室属性
 
-响应数据：
+```javascript
+  chatroom.getChatRoomAttributes();
+```
+
+请求参数：（无）
+
+响应数据：Promise<>
 
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- |  ----------- |
@@ -529,7 +587,14 @@ hummer.createChatRoom(options).then((res) => {
 {"appid":1504984159,"roomid":0,"rescode":0,"attributes":{"Roomid":"1704994371","Name":"nginx大讲堂","Bulletin":"bull","Owner":"777666","Passwd":"","MaxUser":"100000","AppExtra":"ex","Appid":"1504984159","Description":"全栈技术"}}
 ```
 
-#### getChatRoomManager获取聊天室所有管理员
+#### getChatRoomManager
+
+获取聊天室所有管理员
+
+```javascript
+  chatroom.getChatRoomManager({});
+```
+
 请求参数：
 
 | Name                  | Type              |  Description |
@@ -560,7 +625,14 @@ hummer.createChatRoom(options).then((res) => {
 {"appid":1504984159,"roomid":1704994371,"admins":{"owner":["777666"]},"rescode":0}
 ```
 
-#### getUserList获取聊天室用户列表
+#### getUserList
+
+获取聊天室用户列表
+
+```javascript
+  chatroom.getUserList({});
+```
+
 请求参数：
 
 | Name                  | Type              |  Description |
@@ -592,7 +664,14 @@ hummer.createChatRoom(options).then((res) => {
 {"appid":1504984159,"roomid":1704994371,"pos":0,"uids":["777666"],"rescode":0}
 ```
 
-#### setUserAttributes设置用户属性
+#### setUserAttributes
+
+设置用户属性
+
+```javascript
+  chatroom.setUserAttributes({});
+```
+
 请求参数：
 
 | Name                  | Type              |  Description |
@@ -623,13 +702,15 @@ hummer.createChatRoom(options).then((res) => {
         })
 ```
 
-#### getUserAttributesList获取用户属性列表
-请求参数：
+#### getUserAttributesList
 
-| Name                  | Type              |  Description |
-| --------------------- | ----------------- |   ----------------- |
-|    NA         |      NA        |   |  |
+获取用户属性列表
 
+```javascript
+  chatroom.getUserAttributesList();
+```
+
+请求参数：（无）
 
 响应数据：
 
@@ -650,15 +731,24 @@ hummer.createChatRoom(options).then((res) => {
 
 响应：
 ```javascript
-{"appid":1504984159,"roomid":1704994373,"users":{"777666":{"name":"张必武"},"888999":{"topic":"张必武好"}},"rescode":0}
+{"appid":1504984159,"roomid":1704994373,"users":{"777666":{"name":"张三"},"888999":{"topic":"张三好"}},"rescode":0}
 ```
 
-#### muteUser禁言操作
+#### muteUser
+
+禁言操作
+
+```javascript
+  chatroom.muteUser({});
+```
+
 请求参数：
 
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- |   ----------------- |
-|    NA         |      NA        |   |  |
+|    uid             |      string          |  被禁言的UID|
+|    secs               |      string          | |
+|    reason            |      string          | 原因 |
 
 
 响应数据：
@@ -682,16 +772,19 @@ hummer.createChatRoom(options).then((res) => {
 
 响应：
 ```javascript
-{"appid":1504984159,"roomid":1704994373,"users":{"777666":{"name":"张必武"},"888999":{"topic":"张必武好"}},"rescode":0}
+{"appid":1504984159,"roomid":1704994373,"users":{"777666":{"name":"张三"},"888999":{"topic":"张三好"}},"rescode":0}
 ```
 
 
-#### getMutedUserList获取聊天室禁言用户列表
-请求参数：
+#### getMutedUserList
 
-| Name                  | Type              |  Description |
-| --------------------- | ----------------- |   ----------------- |
-|    NA             |              |     |
+获取聊天室禁言用户列表
+
+```javascript
+  chatroom.getMutedUserList()
+```
+
+请求参数：（无）
 
 响应数据：
 
@@ -732,6 +825,7 @@ hummer.createChatRoom(options).then((res) => {
 
 
 ##### 接收单播消息(chatroom.on('SingleUserMessage', (data) => {}))
+
 接收指定房间的消息
 ```javascript
 chatroom.on('SingleUserMessage', (data) => { console.log(data); })
@@ -793,7 +887,7 @@ chatroom.on('GroupMessage', (data) => { console.log(data); })
 
 示例：
 ```javascript
-{"uid":"888999","content":"js_sdk sendGroupMessage","requestId":"6834302753401995276","kvExtra":{"name":"张必武"}}
+{"uid":"888999","content":"js_sdk sendGroupMessage","requestId":"6834302753401995276","kvExtra":{"name":"张三"}}
 ```
 
 #### 接收广播消息(chatroom.on('ChatRoomAttributesUpdated', (data) => {}))
@@ -809,7 +903,7 @@ chatroom.on('ChatRoomAttributesUpdated', (data) => { console.log(data); })
 
 示例：
 ```javascript
-{"uid":"888999","content":"js_sdk sendGroupMessage","requestId":"6834295284453867525","kvExtra":{"name":"张必武"}}
+{"uid":"888999","content":"js_sdk sendGroupMessage","requestId":"6834295284453867525","kvExtra":{"name":"张三"}}
 ```
 
 
@@ -832,7 +926,6 @@ chatroom.on('UserKickedOff', (data) => { console.log(data); })
 ```javascript
 {"admin":"777666","tuids":["888999"],"secs":3000,"reason":"js KickOffUser","kicktype":0}
 ```
-
 
 #### 接收用户数更新消息(chatroom.on('UserCountUpdated', (data) => {}))
 
@@ -881,7 +974,7 @@ chatroom.on('UserAttributesSet', (data) => { console.log(data); })
 
 示例：
 ```javascript
-{"uid":"777666","attributes":{"nick":"awu","name":"张必武"}}
+{"uid":"777666","attributes":{"nick":"awu","name":"张三"}}
 ```
 
 #### 接收被禁言的广播通知(chatroom.on('UsersMuted', (data) => {}))
