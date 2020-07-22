@@ -37,7 +37,7 @@
             - [接收用户属性设置通知(chatroom.on('UserAttributesSet', (data) => {}))](#接收用户属性设置通知chatroomonuserattributesset-data--)
             - [接收被禁言的广播通知(chatroom.on('UsersMuted', (data) => {}))](#接收被禁言的广播通知chatroomonusersmuted-data--)
             - [接收解禁的广播通知(chatroom.on('UsersUnMuted', (data) => {}))](#接收解禁的广播通知chatroomonusersunmuted-data--)
-            - [room接收当前用户断线超时离开聊天室回调(room.on('ChatRoomUserOffline', () => {}))](#room接收当前用户断线超时离开聊天室回调roomonchatroomuseroffline---)
+            - [接收当前用户断线超时离开聊天室回调(chatroom.on('ChatRoomUserOffline', () => {}))](#接收当前用户断线超时离开聊天室回调chatroomonchatroomuseroffline---)
     - [调试示例demo](#调试示例demo)
         - [chatroom-demo配置](#chatroom-demo配置)
 
@@ -1016,10 +1016,10 @@ chatroom.on('UsersUnMuted', (data) => { console.log(data); })
 {"opUid":"777666","tuids":["123"],"secs":"600","reason":""}
 ```
 
-#### room接收当前用户断线超时离开聊天室回调(room.on('ChatRoomUserOffline', () => {}))
+#### 接收当前用户断线超时离开聊天室回调(chatroom.on('ChatRoomUserOffline', () => {}))
 
 ```javascript
-room.on('ChatRoomUserOffline', () => {})
+chatroom.on('ChatRoomUserOffline', () => {})
 ```
 
 回调通知：
