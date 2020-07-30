@@ -2,6 +2,19 @@
 
 ## 动态
 
+[2020-07-30] hummer-chatroom-sdk 2.1.4
+
+新增js-sdk支持多端登录互踢功能
+
+[2020-07-20] hummer-chatroom-sdk 2.1.3
+【重要】域名从web-ap-service.sunclouds.com更新为web-ap-service.jocloud.com
+
+项目需要web-ap-service.sunclouds.com停用。必须更新新的js-sdk，新域名为web-ap-service.jocloud.com
+
+[2020-07-17] hummer-chatroom-sdk 2.1.2
+
+[2020-06-11] hummer-chatroom-sdk 2.1.1
+
 [2020-06-02] hummer-chatroom-sdk 2.1.0
 
 chatroom js-sdk对外发布首个版本 2.1.0
@@ -34,23 +47,3 @@ import Hummer from 'humer-chatroom-sdk'
 <script charset="utf-8" src="./path/hummer-chatroom-sdk-x.x.x.js"></script>
 ```
 使用js-sdk的业务部署在后端服务器。
-
-
-## 线上demo
-
-https://hummer-test.sunclouds.com/chatroom-test/chat-test
-
-## 调试示例demo
-
-https://github.com/cherishman2005/vue-room
-
-### chatroom-demo配置
-
-nginx.conf
-```javascript
-	location /room {
-		try_files $uri $uri/ /room/index.html;
-		default_type text/html;
-		alias /home/zhangbiwu/vue_projects/room/dist;
-	}
-```
