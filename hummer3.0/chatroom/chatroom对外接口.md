@@ -8,6 +8,7 @@
             - [login](#login)
             - [logout](#logout)
             - [接收连接状态变更的回调通知(hummer.on('ConnectionStateChanged', (data) => {}))](#接收连接状态变更的回调通知hummeronconnectionstatechanged-data--)
+            - [接收登录互踢的回调通知(hummer.on('ForceoutOffline', (data) => {}))](#接收登录互踢的回调通知hummeronforceoutoffline-data--)
             - [接收Token过期的回调通知(hummer.on('TokenExpired', () => {}))](#接收token过期的回调通知hummerontokenexpired---)
             - [refreshToken](#refreshtoken)
             - [createChatRoom](#createchatroom)
@@ -236,8 +237,42 @@ enum ConnectionChangeReason {
 （5）重连/重登：
 回调通知{"state":"RECONNECTING","reason":"INTERRUPTED"}；
 
-（6）登录被踢：（账户互踢功能：后端暂不支持web互踢）
+（6）账号登录被踢：（js-sdk支持多端登录互踢功能）
 回调通知{"state":"DISCONNECTED","reason":"REMOTE_LOGIN"}
+
+
+#### 接收登录互踢的回调通知(hummer.on('ForceoutOffline', (data) => {}))
+
+| 事件            | 描述                 |
+| --------------- | --------------------------- |
+| ForceoutOffline | 通知js-sdk账号登录被踢        |
+
+```javascript
+hummer.on('ForceoutOffline', (data) => {});
+```
+
+回调通知：
+
+| name    | type    | description                 |
+| ------- | ------- | --------------------------- |
+| eventName | string | 取值"ForceoutOffline" |
+| handler   | function  | 接收回调                 |
+
+回调参数：
+
+| name    | type    | description                 |
+| ------- | ------- | --------------------------- |
+| code   | number    | 下线原因分类码              |
+| reason  | string   | 下线原因描述                |
+
+
+账号登录被踢的3种情形：
+
+* { code: 100, resaon: 您的帐号在别处登录，您被迫下线。}
+
+* { code: 101, resaon: 超出终端类限制，被其他端踢下线。 }
+
+* { code: 102, resaon: 超出设备数限制，被其他端踢下线。  }
 
 
 #### 接收Token过期的回调通知(hummer.on('TokenExpired', () => {}))

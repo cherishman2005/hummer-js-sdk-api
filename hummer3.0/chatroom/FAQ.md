@@ -1,8 +1,8 @@
 # FAQ
 
-## API使用注意事项
+## 账号登录互踢功能
 
-Hummer.createHummer()与hummer.login()分开操作；最好不要放在一起调用。
+如果后端配置多端互踢，根据互踢策略，后端就会发送指令，将原先登录的同一uid用户踢掉。
 
 ## login登录失败的问题排查
 hummer.login登录 是根据业务的入参：appid, uid, token(otp)等参数给后端发了一个请求。
