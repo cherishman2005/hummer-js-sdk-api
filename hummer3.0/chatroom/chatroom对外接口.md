@@ -672,8 +672,8 @@ hummer.createChatRoom(options).then((res) => {
 
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- |   ----------------- |
-|    num             |      number        |     |
-|    pos             |      number        |     |
+|    num             |      number        |   设置每页的返回成员数（建议不超过200）  |
+|    pos             |      number        |  第几页 (第一页从0开始)   |
 
 
 响应数据：
