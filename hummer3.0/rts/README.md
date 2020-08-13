@@ -5,6 +5,13 @@
 
 ## 动态
 
+[2020-07-21] hummer-rts-sdk 3.2.1
+
+【重要】域名从web-ap-service.sunclouds.com更新为web-ap-service.jocloud.com
+
+项目需要web-ap-service.sunclouds.com停用。必须更新新的js-sdk，新域名为web-ap-service.jocloud.com
+
+
 [2020-07-07] hummer-rts-sdk 3.2.0
 
 # 3.2.x新版本与3.1.x旧版本兼容：
