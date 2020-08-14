@@ -48,6 +48,10 @@
 
 ## js-sdk对外接口
 
+### 注意事项
+
+（1）本系统支持使用64位数字的用户ID(uid)。由于javascript的number类型不支持64位的整数。所以sdk使用string来存储uid。
+
 ### createHummer
 
 Hummer初始化：创建hummer实例

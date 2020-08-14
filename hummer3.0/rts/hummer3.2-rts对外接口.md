@@ -100,14 +100,9 @@ npm包发布路径： https://www.npmjs.com/package/hummer-rts-sdk
 
 ### 注意事项
 
-
-
 （1）本系统支持使用64位数字的用户ID(uid)。由于javascript的number类型不支持64位的整数。所以sdk使用string来存储uid。
 
-（2）一个浏览器只能登录一个用户（uid）。
-
 Hummer RTS JS SDK 是通过 HTML 网页加载的 JavaScript 库。Hummer RTS JS SDK 库在网页浏览器中通过 API 调用Hummer的实时信令服务。
-
 
 创建Hummer账号并获取AppId。
 
