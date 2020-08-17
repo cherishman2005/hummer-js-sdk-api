@@ -2,6 +2,7 @@
 
 - [Hummer chatroom js-sdk](#hummer-chatroom-js-sdk)
     - [js-sdk对外接口](#js-sdk对外接口)
+        - [注意事项](#注意事项)
         - [createHummer](#createhummer)
             - [setLogLevel](#setloglevel)
             - [getState](#getstate)
@@ -39,8 +40,6 @@
             - [接收被禁言的广播通知(chatroom.on('UsersMuted', (data) => {}))](#接收被禁言的广播通知chatroomonusersmuted-data--)
             - [接收解禁的广播通知(chatroom.on('UsersUnMuted', (data) => {}))](#接收解禁的广播通知chatroomonusersunmuted-data--)
             - [接收当前用户断线超时离开聊天室回调(chatroom.on('ChatRoomUserOffline', () => {}))](#接收当前用户断线超时离开聊天室回调chatroomonchatroomuseroffline---)
-    - [调试示例demo](#调试示例demo)
-        - [chatroom-demo配置](#chatroom-demo配置)
 
 <!-- /TOC -->
 
@@ -1074,27 +1073,3 @@ handler回调参数：
 | name             | type                    | description                                             |
 | ---------------- | ----------------------- | ------------------------------------------------------- |
 |      NA        |                 |                                                  |
-
-
-## 调试示例demo
-
-https://service-test.sunclouds.com/chatroom-test/chat-test
-
-### chatroom-demo配置
-
-采用http(CDN)方式引用聊天室js_sdk
-```javascript
-<script charset="utf-8" src=" https://***.**.com/hummer-chatroom-sdk-x.x.x.js"></script>
-```
-使用js-sdk的业务部署在后端服务器。
-
-【注】js_sdk带上版本号发布（如“1.0.2”）。
-
-nginx.conf
-```javascript
-	location /room {
-		try_files $uri $uri/ /room/index.html;
-		default_type text/html;
-		alias /home/zhangbiwu/vue_projects/room/dist;
-	}
-```
