@@ -2,6 +2,10 @@
 
 ## 动态
 
+[2020-08-25] hummer-chatroom-sdk 2.1.5
+
+对外接口不变。sdk内部优化：新增HA功能
+
 [2020-07-30] hummer-chatroom-sdk 2.1.4
 
 新增js-sdk支持多端登录互踢功能
@@ -47,24 +51,3 @@ import Hummer from 'humer-chatroom-sdk'
 <script charset="utf-8" src="./path/hummer-chatroom-sdk-x.x.x.js"></script>
 ```
 使用js-sdk的业务部署在后端服务器。
-
-
-## 调试示例demo
-
-### chatroom-demo配置
-
-采用http(CDN)方式引用聊天室js_sdk
-```javascript
-<script charset="utf-8" src=" https://***.**.com/hummer-chatroom-sdk-x.x.x.js"></script>
-```
-使用js-sdk的业务部署在后端服务器。
-
-nginx.conf
-```javascript
-	location /room {
-		try_files $uri $uri/ /room/index.html;
-		default_type text/html;
-		alias /home/zhangbiwu/vue_projects/room/dist;
-	}
-```
-
