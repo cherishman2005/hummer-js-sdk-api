@@ -423,9 +423,9 @@ hummer.createChatRoom(options).then((res) => {
 
 请求参数：
 
-| Name                  | Type              |
-| ---------------------  | ----------------- |
-|    joinProps           |      {[k: string]: string}          |
+| Name                  | Type              |  Description                 |
+| --------------------- | ----------------- |  ------------  |
+|    joinProps          |  {[k: string]: string} | 扩展字段，用于业务扩展，SDK 只负责透传 |
 
 
 响应数据：
