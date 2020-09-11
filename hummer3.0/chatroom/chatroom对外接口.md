@@ -6,6 +6,7 @@
         - [createHummer](#createhummer)
             - [setLogLevel](#setloglevel)
             - [getState](#getstate)
+            - [getConnectionState](#getconnectionstate)
             - [login](#login)
             - [logout](#logout)
             - [接收连接状态变更的回调通知(hummer.on('ConnectionStateChanged', (data) => {}))](#接收连接状态变更的回调通知hummeronconnectionstatechanged-data--)
@@ -105,6 +106,8 @@ enum LOGLEVEL {
 
 获取SDK当前状态
 
+为了保持版本兼容，getState暂时保留；
+
 ```javascript
 hummer.getState();
 ```
@@ -127,6 +130,37 @@ hummer.getState();
 | CONNECTING | 连接中 |
 | RECONNECTING | 重连中 |
 | CONNECTED | 已连接 |
+
+#### getConnectionState
+
+获取SDK当前状态
+
+getState更名为getConnectionState
+
+```javascript
+hummer.getConnectionState();
+```
+
+请求参数：
+
+| Name      | Type                    | Description                                         |
+| --------- | ----------------------- | --------------------------------------------------- |
+| NA        |                         |                                                     |
+
+响应数据：
+
+| Name      | Type   | Description                 |
+| --------- | ------ | --------------------------- |
+|           | enum   |                             |
+
+| 枚举值 | 含义 |
+| :--- | :--- |
+| UNAVAILABLE  |通道还未初始化|
+| DISCONNECTED | 通道处于断开连接的状态 |
+| CONNECTING   | 通道处于连接中的状态 |
+| RECONNECTING | 重连中 |
+| CONNECTED    | 通道处于连接成功的状态 |
+
 
 
 #### login
@@ -205,6 +239,7 @@ hummer.on('ConnectionStateChanged', (data) => {});
 
 ```typescript
 enum ConnectionState {
+    UNAVAILABLE = "UNAVAILABLE",
     DISCONNECTED = "DISCONNECTED",
     CONNECTING = "CONNECTING",
     CONNECTED = "CONNECTED",
