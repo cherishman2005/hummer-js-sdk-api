@@ -43,7 +43,7 @@ npm包路径：https://www.npmjs.com/package/hummer-chatroom-sdk
 npm install hummer-chatroom-sdk
 
 ```javascript
-import Hummer from 'humer-chatroom-sdk'
+import Hummer from 'hummer-chatroom-sdk'
 ```
 
 （2）采用http方式引用聊天室js_sdk

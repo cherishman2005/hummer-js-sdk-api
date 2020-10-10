@@ -68,7 +68,7 @@ https://github.com/cherishman2005/hummer-js-sdk-api/
 npm install hummer-channel
 
 ```javascript
-import Hummer from 'humer-channel'
+import Hummer from 'hummer-channel'
 ```
 
 （2）采用http(CDN)方式引用聊天室js_sdk
