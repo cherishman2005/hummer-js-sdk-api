@@ -2,11 +2,19 @@
 
 # Hummer Channel Service js-sdk
 
-https://github.com/cherishman2005/hummer-js-sdk-api/
-
 ## FAQ
 
 ### 动态
+
+[2020-10-20] 提供hummer-channel.js 1.0.7 版本
+
+	接口未改动。sdk内部优化：对Electron兼容适配。
+
+[2020-07-20] hummer-channel 1.0.6
+
+【重要】域名从web-ap-service.sunclouds.com更新为web-ap-service.jocloud.com
+
+项目需要停用web-ap-service.sunclouds.com。必须更新新的js-sdk，新域名为web-ap-service.jocloud.com
 
 [2019-12-11] 提供hummer-channel.js  1.0.5版本
 
@@ -78,17 +86,6 @@ import Hummer from 'hummer-channel'
 使用js-sdk的业务部署在后端服务器。
 
 
-## 调试示例demo
+## hummer-channel API接口文档
 
-https://github.com/cherishman2005/vue-room
-
-### channel-demo配置
-
-nginx.conf
-```javascript
-	location /room {
-		try_files $uri $uri/ /room/index.html;
-		default_type text/html;
-		alias /home/zhangbiwu/vue_projects/room/dist;
-	}
-```
+- [https://github.com/cherishman2005/hummer-js-sdk-api/](https://github.com/cherishman2005/hummer-js-sdk-api/)
