@@ -2,6 +2,21 @@
 
 ## 动态
 
+[2020-10-27] hummer-chatroom-sdk 2.1.6
+
+1. Token过期&更新机制
+   * 新增刷新token的API：refreshToken1；废弃API: refreshToken；
+   * 新增监听token即将过期接口: hummer.on("TokenWillExpire", () => {});
+
+1. 多端在线与登录互踢机制
+
+1. 获取连接所处状态
+   * 新增API：getConnectionState；废弃API：getState
+
+1. 连接状态变化回调优化
+
+1. sdk内部优化
+
 [2020-08-25] hummer-chatroom-sdk 2.1.5
 
 对外接口不变。sdk内部优化：新增HA功能
