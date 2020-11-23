@@ -3,21 +3,24 @@
 <!-- TOC -->
 
 - [Hummer chatroom js-sdk](#hummer-chatroom-js-sdk)
-    - [拉取历史消息](#拉取历史消息)
+    - [chatroom历史消息获取](#chatroom历史消息获取)
     - [chatroom聊天室房间管理_房间扩展属性](#chatroom聊天室房间管理_房间扩展属性)
         - [房间属性操作API](#房间属性操作api)
-            - [](#)
+            - [设置房间扩展属性](#设置房间扩展属性)
+            - [更新房间扩展属性](#更新房间扩展属性)
+            - [删除房间的指定扩展属性](#删除房间的指定扩展属性)
+            - [清空某指定房间的扩展属性](#清空某指定房间的扩展属性)
         - [notify监听](#notify监听)
             - [接收设置房间属性Notify的回调](#接收设置房间属性notify的回调)
             - [接收到删除房间某些扩展属性Notify回调](#接收到删除房间某些扩展属性notify回调)
-                - [接收到清除房间某些属性Notify回调](#接收到清除房间某些属性notify回调)
-                - [接收到更新房间某些扩展属性Notify回调](#接收到更新房间某些扩展属性notify回调)
+            - [接收到清除房间某些属性Notify回调](#接收到清除房间某些属性notify回调)
+            - [接收到更新房间某些扩展属性Notify回调](#接收到更新房间某些扩展属性notify回调)
     - [消息通道](#消息通道)
         - [创建message对象](#创建message对象)
         - [P2P消息](#p2p消息)
             - [批量查询用户在线状态](#批量查询用户在线状态)
             - [发送点对点（P2P）的消息](#发送点对点p2p的消息)
-                - [监听P2P消息](#监听p2p消息)
+            - [监听P2P消息](#监听p2p消息)
         - [P2C消息](#p2c消息)
             - [创建channel实例](#创建channel实例)
             - [加入channel](#加入channel)
@@ -38,15 +41,173 @@
 * 消息通道；
 
 
-## 拉取历史消息
+## chatroom历史消息获取
+
+查询历史消息
+```js
+chatroom.fetchHistoryMessages({})
+```
+
+请求参数：
+
+| Name | Type   | Description |
+| ---- | ------ | ----------- |
+| msgTypes | number[] | 消息类型列表 |
+| anchorUuid? | string | uuid |
+| anchorTimestamp? | number | 消息锚点. 为null则表示从最新消息开始查询  |
+| direction | number | 查询方向 enum HistoryDirection  |
+| limit     | number |消息条数: 每次最多查询100条. limit>100时, 当100处理; <1时, 当1处理  |
+
+```
+enum HistoryDirection {
+    kHistoryDirectionOLD = 0; // OLD：基于锚点消息，查询更早于锚点消息的消息
+    kHistoryDirectionNEW = 1; // NEW 基于锚点消息，查询更晚于锚点消息的消息
+}
+```
+
+响应数据：Promise<>
+
+| Name     | Type    | Description  |
+| -------- | ------- | ------------ |
+| rescode  | number  |   0:成功     |
+| msg      | string  | 返回描述     |
+| hasMore  | bealean  |  是否还有消息，true: 有，false: 无    |
+| messages | Message[]  |  消息列表    |
+
+```
+interface Message {
+    msgType: MessageType;
+    content: string;
+    uuid: string;
+    timestamp: number;
+}
+```
 
 
 ## chatroom聊天室房间管理_房间扩展属性
 
 ### 房间属性操作API
 
-#### 
+#### 设置房间扩展属性
 
+```js
+chatroom.setRoomExtraAttributes({})
+```
+
+请求参数：
+
+| Name | Type   | Description |
+| ---- | ------ | ----------- |
+| extraAttributes | {[k: string]: string} | 房间属性key-value键值对 |
+
+
+响应数据：Promise<>
+
+| Name     | Type    | Description  |
+| -------- | ------- | ------------ |
+| rescode  | number  |   0:成功     |
+| msg      | string  | 返回描述     |
+
+
+示例：
+```js
+try {
+    let params = { extraAttributes };
+    const res = await chatroom.setRoomExtraAttributes(params);
+    console.log("res=", res);
+} catch (e) {
+    console.log(e);
+}
+```
+
+
+#### 更新房间扩展属性
+
+```js
+chatroom.updateRoomExtraAttributes({})
+```
+
+请求参数：
+
+| Name | Type   | Description |
+| ---- | ------ | ----------- |
+| extraAttributes | {[k: string]: string} | 房间属性key-value键值对 |
+
+
+响应数据：Promise<>
+
+| Name     | Type    | Description  |
+| -------- | ------- | ------------ |
+| rescode  | number  |   0:成功     |
+| msg      | string  | 返回描述     |
+
+
+示例：
+```js
+try {
+    let params = { extraAttributes };
+    const res = await chatroom.updateRoomExtraAttributes(params);
+    console.log("res=", res);
+} catch (e) {
+    console.log(e);
+}
+```
+
+#### 删除房间的指定扩展属性
+
+```js
+chatroom.deleteRoomExtraAttributes({})
+```
+
+请求参数：
+
+| Name | Type   | Description |
+| ---- | ------ | ----------- |
+| extraKeys | string[] | 房间属性key数组 |
+
+
+响应数据：Promise<>
+
+| Name     | Type    | Description  |
+| -------- | ------- | ------------ |
+|  rescode | number  |   0:成功      |
+|  msg     | string  | 返回描述      |
+
+示例：
+```js
+try {
+    const res = await chatroom.deleteRoomExtraAttributes({extraKeys});
+    console.log("res=", res);
+} catch (e) {
+    console.log(e);
+}
+```
+
+#### 清空某指定房间的扩展属性
+
+```js
+chatroom.clearRoomExtraAttributes()
+```
+
+请求参数：（无）
+
+
+响应数据：Promise<>
+
+| Name     | Type    | Description  |
+| -------- | ------- | ------------ |
+|  rescode | number  |   0:成功      |
+|  msg     | string  |  返回描述      |
+
+示例：
+```js
+try {
+    const res = await chatroom.clearRoomExtraAttributes();
+    console.log("res=", res);
+} catch (e) {
+    console.log(e);
+}
+```
 
 ### notify监听
 
@@ -89,14 +250,14 @@ data定义：
 接收到该房间删除用户某些属性Notify回调通知
 
 ```
-room.on('RoomAttributesDeleted', (data) => { console.log(data); });
+chatroom.on('RoomExtraAttributesDeleted', (data) => { console.log(data); });
 ```
 
 回调通知：
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| eventName | string | 取值"RoomAttributesDeleted" |
+| eventName | string | 取值"RoomExtraAttributesDeleted" |
 | handler | function  | 接收回调                 |
 
 handler回调参数：
@@ -110,11 +271,12 @@ data定义：
 
 | name             | type                    | description                                             |
 | ---------------- | ----------------------- | ------------------------------------------------------- |
-| lastUpdateUid    | string                  | 最近一次变更房间属性的用户UID |
-| attributes       | {[k:string]: string}    | 房间属性 |
+| uid           | string                  | 最近一次变更房间属性的用户UID |
+| lasttimeTs    | number                  | 最近一次变更房间属性的时间戳 |
+| extraAttributes       | {[k:string]: string}    | 房间扩展属性 |
 
 
-##### 接收到清除房间某些属性Notify回调
+#### 接收到清除房间某些属性Notify回调
 
 接收到该房间清除用户某些属性Notify回调通知
 
@@ -140,11 +302,13 @@ data定义：
 
 | name             | type                    | description                                             |
 | ---------------- | ----------------------- | ------------------------------------------------------- |
-| lastUpdateUid    | string                  | 最近一次变更房间属性的用户UID |
-| attributes       | {[k:string]: string}    | 房间属性 |
+| uid           | string                  | 最近一次变更房间属性的用户UID |
+| lasttimeTs    | number                  | 最近一次变更房间属性的时间戳 |
+| extraAttributes       | {[k:string]: string}    | 房间扩展属性 |
 
 
-##### 接收到更新房间某些扩展属性Notify回调
+
+#### 接收到更新房间某些扩展属性Notify回调
 
 接收到添加或更新房间某些属性Notify回调通知
 
@@ -167,13 +331,15 @@ handler回调参数：
 |         | object  | 详细定义将data定义描述      |
 
 
+
 data定义：
 
 | name             | type                    | description                                             |
 | ---------------- | ----------------------- | ------------------------------------------------------- |
-| roomExtraAttribute    | {[k: string]: string}                  | 房间属性名列表 |
-| operator              | string    |   操作者的用户ID |
-| updateTs              | number    |   房间属性最近一次更新的时间戳（毫秒） |
+| uid           | string                  | 最近一次变更房间属性的用户UID |
+| lasttimeTs    | number                  | 最近一次变更房间属性的时间戳 |
+| extraAttributes       | {[k:string]: string}    | 房间扩展属性 |
+
 
 ## 消息通道
 
@@ -202,9 +368,11 @@ interface Message {
 };
 ```
 
-【注】
-* 测试无感知，只是组成一个json-object对象。
-
+示例：
+```
+let content = 'js-sdk message';
+let message = Hummer.createMessage(0, content);
+```
 
 ### P2P消息
 
@@ -281,7 +449,7 @@ try {
 }
 ```
 
-##### 监听P2P消息
+#### 监听P2P消息
 
 接收对端的P2P消息
 ```javascript
@@ -341,11 +509,7 @@ channel = hummer.createChannel({region, channelId})
 channel.joinChannel();
 ```
 
-请求参数：
-
-| Name | Type   | Description |
-| ---- | ------ | ----------- |
-| extra  | {[k: string]: string} | 可扩展字段（选填字段） |
+请求参数：（无）
 
 
 响应数据：Promise<>
@@ -372,11 +536,7 @@ try {
 channel.leaveChannel();
 ```
 
-请求参数：
-
-| Name | Type   | Description |
-| ---- | ------ | ----------- |
-| extra  | {[k: string]: string} | 可扩展字段（选填字段） |
+请求参数：（无）
 
 
 响应数据：Promise<>
