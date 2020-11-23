@@ -75,7 +75,7 @@ enum Direction {
 
 ```
 interface Message {
-    msgType: MessageType;
+    msgType: MsgType;
     content: string;
     uuid: string;
     timestamp: number;
