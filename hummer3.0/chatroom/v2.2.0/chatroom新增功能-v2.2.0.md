@@ -53,15 +53,14 @@ chatroom.fetchHistoryMessages({})
 | Name | Type   | Description |
 | ---- | ------ | ----------- |
 | msgTypes | number[] | 消息类型列表 |
-| anchorUuid? | string | uuid |
-| anchorTimestamp? | number | 消息锚点. 为null则表示从最新消息开始查询  |
+| anchor   | { uuid: string, timestamp: number } | 消息锚点. 为null则表示从最新消息开始查询 |
 | direction | number | 查询方向 enum HistoryDirection  |
 | limit     | number |消息条数: 每次最多查询100条. limit>100时, 当100处理; <1时, 当1处理  |
 
 ```
-enum HistoryDirection {
-    kHistoryDirectionOLD = 0; // OLD：基于锚点消息，查询更早于锚点消息的消息
-    kHistoryDirectionNEW = 1; // NEW 基于锚点消息，查询更晚于锚点消息的消息
+enum Direction {
+    OLD = 0; // 基于锚点消息，查询更早于锚点消息的消息
+    NEW = 1; // 基于锚点消息，查询更晚于锚点消息的消息
 }
 ```
 
