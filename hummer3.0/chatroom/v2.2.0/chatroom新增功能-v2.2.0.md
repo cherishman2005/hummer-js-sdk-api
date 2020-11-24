@@ -82,6 +82,11 @@ interface Message {
 }
 ```
 
+【注】
+* limit < 1当1处理
+* 1 <= limit <= 100 按实际值处理
+* limit > 100 当100处理
+
 
 ## chatroom聊天室房间管理_房间扩展属性
 
