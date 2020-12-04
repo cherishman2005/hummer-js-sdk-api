@@ -85,7 +85,7 @@ const hummer = new Hummer.Hummer({ appid: [appid],
 设置打印日志级别
 
 ```javascript
-hummer. setLogLevel({ level });
+hummer.setLogLevel({ level });
 ```
 
 请求参数：
