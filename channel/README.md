@@ -1,10 +1,14 @@
-[TOC]
-
 # Hummer Channel Service js-sdk
 
-## FAQ
+## 动态
 
-### 动态
+[2020-10-20] 提供hummer-channel.js 1.0.8 版本
+	接口未改动。sdk内部优化。
+
+【注】
+* 1.0.6和1.0.7只是更新域名和兼容屏蔽https上报
+* 1.0.8版本在2019-12-11 hummer-channel.js 1.0.5基础上合入hummer-rts js-sdk的迭代更新和优化
+
 
 [2020-10-20] 提供hummer-channel.js 1.0.7 版本
 
@@ -16,11 +20,11 @@
 
 项目需要停用web-ap-service.sunclouds.com。必须更新新的js-sdk，新域名为web-ap-service.jocloud.com
 
-[2019-12-11] 提供hummer-channel.js  1.0.5版本
+[2019-12-11] 提供hummer-channel.js 1.0.5版本
 
 	接口未改动：（I）js-sdk内部心跳超时优化；（II）js-sdk内部可靠组播优化；
 
-[2019-12-02] 提供hummer-channel.js  1.0.4版本
+[2019-12-02] 提供hummer-channel.js 1.0.4版本
 
 	接口未改动，js-sdk内部优化
 
@@ -73,12 +77,12 @@
 
 （1）npm包
 
-npm install hummer-channel
-
-```javascript
-import Hummer from 'hummer-channel'
-```
-
+ npm install hummer-channel
+ 
+ ```javascript
+ import Hummer from 'hummer-channel'
+ ```
+ 
 （2）采用http(CDN)方式引用聊天室js_sdk
 ```javascript
 <script charset="utf-8" src=" https://***.**.com/hummer-channel-x.x.x.js"></script>

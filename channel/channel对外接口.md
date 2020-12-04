@@ -1,30 +1,34 @@
+<!-- TOC -->
+
+- [Hummer Channel Service js-sdk](#hummer-channel-service-js-sdk)
+    - [js-sdk对外接口](#js-sdk对外接口)
+        - [注意事项](#注意事项)
+        - [初始化Hummer](#初始化hummer)
+        - [setLogLevel](#setloglevel)
+        - [hummer刷新Token](#hummer刷新token)
+        - [初始化Channel Service](#初始化channel-service)
+            - [接收消息回调函数(onReceiveMessage)](#接收消息回调函数onreceivemessage)
+            - [接收channel组播消息回调函数(onReceiveChannelMessage)](#接收channel组播消息回调函数onreceivechannelmessage)
+            - [接收到上线Notify回调(onNotifyJoinChannel)](#接收到上线notify回调onnotifyjoinchannel)
+            - [接收到下线Notify回调(onNotifyLeaveChannel)](#接收到下线notify回调onnotifyleavechannel)
+            - [接收设置用户属性Notify的回调(onNotifyUserAttributesSet)](#接收设置用户属性notify的回调onnotifyuserattributesset)
+            - [接收到删除用户某一属性Notify回调(onNotifyUserAttributesDelete)](#接收到删除用户某一属性notify回调onnotifyuserattributesdelete)
+        - [getInstance获取实例(getInstance)](#getinstance获取实例getinstance)
+        - [给用户发P2P消息(sendMessageToUser)](#给用户发p2p消息sendmessagetouser)
+        - [给指定channel发送组播消息(sendMessageToChannel)](#给指定channel发送组播消息sendmessagetochannel)
+        - [查询用户在线状态(queryOnlineStatusForUser)](#查询用户在线状态queryonlinestatusforuser)
+        - [【辅助工具】将string编码成Utf8二进制(encodeStringToUtf8Bytes)](#辅助工具将string编码成utf8二进制encodestringtoutf8bytes)
+        - [【辅助工具】将Utf8二进制解码成string类型(decodeUtf8BytesToString)](#辅助工具将utf8二进制解码成string类型decodeutf8bytestostring)
+        - [进入频道joinChannel](#进入频道joinchannel)
+        - [离开频道leaveChannel](#离开频道leavechannel)
+        - [设置用户属性(setUserAttributes)](#设置用户属性setuserattributes)
+        - [删除用户某些属性(deleteUserAttributesByKeys)](#删除用户某些属性deleteuserattributesbykeys)
+        - [获取频道用户列表(getChannelUserList)](#获取频道用户列表getchanneluserlist)
+        - [根据用户某一属性获取频道用户列表(getChannelUserListByAtrribute)](#根据用户某一属性获取频道用户列表getchanneluserlistbyatrribute)
+
+<!-- /TOC -->
+
 # Hummer Channel Service js-sdk
-
-   * [Hummer Channel Service js-sdk](#hummer-channel-service-js-sdk)
-      * [js-sdk对外接口](#js-sdk对外接口)
-         * [注意事项](#注意事项)
-         * [初始化Hummer](#初始化hummer)
-         * [hummer刷新Token(refreshToken)](#hummer刷新tokenrefreshtoken)
-         * [初始化Channel Service](#初始化channel-service)
-            * [接收消息回调函数(onReceiveMessage)](#接收消息回调函数onreceivemessage)
-            * [接收channel组播消息回调函数(onReceiveChannelMessage)](#接收channel组播消息回调函数onreceivechannelmessage)
-            * [接收到上线Notify回调(onNotifyJoinChannel)](#接收到上线notify回调onnotifyjoinchannel)
-            * [接收到下线Notify回调(onNotifyLeaveChannel)](#接收到下线notify回调onnotifyleavechannel)
-            * [接收设置用户属性Notify的回调(onNotifyUserAttributesSet)](#接收设置用户属性notify的回调onnotifyuserattributesset)
-            * [接收到删除用户某一属性Notify回调(onNotifyUserAttributesDelete)](#接收到删除用户某一属性notify回调onnotifyuserattributesdelete)
-         * [getInstance获取实例(getInstance)](#getinstance获取实例getinstance)
-         * [给用户发P2P消息(sendMessageToUser)](#给用户发p2p消息sendmessagetouser)
-         * [给指定channel发送组播消息(sendMessageToChannel)](#给指定channel发送组播消息sendmessagetochannel)
-         * [查询用户在线状态(queryOnlineStatusForUser)](#查询用户在线状态queryonlinestatusforuser)
-         * [【辅助工具】将string编码成Utf8二进制(encodeStringToUtf8Bytes)](#辅助工具将string编码成utf8二进制encodestringtoutf8bytes)
-         * [【辅助工具】将Utf8二进制解码成string类型(decodeUtf8BytesToString)](#辅助工具将utf8二进制解码成string类型decodeutf8bytestostring)
-         * [进入频道(joinChannel)](#进入频道joinchannel)
-         * [离开频道(leaveChannel)](#离开频道leavechannel)
-         * [设置用户属性(setUserAttributes)](#设置用户属性setuserattributes)
-         * [删除用户某些属性(deleteUserAttributesByKeys)](#删除用户某些属性deleteuserattributesbykeys)
-         * [获取频道用户列表(getChannelUserList)](#获取频道用户列表getchanneluserlist)
-         * [根据用户某一属性获取频道用户列表(getChannelUserListByAtrribute)](#根据用户某一属性获取频道用户列表getchanneluserlistbyatrribute)
-
 
 ## js-sdk对外接口
 
@@ -75,7 +79,37 @@ const hummer = new Hummer.Hummer({ appid: [appid],
 | onLoginStatus        |      Function        | 接收登录状态变更消息  |
 | onerror    | Function | 返回json-object，如果code=0，表示成功。如{"code":0,"msg":"ok"}                         |
 
-### hummer刷新Token(refreshToken)
+
+### setLogLevel
+
+设置打印日志级别
+
+```javascript
+hummer. setLogLevel({ level });
+```
+
+请求参数：
+
+| Name      | Type                    | Description                                         |
+| --------- | ----------------------- | --------------------------------------------------- |
+|   level   |     enum                |    日志等级                                         |
+
+响应数据：
+
+| Name      | Type   | Description                 |
+| --------- | ------ | --------------------------- |
+|    NA     | void   |                             |
+
+
+| 枚举值 | 含义 |
+| :--- | :--- |
+| DEBUG(-1) | debug |
+| LOG(0) | log |
+| INFO(1) | info |
+| WARN(2) | warn |
+| ERROR(3) | error |
+
+### hummer刷新Token
 
 请求参数：
 
@@ -439,7 +473,7 @@ Hummer.Utify.decodeUtf8BytesToString(content)
 ```
 
 
-### 进入频道(joinChannel)
+### 进入频道joinChannel
 
 请求参数：
 
@@ -460,13 +494,13 @@ Hummer.Utify.decodeUtf8BytesToString(content)
 示例：
 ```js
         let params = {channelId};
-        this.channel.joinChannel(params).then(res => {
+        this.signal.joinChannel(params).then(res => {
           console.log("joinChannel res:", res);
         }).catch(err => {
         });
 ```
 
-### 离开频道(leaveChannel)
+### 离开频道leaveChannel
 
 请求参数：
 
@@ -486,7 +520,7 @@ Hummer.Utify.decodeUtf8BytesToString(content)
 示例：
 ```js
         let params = {channelId, extra};
-        this.channel.leaveChannel(params).then(res => {
+        this.signal.leaveChannel(params).then(res => {
           console.log("leaveChannel res:", res);
         }).catch(err => {
         });
@@ -564,7 +598,7 @@ Hummer.Utify.decodeUtf8BytesToString(content)
 
 示例：
 ```javascript
-        this.channel.getChannelUserList({channelId}).then(res => {
+        this.signal.getChannelUserList({channelId}).then(res => {
           console.log("getChannelUserList res:", res);
         }).catch(err => {
         });
