@@ -228,7 +228,7 @@ hummer.on('ConnectionStateChanged', (data) => {});
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
 | eventName | string | 取值"ConnectionStateChanged" |
-| handler | function  | 接收回调                 |
+| handler   | function  | 接收回调                 |
 
 回调参数：
 
