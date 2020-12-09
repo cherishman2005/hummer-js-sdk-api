@@ -3,18 +3,19 @@
 <!-- TOC -->
 
 - [Hummer chatroom js-sdk](#hummer-chatroom-js-sdk)
-    - [chatroom历史消息获取](#chatroom历史消息获取)
+    - [fetchHistoryMessages](#fetchhistorymessages)
     - [chatroom聊天室房间管理_房间扩展属性](#chatroom聊天室房间管理_房间扩展属性)
         - [房间属性操作API](#房间属性操作api)
-            - [设置房间扩展属性](#设置房间扩展属性)
-            - [更新房间扩展属性](#更新房间扩展属性)
-            - [删除房间的指定扩展属性](#删除房间的指定扩展属性)
-            - [清空某指定房间的扩展属性](#清空某指定房间的扩展属性)
+            - [setRoomExtraAttributes](#setroomextraattributes)
+            - [updateRoomExtraAttributes](#updateroomextraattributes)
+            - [deleteRoomExtraAttributes](#deleteroomextraattributes)
+            - [clearRoomExtraAttributes](#clearroomextraattributes)
+            - [fetchRoomExtraAttributes](#fetchroomextraattributes)
         - [notify监听](#notify监听)
-            - [接收设置房间属性Notify的回调](#接收设置房间属性notify的回调)
-            - [接收到删除房间某些扩展属性Notify回调](#接收到删除房间某些扩展属性notify回调)
-            - [接收到清除房间某些属性Notify回调](#接收到清除房间某些属性notify回调)
-            - [接收到更新房间某些扩展属性Notify回调](#接收到更新房间某些扩展属性notify回调)
+            - [RoomExtraAttributesSet](#roomextraattributesset)
+            - [RoomExtraAttributesUpdated](#roomextraattributesupdated)
+            - [RoomExtraAttributesDeleted](#roomextraattributesdeleted)
+            - [RoomExtraAttributesCleared](#roomextraattributescleared)
     - [消息通道](#消息通道)
         - [创建message对象](#创建message对象)
         - [P2P消息](#p2p消息)
@@ -41,9 +42,9 @@
 * 消息通道；
 
 
-## chatroom历史消息获取
+## fetchHistoryMessages
 
-查询历史消息
+chatroom历史消息获取：查询历史消息
 ```js
 chatroom.fetchHistoryMessages({})
 ```
@@ -92,8 +93,9 @@ interface Message {
 
 ### 房间属性操作API
 
-#### 设置房间扩展属性
+#### setRoomExtraAttributes
 
+设置房间扩展属性
 ```js
 chatroom.setRoomExtraAttributes({})
 ```
@@ -125,8 +127,9 @@ try {
 ```
 
 
-#### 更新房间扩展属性
+#### updateRoomExtraAttributes
 
+更新房间扩展属性
 ```js
 chatroom.updateRoomExtraAttributes({})
 ```
@@ -157,8 +160,9 @@ try {
 }
 ```
 
-#### 删除房间的指定扩展属性
+#### deleteRoomExtraAttributes
 
+删除房间的指定扩展属性
 ```js
 chatroom.deleteRoomExtraAttributes({})
 ```
@@ -187,8 +191,9 @@ try {
 }
 ```
 
-#### 清空某指定房间的扩展属性
+#### clearRoomExtraAttributes
 
+清空某指定房间的扩展属性
 ```js
 chatroom.clearRoomExtraAttributes()
 ```
@@ -213,11 +218,43 @@ try {
 }
 ```
 
+#### fetchRoomExtraAttributes
+
+查询房间的指定扩展属性
+
+```js
+chatroom.fetchRoomExtraAttributes({})
+```
+
+请求参数：
+
+| Name | Type   | Description |
+| ---- | ------ | ----------- |
+| extraKeys | string[] | 房间属性key数组 |
+
+
+响应数据：Promise<>
+
+| Name     | Type    | Description  |
+| -------- | ------- | ------------ |
+|  rescode | number  |   0:成功      |
+|  msg     | string  | 返回描述      |
+
+示例：
+```js
+try {
+    const res = await chatroom.fetchRoomExtraAttributes({extraKeys});
+    console.log("res=", res);
+} catch (e) {
+    console.log(e);
+}
+```
+
 ### notify监听
 
-#### 接收设置房间属性Notify的回调
+#### RoomExtraAttributesSet
 
-接收设置房间属性Notify的回调通知。
+接收设置房间扩展属性Notify的回调通知。
 
 ```
 chatroom.on('RoomExtraAttributesSet', (data) => { console.log(data); })
@@ -243,15 +280,41 @@ data定义：
 | lastUpdateUid    | string                  | 最近一次变更房间属性的用户UID |
 | attributes       | {[k:string]: string}    | 房间属性 |
 
-参考示例：
+#### RoomExtraAttributesUpdated
 
-```javascript
-{"lastUpdateUid":"999888","attributes":{"Name":"awu","Bulletin":"bull","Extention":"ex","room_name":"nginx大讲堂"}}
+接收到添加或更新房间某些扩展属性Notify回调通知
+
+```
+chatroom.on('RoomExtraAttributesUpdated', (data) => { console.log(data); });
 ```
 
-#### 接收到删除房间某些扩展属性Notify回调
+回调通知：
 
-接收到该房间删除用户某些属性Notify回调通知
+| name    | type    | description                 |
+| ------- | ------- | --------------------------- |
+| eventName | string | 取值"RoomExtraAttributesUpdated" |
+| handler | function  | 接收回调                 |
+
+
+handler回调参数：
+
+| name    | type    | description                 |
+| ------- | ------- | --------------------------- |
+|         | object  | 详细定义将data定义描述      |
+
+
+
+data定义：
+
+| name             | type                    | description                                             |
+| ---------------- | ----------------------- | ------------------------------------------------------- |
+| uid           | string                  | 最近一次变更房间属性的用户UID |
+| lasttimeTs    | number                  | 最近一次变更房间属性的时间戳 |
+| extraAttributes       | {[k:string]: string}    | 房间扩展属性 |
+
+#### RoomExtraAttributesDeleted
+
+接收到删除房间某些扩展属性Notify回调
 
 ```
 chatroom.on('RoomExtraAttributesDeleted', (data) => { console.log(data); });
@@ -280,9 +343,9 @@ data定义：
 | extraAttributes       | {[k:string]: string}    | 房间扩展属性 |
 
 
-#### 接收到清除房间某些属性Notify回调
+#### RoomExtraAttributesCleared
 
-接收到该房间清除用户某些属性Notify回调通知
+接收到清除房间某些扩展属性Notify回调。
 
 ```
 chatroom.on('RoomExtraAttributesCleared', (data) => { console.log(data); });
@@ -292,7 +355,7 @@ chatroom.on('RoomExtraAttributesCleared', (data) => { console.log(data); });
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| eventName | string | 取值"RoomAttributesCleared" |
+| eventName | string | 取值"RoomExtraAttributesCleared" |
 | handler | function  | 接收回调                 |
 
 handler回调参数：
@@ -300,40 +363,6 @@ handler回调参数：
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
 |         | object  | 详细定义将data定义描述      |
-
-
-data定义：
-
-| name             | type                    | description                                             |
-| ---------------- | ----------------------- | ------------------------------------------------------- |
-| uid           | string                  | 最近一次变更房间属性的用户UID |
-| lasttimeTs    | number                  | 最近一次变更房间属性的时间戳 |
-| extraAttributes       | {[k:string]: string}    | 房间扩展属性 |
-
-
-
-#### 接收到更新房间某些扩展属性Notify回调
-
-接收到添加或更新房间某些属性Notify回调通知
-
-```
-chatroom.on('RoomExtraAttributesUpdated', (data) => { console.log(data); });
-```
-
-回调通知：
-
-| name    | type    | description                 |
-| ------- | ------- | --------------------------- |
-| eventName | string | 取值"RoomExtraAttributesUpdated" |
-| handler | function  | 接收回调                 |
-
-
-handler回调参数：
-
-| name    | type    | description                 |
-| ------- | ------- | --------------------------- |
-|         | object  | 详细定义将data定义描述      |
-
 
 
 data定义：
