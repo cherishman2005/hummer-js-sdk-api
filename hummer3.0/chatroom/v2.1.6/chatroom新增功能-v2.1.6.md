@@ -5,7 +5,7 @@
 - [Hummer chatroom js-sdk](#hummer-chatroom-js-sdk)
     - [refreshToken1](#refreshtoken1)
     - [接收token即将过期的回调通知TokenWillExpire](#接收token即将过期的回调通知tokenwillexpire)
-    - [getState](#getstate)
+    - [getConnectionState](#getconnectionstate)
 
 <!-- /TOC -->
 
@@ -72,14 +72,14 @@ hummer.on('TokenWillExpire', () => {});
 * 接收token即将过期的回调通知。
 
 
-## getState
+## getConnectionState
 
 获取SDK当前状态
 
 为了保持版本兼容，getState暂时保留；
 
 ```javascript
-hummer.getState();
+hummer.getConnectionState();
 ```
 
 请求参数：
