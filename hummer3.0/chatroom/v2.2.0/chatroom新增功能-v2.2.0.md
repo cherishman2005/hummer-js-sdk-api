@@ -17,17 +17,17 @@
             - [RoomExtraAttributesDeleted](#roomextraattributesdeleted)
             - [RoomExtraAttributesCleared](#roomextraattributescleared)
     - [消息通道](#消息通道)
-        - [创建message对象](#创建message对象)
+        - [createMessage](#createmessage)
         - [P2P消息](#p2p消息)
-            - [批量查询用户在线状态](#批量查询用户在线状态)
-            - [发送点对点（P2P）的消息](#发送点对点p2p的消息)
-            - [监听P2P消息](#监听p2p消息)
+            - [fetchUserOnlineStatus](#fetchuseronlinestatus)
+            - [sendP2PMessage](#sendp2pmessage)
+            - [P2PMessageReceived](#p2pmessagereceived)
         - [P2C消息](#p2c消息)
             - [创建channel实例](#创建channel实例)
-            - [加入channel](#加入channel)
-            - [离开channel](#离开channel)
-            - [发送channel（P2C）消息](#发送channelp2c消息)
-            - [监听channel（P2C）消息](#监听channelp2c消息)
+            - [joinChannel](#joinchannel)
+            - [leaveChannel](#leavechannel)
+            - [sendP2CMessage](#sendp2cmessage)
+            - [P2CMessageReceived](#p2cmessagereceived)
 
 <!-- /TOC -->
 
@@ -49,7 +49,7 @@ chatroom历史消息获取：查询历史消息
 chatroom.fetchHistoryMessages({})
 ```
 
-请求参数：
+**请求参数**
 
 | Name | Type   | Description |
 | ---- | ------ | ----------- |
@@ -65,7 +65,10 @@ enum Direction {
 }
 ```
 
-响应数据：Promise<>
+【注】
+msgTypes暂支持Text(0)
+
+**响应数据：Promise<>**
 
 | Name     | Type    | Description  |
 | -------- | ------- | ------------ |
@@ -74,12 +77,16 @@ enum Direction {
 | hasMore  | bealean  |  是否还有消息，true: 有，false: 无    |
 | messages | Message[]  |  消息列表    |
 
+
 ```
 interface Message {
     msgType: MsgType;
     content: string;
     uuid: string;
     timestamp: number;
+    uid: string;
+    extra: string;
+    kvExtra: {[k: string]: string};
 }
 ```
 
@@ -376,7 +383,9 @@ data定义：
 
 ## 消息通道
 
-### 创建message对象
+### createMessage
+
+创建message对象
 
 构造消息对象
 
@@ -409,8 +418,9 @@ let message = Hummer.createMessage(0, content);
 
 ### P2P消息
 
-#### 批量查询用户在线状态
+#### fetchUserOnlineStatus
 
+批量查询用户在线状态
 ```javascript
 hummer.fetchUserOnlineStatus({ uids })
 ```
@@ -449,7 +459,9 @@ try {
 }
 ```
 
-#### 发送点对点（P2P）的消息
+#### sendP2PMessage
+
+发送点对点（P2P）的消息
 
 ```javascript
 hummer.sendP2PMessage({})；
@@ -482,7 +494,7 @@ try {
 }
 ```
 
-#### 监听P2P消息
+#### P2PMessageReceived
 
 接收对端的P2P消息
 ```javascript
@@ -536,7 +548,9 @@ channel = hummer.createChannel({region, channelId})
 | --------------------- | ----------------- | ------------  |
 |                       | object            | channel实例    |
 
-#### 加入channel
+#### joinChannel 
+
+加入channel
 
 ```js
 channel.joinChannel();
@@ -563,8 +577,9 @@ try {
 
 ```
 
-#### 离开channel
+#### leaveChannel
 
+离开channel
 ```js
 channel.leaveChannel();
 ```
@@ -589,7 +604,9 @@ try {
 }
 ```
 
-#### 发送channel（P2C）消息
+#### sendP2CMessage
+
+发送channel（P2C）消息
 
 ```js
 channel.sendP2CMessage({})
@@ -621,9 +638,10 @@ try {
 }
 ```
 
-#### 监听channel（P2C）消息
+#### P2CMessageReceived
 
-接收指定channel的消息
+监听channel（P2C）消息
+
 ```javascript
 channel.on('P2CMessageReceived', (data) => { console.log(data); })
 ```

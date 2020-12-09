@@ -14,6 +14,7 @@
             - [接收Token过期的回调通知(hummer.on('TokenExpired', () => {}))](#接收token过期的回调通知hummerontokenexpired---)
             - [refreshToken](#refreshtoken)
             - [createChatRoom](#createchatroom)
+            - [dismissChatRoom](#dismisschatroom)
             - [getChatRoomUserCount](#getchatroomusercount)
         - [ChatRoom](#chatroom)
             - [createChatRoomInstance](#createchatroominstance)
@@ -23,11 +24,13 @@
             - [sendSingleUserMessage](#sendsingleusermessage)
             - [sendTextChat](#sendtextchat)
             - [getChatRoomAttributes](#getchatroomattributes)
+            - [updateChatRoomAttributes](#updatechatroomattributes)
             - [getChatRoomManager](#getchatroommanager)
             - [getUserList](#getuserlist)
             - [setUserAttributes](#setuserattributes)
             - [getUserAttributesList](#getuserattributeslist)
             - [muteUser](#muteuser)
+            - [unMuteUser](#unmuteuser)
             - [getMutedUserList](#getmuteduserlist)
         - [接收消息的监听接口](#接收消息的监听接口)
                 - [接收单播消息(chatroom.on('SingleUserMessage', (data) => {}))](#接收单播消息chatroomonsingleusermessage-data--)
@@ -405,6 +408,40 @@ hummer.createChatRoom(options).then((res) => {
 {appid: 1504984159, uid: "123", roomid: 1704984183, rescode: 0, props: {…}, …}
 ```
 
+#### dismissChatRoom
+
+解散聊天室。
+
+```javascript
+  hummer.dismissChatRoom()
+```
+
+**请求参数**
+
+（无）
+
+**响应数据**
+
+| Name                  | Type              |  Description |
+| --------------------- | ----------------- | ------------  |
+| rescode               | number            | 返回码：0-成功  |
+| msg                   | string            | 返回描述       |
+
+
+**请求示例**
+```javascript
+hummer.dismissChatRoom().then((res) => {
+  console.log("dismissChatRoom res:", res);
+}).catch((err) => {
+  console.log(err)
+});
+```
+
+**响应示例**
+```javascript
+{"appid":1350626568,"uid":"777888","roomid":200637135,"rescode":0,"props":{},"msg":"OK"}
+```
+
 #### getChatRoomUserCount
 
 查询聊天室在线人数
@@ -660,6 +697,40 @@ hummer.createChatRoom(options).then((res) => {
 {"appid":1504984159,"roomid":0,"rescode":0,"attributes":{"Roomid":"1704994371","Name":"nginx大讲堂","Bulletin":"bull","Owner":"777666","Passwd":"","MaxUser":"100000","AppExtra":"ex","Appid":"1504984159","Description":"全栈技术"}}
 ```
 
+#### updateChatRoomAttributes
+
+更新聊天室属性
+
+```javascript
+  chatroom.updateChatRoomAttributes({});
+```
+
+**请求参数**
+
+| Name                  | Type              |  Description |
+| --------------------- | ----------------- |   ----------------- |
+|    attributes         |      {[k: string]: string}        | 聊天室基础属性 |
+
+**响应数据：Promise<>**
+
+| Name                  | Type              |  Description |
+| --------------------- | ----------------- |  ----------- |
+|    rescode           |      number          | 返回码：0-成功 |
+|    msg               |      string          |  提示         |
+
+
+**请求示例**
+```javascript
+  let attributes = { "Name": "awu", "Description": "js_sdk测试", "Bulletin": "bull", "Extention": "ex" };
+
+  let params = { attributes };
+  chatroom.updateChatRoomAttributes(params).then((res) => {
+    console.log("updateChatRoomAttributes Res: ", res);
+  }).catch((err) => {
+    console.log(err)
+  })
+```
+
 #### getChatRoomManager
 
 获取聊天室所有管理员
@@ -809,30 +880,30 @@ hummer.createChatRoom(options).then((res) => {
 
 #### muteUser
 
-禁言操作
+禁言操作。
 
 ```javascript
   chatroom.muteUser({});
 ```
 
-请求参数：
+**请求参数**
 
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- |   ----------------- |
-|    uid             |      string          |  被禁言的UID|
-|    secs               |      string          | |
+|    uid             |      string          |  被禁言用户ID|
+|    secs               |      string          | 预留字段 |
 |    reason            |      string          | 原因 |
 
 
-响应数据：
+**响应数据**
 
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- |  ---------  |
-|    rescode           |      number          | 0：表示成功|
-|    users             |      {[k: string]: { [k: string]: string}}   | |
+|    rescode           |      number          | 返回码：0-成功 |
+|    users             |      {[k: string]: { [k: string]: string}}   | 用户列表 |
 
 
-示例：
+**请求示例**
 ```javascript
   try {
     let options = { uid, secs, reason };
@@ -843,9 +914,50 @@ hummer.createChatRoom(options).then((res) => {
   };
 ```
 
-响应：
+**响应示例**
 ```javascript
-{"appid":1504984159,"roomid":1704994373,"users":{"777666":{"name":"张三"},"888999":{"topic":"张三好"}},"rescode":0}
+{"appid":1350626568,"uid":"777888","roomid":200637135,"rescode":0,"props":{},"msg":"OK"}
+```
+
+#### unMuteUser
+
+解禁操作。
+
+```javascript
+  chatroom.unMuteUser({});
+```
+
+**请求参数**
+
+| Name                  | Type              |  Description |
+| --------------------- | ----------------- |   ----------------- |
+|    uid             |      string          |  解禁用户ID|
+|    secs               |      string          | 预留字段 |
+|    reason            |      string          | 原因 |
+
+
+**响应数据**
+
+| Name                  | Type              |  Description |
+| --------------------- | ----------------- |  ---------  |
+|    rescode           |      number          | 返回码：0-成功 |
+|    users             |      {[k: string]: { [k: string]: string}}   | 用户列表 |
+
+
+**请求示例**
+```javascript
+  try {
+    let options = { uid, secs, reason };
+    const res = await chatroom.unMuteUser(options);
+    console.log("unMuteUser res=" + JSON.stringify(res));
+  } catch (e) {
+    console.log("unMuteUser err=", e);
+  };
+```
+
+**响应示例**
+```javascript
+{"appid":1350626568,"uid":"777888","roomid":200637135,"rescode":0,"props":{},"msg":"OK"}
 ```
 
 
