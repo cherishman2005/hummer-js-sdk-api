@@ -520,10 +520,8 @@ data定义：
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
-| peerId  | string   | 用户ID                      |
+| opUid  | string    | 发送者用户ID                 |
 | message | Message  | 详见构造消息对象（Message）   |
-
-
 
 
 ### P2C消息
