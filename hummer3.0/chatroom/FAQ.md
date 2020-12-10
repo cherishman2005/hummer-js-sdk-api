@@ -50,3 +50,23 @@ key值不要支持非可见字符（如中文）； key只需要支持可见字�
 
 * 必须在login调用返回ok（rescode=0）后才能进行这些API操作；
     如：业务在重新登录的时候，没有监听sdk login的回调成功，这时候连接还没有建立好，就发了leave，所以会超时。
+
+# 【兼容】回调监听string和object类型判断
+
+```
+let extra = {extra: 'nickname'};
+
+if (typeof(extra) == 'string') {
+  console.log('string');
+} else if (typeof(extra) == 'object') {
+  console.log('object');
+}
+
+let extra1 = 'nickname';
+
+if (typeof(extra1) == 'string') {
+  console.log('string');
+} else if (typeof(extra1) == 'object') {
+  console.log('object');
+}
+```
