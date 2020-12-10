@@ -1051,16 +1051,16 @@ chatroom.on('TextChat', (data) => { console.log(data); })
 |    uid             |      string          |发送者ID|
 |    roomid             |      number          |房间ID|
 |    chat                    |     string           | utf-8 |
-|    extra                   |     string          | 附加信息（废弃） |
+|    extra                   |     {[k: string]: string}          | 附加信息（废弃） |
 |    kvExtra                    |     {[k: string]: string}           | 附加信息 |
 
-【注】不要用 extra字段（新版本已经废弃，只是为了兼容才保留）。请使用kvExtra字段。
+【注】尽量不要用 extra字段（新版本已经废弃，只是为了兼容才保留）。请使用kvExtra字段。
 
-示例：
+**示例**
+
 ```javascript
-{"uid":"777888","chat":"js_sdk sendTextChat","extra":"","kvExtra":{"sss":"你好"}}
+{"uid":"777888","chat":"js_sdk sendTextChat","extra":{"extra":""},"kvExtra":{"sss":"你好"}}
 ```
-
 
 #### 接收广播消息(chatroom.on('GroupMessage', (data) => {}))
 
