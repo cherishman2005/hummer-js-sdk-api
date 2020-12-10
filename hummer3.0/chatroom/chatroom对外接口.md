@@ -1039,22 +1039,26 @@ handler回调参数：
 
 #### 接收公屏消息(chatroom.on('TextChat', (data) => {}))
 
+接收公屏消息。
+
 ```javascript
 chatroom.on('TextChat', (data) => { console.log(data); })
 ```
 
-| Name                  | Type              |  Description |
+| 参数                  | 类型              |  说明 |
 | --------------------- | ----------------- | ----------- |
-|    appid             |      number          | |
-|    uid             |      string          |发送者uid|
-|    roomid             |      number          ||
+|    appid             |      number          | AppID |
+|    uid             |      string          |发送者ID|
+|    roomid             |      number          |房间ID|
 |    chat                    |     string           | utf-8 |
-|    extra                   |     {[k: string]: string}          |  |
-|    kvExtra                    |     {[k: string]: string}           |  |
+|    extra                   |     string          | 附加信息（废弃） |
+|    kvExtra                    |     {[k: string]: string}           | 附加信息 |
+
+【注】不要用 extra字段（新版本已经废弃，只是为了兼容才保留）。请使用kvExtra字段。
 
 示例：
 ```javascript
-{"uid":"777666","chat":"js_sdk sendTextChat","extra":{"extra":"extra"},"kvExtra":{"topic":"nginx大讲堂"},"requestId":"6834301645300433320"}
+{"uid":"777888","chat":"js_sdk sendTextChat","extra":"","kvExtra":{"sss":"你好"}}
 ```
 
 
