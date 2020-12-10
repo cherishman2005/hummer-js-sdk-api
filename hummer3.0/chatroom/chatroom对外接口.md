@@ -1054,7 +1054,7 @@ chatroom.on('TextChat', (data) => { console.log(data); })
 |    extra                   |     {[k: string]: string}          | 附加信息（废弃） |
 |    kvExtra                    |     {[k: string]: string}           | 附加信息 |
 
-【注】尽量不要用 extra字段（新版本已经废弃，只是为了兼容才保留）。请使用kvExtra字段。
+【注】尽量不要用 extra字段（新版本已经废弃，只是为了兼容才保留），请使用kvExtra字段。
 
 **示例**
 
