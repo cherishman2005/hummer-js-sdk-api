@@ -51,3 +51,9 @@ key值不要支持非可见字符（如中文）； key只需要支持可见字�
 * 必须在login调用返回ok（rescode=0）后才能进行这些API操作；
     如：业务在重新登录的时候，没有监听sdk login的回调成功，这时候连接还没有建立好，就发了leave，所以会超时。
 
+## UserCountUpdated 这个sdk是实现通知的，还是定时的
+
+后端 收到join/leave 用户变更时 push过来的。 sdk只是被动接收消息。
+
+* 如果一个用户logout、另一个用户login，这时候人数是不变的，会通知吗？
+  * 由相关负责同事 解释。
