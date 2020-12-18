@@ -5,6 +5,7 @@
 [2020-12-18] hummer-chatroom-sdk 2.2.1
 
 1. 可靠消息通道
+
 1. 去掉匿名可以加入聊天室的功能
 
 [2020-12-01] hummer-chatroom-sdk 2.2.0
@@ -41,6 +42,7 @@
 新增js-sdk支持多端登录互踢功能
 
 [2020-07-20] hummer-chatroom-sdk 2.1.3
+
 【重要】域名从web-ap-service.sunclouds.com更新为web-ap-service.jocloud.com
 
 项目需要web-ap-service.sunclouds.com停用。必须更新新的js-sdk，新域名为web-ap-service.jocloud.com
