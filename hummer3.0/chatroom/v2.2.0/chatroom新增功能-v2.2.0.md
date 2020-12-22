@@ -391,7 +391,7 @@ data定义：
 
 | Name       | Type   | Description                         |
 | ---------- | ------ | ----------------------------------- |
-| msgType    | MessageType(enum)     |  消息类型             |
+| msgType    | MsgType(enum)         |  消息类型             |
 | content    | string                |  消息内容             |
 
 接口定义如下：
@@ -471,12 +471,12 @@ hummer.sendP2PMessage({})；
 
 请求参数：
 
-| Name      | Type                    | Description                                         |
+| Name      | Type                    | Description                                  |
 | --------- | ----------------------- | -------------------------------------------- |
 | recevier  | string                  | 接收者UID                                     |
-| message   | Message              | 消息的内容。                                        |
-| options  | {isOffline： boolean}  | 离线、在线选项                                      |
-
+| message   | TextMessage              | 消息对象Object                                  |
+| options  | {isOffline： boolean}  | 离线、在线选项 true:支持离线；false：支持在线消息     |
+| appExtras | { [k: string]: string } | 可选参数。 用户自定义的数据。 键和值为string的Object。 |
 
 响应数据：Promise<>
 
@@ -616,8 +616,7 @@ channel.sendP2CMessage({})
 
 | Name      | Type                    | Description                                         |
 | --------- | ----------------------- | --------------------------------------------------- |
-| type      | string                  | content的类型。用户自己约定。                       |
-| message   | Message                 | Message消息对象                                    |
+| message   | TextMessage              | 文本消息对象。                                |
 | appExtras | { [k: string]: string } | 可选参数。 用户自定义的数据。 键和值为string的Object。 |
 
 响应数据：Promise<>
@@ -637,6 +636,9 @@ try {
     console.error(e);
 }
 ```
+
+【注】
+channel暂不支持离线消息
 
 #### P2CMessageReceived
 
