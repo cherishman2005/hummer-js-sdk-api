@@ -166,7 +166,7 @@ hummer.getConnectionState();
 hummer.login({ region, uid, token });
 ```
 
-请求参数：
+**请求参数：**
 
 | Name      | Type                    | Description                                         |
 | --------- | ----------------------- | --------------------------------------------------- |
@@ -193,14 +193,14 @@ hummer.login({ region, uid, token });
 hummer.logout();
 ```
 
-请求参数：
+**请求参数：**
 
 | Name      | Type                    | Description                                         |
 | --------- | ----------------------- | --------------------------------------------------- |
 |   NA      |                         |                 |                                   |
 
 
-响应数据：Promise<>
+**响应数据：Promise<>**
 
 | Name      | Type   | Description                 |
 | --------- | ------ | --------------------------- |
@@ -338,14 +338,14 @@ hummer.on('TokenExpired', () => {});
 hummer.on('TokenWillExpire', () => {});
 ```
 
-回调通知：
+**回调通知：**
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
 | eventName | string    | 取值"TokenWillExpire"       |
 | handler   | function  | 接收回调                 |
 
-回调参数：
+**回调参数：**
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
@@ -363,13 +363,13 @@ hummer.on('TokenWillExpire', () => {});
 hummer.refreshToken({ token });
 ```
 
-请求参数：
+**请求参数：**
 
 | Name      | Type                    | Description                                         |
 | --------- | ----------------------- | --------------------------------------------------- |
 | token     | string                  |           动态密钥                                  |
 
-响应数据：Promise<>
+**响应数据：Promise<>**
 
 | Name      | Type   | Description                 |
 | --------- | ------ | --------------------------- |
@@ -385,7 +385,7 @@ hummer.refreshToken({ token });
   hummer.createChatRoom({})
 ```
 
-请求参数：
+**请求参数：**
 
 
 | Name                  | Type              |  Description |
@@ -394,7 +394,7 @@ hummer.refreshToken({ token });
 | attributes        |      {[k: string]: string}       |   房间属性       |
 
 
-响应数据：
+**响应数据：Promise<>**
 
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- | ------------  |
@@ -437,7 +437,7 @@ hummer.createChatRoom(options).then((res) => {
 
 （无）
 
-**响应数据**
+**响应数据：Promise<>**
 
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- | ------------  |
@@ -510,14 +510,14 @@ hummer.dismissChatRoom().then((res) => {
 	chatroom.joinChatRoom({});
 ```
 
-请求参数：
+**请求参数：**
 
 | Name                  | Type              |  Description                 |
 | --------------------- | ----------------- |  ------------  |
 |    joinProps          |  {[k: string]: string} | 扩展字段，用于业务扩展，SDK 只负责透传 |
 
 
-响应数据：
+**响应数据：Promise<>**
 
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- | ------------  |
@@ -542,9 +542,10 @@ hummer.dismissChatRoom().then((res) => {
 	chatroom.leaveChatRoom();
 ```
 
-请求参数：（无）
+**请求参数：**
+（无）
 
-响应数据：
+**响应数据：**
 
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- |  ----------  |
@@ -584,7 +585,7 @@ hummer.dismissChatRoom().then((res) => {
 	chatroom.sendGroupMessage({});
 ```
 
-请求参数：
+**请求参数：**
 
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- |   ----------------- |
@@ -592,7 +593,7 @@ hummer.dismissChatRoom().then((res) => {
 | kvExtra               | {[k: string]: string}  | 扩展字段key-value |
 
 
-响应数据：
+**响应数据：**
 
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- | ---------- |
@@ -617,7 +618,7 @@ hummer.dismissChatRoom().then((res) => {
 	chatroom.sendSingleUserMessage({});
 ```
 
-请求参数：
+**请求参数：**
 
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- |   ----------------- |
@@ -625,7 +626,7 @@ hummer.dismissChatRoom().then((res) => {
 |    receiver           |     string           | 接收者uid |
 |    kvExtra            | {[k: string]: string} | 扩展字段key-value |
 
-响应数据：
+**响应数据：**
 
 | Name                  | Type              |  Description |
 | --------------------- |   --------------  |  ----------  |
@@ -651,7 +652,7 @@ hummer.dismissChatRoom().then((res) => {
 	chatroom.sendTextChat({});
 ```
 
-请求参数：
+**请求参数：**
 
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- |   ----------------- |
@@ -660,7 +661,7 @@ hummer.dismissChatRoom().then((res) => {
 |    kvExtra        |     {[k: string]: string}           | 扩展字段key-value键值对  |
 
 
-响应数据：
+**响应数据：**
 
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- |  ---------  |
@@ -690,9 +691,11 @@ hummer.dismissChatRoom().then((res) => {
   chatroom.getChatRoomAttributes();
 ```
 
-请求参数：（无）
+**请求参数：**
 
-响应数据：Promise<>
+（无）
+
+**响应数据：Promise<>**
 
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- |  ----------- |
@@ -756,14 +759,14 @@ hummer.dismissChatRoom().then((res) => {
   chatroom.getChatRoomManager({});
 ```
 
-请求参数：
+**请求参数：**
 
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- | ----------------- |
 |    roler              |    string         | "owner" |
 
 
-响应数据：
+**响应数据：**
 
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- | -----------  |
@@ -794,7 +797,7 @@ hummer.dismissChatRoom().then((res) => {
   chatroom.getUserList({});
 ```
 
-请求参数：
+**请求参数：**
 
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- |   ----------------- |
@@ -802,7 +805,7 @@ hummer.dismissChatRoom().then((res) => {
 |    pos             |      number        |  第几页 (第一页从0开始)   |
 
 
-响应数据：
+**响应数据：**
 
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- | ----------- |
@@ -833,27 +836,24 @@ hummer.dismissChatRoom().then((res) => {
   chatroom.setUserAttributes({});
 ```
 
-请求参数：
+**请求参数：**
 
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- |   ----------------- |
 |    attributes         |      {[k: string]: string}        |   |  |
 
 
-响应数据：
+**响应数据：**
 
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- |  ---------  |
-|    appid             |      number          | |
-|    uid               |      string          ||
-|    roomid            |      number          ||
 |    rescode           |      number          | 0：表示成功|
-|    props             |      {[k: string]: string}        | | |
+
 
 
 示例：
 ```javascript
-        let attributes = { "Name": "awu", "Description": "js_sdk测试", "Bulletin": "bull", "Extention": "ex" };
+        let attributes = { "name": "awu", "description": "js_sdk测试"};
 
         let params = { attributes };
         chatroom.setUserAttributes(params).then((res) => {
@@ -871,9 +871,11 @@ hummer.dismissChatRoom().then((res) => {
   chatroom.getUserAttributesList();
 ```
 
-请求参数：（无）
+**请求参数：**
 
-响应数据：
+（无）
+
+**响应数据：**
 
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- |  ---------  |
@@ -881,7 +883,7 @@ hummer.dismissChatRoom().then((res) => {
 |    users             |      {[k: string]: { [k: string]: string}}   | |
 
 
-示例：
+**示例：**
 ```javascript
         chatroom.getUserAttributesList().then((res) => {
           console.log("getUserAttributesList Res: " + JSON.stringify(res));
@@ -890,7 +892,7 @@ hummer.dismissChatRoom().then((res) => {
         })
 ```
 
-响应：
+**响应：**
 ```javascript
 {"appid":1504984159,"roomid":1704994373,"users":{"777666":{"name":"张三"},"888999":{"topic":"张三好"}},"rescode":0}
 ```
@@ -1069,14 +1071,14 @@ interface Message {
 chatroom.setRoomExtraAttributes({})
 ```
 
-请求参数：
+**请求参数：**
 
 | Name | Type   | Description |
 | ---- | ------ | ----------- |
 | extraAttributes | {[k: string]: string} | 房间属性key-value键值对 |
 
 
-响应数据：Promise<>
+**响应数据：Promise<>**
 
 | Name     | Type    | Description  |
 | -------- | ------- | ------------ |
@@ -1103,14 +1105,14 @@ try {
 chatroom.updateRoomExtraAttributes({})
 ```
 
-请求参数：
+**请求参数：**
 
 | Name | Type   | Description |
 | ---- | ------ | ----------- |
 | extraAttributes | {[k: string]: string} | 房间属性key-value键值对 |
 
 
-响应数据：Promise<>
+**响应数据：Promise<>**
 
 | Name     | Type    | Description  |
 | -------- | ------- | ------------ |
@@ -1118,7 +1120,7 @@ chatroom.updateRoomExtraAttributes({})
 | msg      | string  | 返回描述     |
 
 
-示例：
+**示例：**
 ```js
 try {
     let params = { extraAttributes };
@@ -1136,21 +1138,21 @@ try {
 chatroom.deleteRoomExtraAttributes({})
 ```
 
-请求参数：
+**请求参数：**
 
 | Name | Type   | Description |
 | ---- | ------ | ----------- |
 | extraKeys | string[] | 房间属性key数组 |
 
 
-响应数据：Promise<>
+**响应数据：Promise<>**
 
 | Name     | Type    | Description  |
 | -------- | ------- | ------------ |
 |  rescode | number  |   0:成功      |
 |  msg     | string  | 返回描述      |
 
-示例：
+**示例：**
 ```js
 try {
     const res = await chatroom.deleteRoomExtraAttributes({extraKeys});
@@ -1167,11 +1169,12 @@ try {
 chatroom.clearRoomExtraAttributes()
 ```
 
-请求参数：（无）
+**请求参数：**
+（无）
 
 
-响应数据：Promise<>
-
+**响应数据：Promise<>
+**
 | Name     | Type    | Description  |
 | -------- | ------- | ------------ |
 |  rescode | number  |   0:成功      |
@@ -1195,21 +1198,21 @@ try {
 chatroom.fetchRoomExtraAttributes({})
 ```
 
-请求参数：
+**请求参数：**
 
 | Name | Type   | Description |
 | ---- | ------ | ----------- |
 | extraKeys | string[] | 房间属性key数组 |
 
 
-响应数据：Promise<>
+**响应数据：Promise<>**
 
 | Name     | Type    | Description  |
 | -------- | ------- | ------------ |
 |  rescode | number  |   0:成功      |
 |  msg     | string  | 返回描述      |
 
-示例：
+**示例：**
 ```js
 try {
     const res = await chatroom.fetchRoomExtraAttributes({extraKeys});
@@ -1220,7 +1223,7 @@ try {
 ```
 
 ### 接收消息的监听接口
-| 监听事件                            | 含义                                                         |
+| 监听事件                           | 含义                                                         |
 | :-------------------------------- | :----------------------------------------------------------- |
 | SingleUserMessage                 | 接收单播消息                                                  |
 | GroupMessage                      | 接收广播消息                                                  |
@@ -1246,7 +1249,7 @@ try {
 chatroom.on('SingleUserMessage', (data) => { console.log(data); })
 ```
 
-回调通知：
+**回调通知：**
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
@@ -1254,7 +1257,7 @@ chatroom.on('SingleUserMessage', (data) => { console.log(data); })
 | handler | function  | 接收回调                 |
 
 
-handler回调参数：
+**handler回调参数：**
 
 | Name                  | Type              |  Description |
 | --------------------- | --------------- | ----------- |
@@ -1304,7 +1307,7 @@ chatroom.on('GroupMessage', (data) => { console.log(data); })
 |    content            |      string          | 消息内容|
 |    kvExtra            |     {[k: string]: string}           |  |
 
-示例：
+**示例：**
 ```javascript
 {"uid":"888999","content":"js_sdk sendGroupMessage","requestId":"6834302753401995276","kvExtra":{"name":"张三"}}
 ```
@@ -1320,7 +1323,7 @@ chatroom.on('ChatRoomAttributesUpdated', (data) => { console.log(data); })
 |    uid             |      string          |发送者uid|
 |    content             |      string          | 消息内容|
 
-示例：
+**示例：**
 ```javascript
 {"uid":"888999","content":"js_sdk sendGroupMessage","requestId":"6834295284453867525","kvExtra":{"name":"张三"}}
 ```
@@ -1341,7 +1344,7 @@ chatroom.on('UserKickedOff', (data) => { console.log(data); })
 |    reason             |      string           | 原因|
 |    kicktype           |      number           | 类型|
 
-示例：
+**示例：**
 ```javascript
 {"admin":"777666","tuids":["888999"],"secs":3000,"reason":"js KickOffUser","kicktype":0}
 ```
@@ -1357,7 +1360,7 @@ chatroom.on('UserCountUpdated', (data) => { console.log(data); })
 | --------------------- | ----------------- | ----------- |
 |    totalCount             |      number        | |
 
-示例：
+**示例：**
 ```javascript
 {"totalCount":2}
 ```
@@ -1374,7 +1377,7 @@ chatroom.on('UserOnlineUpdated', (data) => { console.log(data); })
 |    joinUsers          |      string[]         | 加入用户列表|
 |    leaveUsers         |      string[]         | 离开用户列表|
 
-示例：
+**示例：**
 ```javascript
 {"joinUsers":["777666"],"leaveUsers":[]}
 ```
@@ -1391,7 +1394,7 @@ chatroom.on('UserAttributesSet', (data) => { console.log(data); })
 |    uid                |      string          ||
 |    attributes         |      {[k: string]: string}        |   |  |
 
-示例：
+**示例：**
 ```javascript
 {"uid":"777666","attributes":{"nick":"awu","name":"张三"}}
 ```
@@ -1410,7 +1413,7 @@ chatroom.on('UsersMuted', (data) => { console.log(data); })
 |    secs               |      string           |   时间(ms) |
 |    reason             |      string           |   原因 |
 
-示例：
+**示例：**
 ```javascript
 {"opUid":"777666","tuids":["123"],"secs":"600","reason":""}
 ```
@@ -1430,7 +1433,7 @@ chatroom.on('UsersUnMuted', (data) => { console.log(data); })
 |    secs               |      string           |   时间(ms) |
 |    reason             |      string           |   原因 |
 
-示例：
+**示例：**
 ```javascript
 {"opUid":"777666","tuids":["123"],"secs":"600","reason":""}
 ```
@@ -1442,7 +1445,7 @@ chatroom.on('UsersUnMuted', (data) => { console.log(data); })
 chatroom.on('ChatRoomUserOffline', () => {})
 ```
 
-回调通知：
+**回调通知：**
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
@@ -1465,20 +1468,20 @@ handler回调参数：
 chatroom.on('RoomExtraAttributesSet', (data) => { console.log(data); })
 ```
 
-回调通知：
+**回调通知：**
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
 | eventName | string | 取值"RoomAttributesSet" |
 | handler | function  | 接收回调                 |
 
-handler回调参数：
+**handler回调参数：**
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
 |         | object  | 详细定义将data定义描述      |
 
-data定义：
+**data定义：**
 
 | name             | type                    | description                                             |
 | ---------------- | ----------------------- | ------------------------------------------------------- |
@@ -1493,7 +1496,7 @@ data定义：
 chatroom.on('RoomExtraAttributesUpdated', (data) => { console.log(data); });
 ```
 
-回调通知：
+**回调通知：**
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
@@ -1501,7 +1504,7 @@ chatroom.on('RoomExtraAttributesUpdated', (data) => { console.log(data); });
 | handler | function  | 接收回调                 |
 
 
-handler回调参数：
+**handler回调参数：**
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
@@ -1509,7 +1512,7 @@ handler回调参数：
 
 
 
-data定义：
+**data定义：**
 
 | name             | type                    | description                                             |
 | ---------------- | ----------------------- | ------------------------------------------------------- |
@@ -1525,7 +1528,7 @@ data定义：
 chatroom.on('RoomExtraAttributesDeleted', (data) => { console.log(data); });
 ```
 
-回调通知：
+**回调通知：**
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
@@ -1539,7 +1542,7 @@ handler回调参数：
 |         | object  | 详细定义将data定义描述      |
 
 
-data定义：
+**data定义：**
 
 | name             | type                    | description                                             |
 | ---------------- | ----------------------- | ------------------------------------------------------- |
@@ -1598,7 +1601,7 @@ interface TextMessage {
 };
 ```
 
-MsgType类型定义：
+**MsgType类型定义：**
 
 | 枚举值 | 含义 |
 | :--- | :--- |
@@ -1614,7 +1617,7 @@ export enum MsgType {
 }
 ```
 
-示例：
+**示例：**
 ```
 let content = 'js-sdk message';
 let message: TextMessage = Hummer.createMessage(MsgType.TEXT, content);
@@ -1633,13 +1636,13 @@ let message: TextMessage = Hummer.createMessage(MsgType.TEXT, content);
 hummer.fetchUserOnlineStatus({ uids })
 ```
 
-请求参数：
+**请求参数：**
 
 | Name | Type   | Description |
 | ---- | ------ | ----------- |
 | uids | string[] | 要查询的uid列表   |
 
-响应数据：Promise<> 
+**响应数据：Promise<>**
 
 | Name     | Type    | Description  |
 | -------- | ------- | ------------ |
@@ -1647,7 +1650,7 @@ hummer.fetchUserOnlineStatus({ uids })
 | msg      | string  | 返回描述     |
 | status | {[uid: string]: OnlineStatus} | 用户/在线状态键值对      |
 
-OnlineStatus定义：
+**OnlineStatus定义：**
 ```
 enum OnlineStatus {
     UNDEFINED = -1,
@@ -1657,7 +1660,7 @@ enum OnlineStatus {
 };
 ```
 
-示例：
+**示例：**
 ```js
 try {
     const res = await this.hummer.fetchUserOnlineStatus({uids});
@@ -1691,7 +1694,7 @@ hummer.sendP2PMessage({})；
 | rescode   | number | 0：表示成功                 |
 | msg       | string | 返回描述                    |
 
-示例：
+**示例：**
 ```javascript
 try {
     let params = { uid, message, options }
@@ -1800,7 +1803,7 @@ channel.leaveChannel();
 |  rescode | number  |   0:成功      |
 |  msg     | string  |   返回描述    |
 
-示例：
+**示例：**
 ```js
 try {
     const res = await channel.leaveChannel();
@@ -1825,14 +1828,14 @@ channel.sendP2CMessage({})
 | message   | TextMessage              | 文本消息对象。                                |
 | appExtras | { [k: string]: string } | 可选参数。 用户自定义的数据。 键和值为string的Object。 |
 
-响应数据：Promise<>
+**响应数据：Promise<>**
 
 | Name      | Type   | Description                 |
 | --------- | ------ | --------------------------- |
 | rescode   | number | 0：表示成功                 |
 | msg       | string | 返回描述                    |
 
-示例：
+**示例：**
 ```javascript
 try {
     let params = { message }
@@ -1868,4 +1871,3 @@ channel.on('P2CMessageReceived', (data) => { console.log(data); })
 | ------- | ------- | --------------------------- |
 | opUid   | string  | 发送者用户ID                 |
 | message | Message | Message消息对象              |
-
