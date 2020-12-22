@@ -61,7 +61,7 @@
                 - [sendP2PMessage](#sendp2pmessage)
                 - [P2PMessageReceived](#p2pmessagereceived)
             - [P2C Channel消息](#p2c-channel消息)
-                - [创建channel实例](#创建channel实例)
+                - [createChannel](#createchannel)
                 - [joinChannel](#joinchannel)
                 - [leaveChannel](#leavechannel)
                 - [sendP2CMessage](#sendp2cmessage)
@@ -1741,7 +1741,9 @@ hummer.on(eventName: 'P2PMessageReceived', handler: (data) => { console.log(data
 
 #### P2C Channel消息
 
-##### 创建channel实例
+##### createChannel
+
+创建channel实例
 
 ```javascript
 channel = hummer.createChannel({region, channelId})
