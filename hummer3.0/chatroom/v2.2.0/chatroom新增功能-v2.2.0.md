@@ -358,7 +358,7 @@ data定义：
 chatroom.on('RoomExtraAttributesCleared', (data) => { console.log(data); });
 ```
 
-回调通知：
+**回调通知：**
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
@@ -372,7 +372,7 @@ handler回调参数：
 |         | object  | 详细定义将data定义描述      |
 
 
-data定义：
+**data定义：**
 
 | name             | type                    | description                                             |
 | ---------------- | ----------------------- | ------------------------------------------------------- |
@@ -387,31 +387,40 @@ data定义：
 
 创建message对象
 
-构造消息对象
+Text文本对象TextMessage构造消息对象
 
 | Name       | Type   | Description                         |
 | ---------- | ------ | ----------------------------------- |
 | msgType    | MsgType(enum)         |  消息类型             |
 | content    | string                |  消息内容             |
 
-接口定义如下：
+```
+interface TextMessage {
+    msgType: MessageType;
+    content: string;
+};
+```
+
+MsgType类型定义：
+
+| 枚举值 | 含义 |
+| :--- | :--- |
+| TEXT(0)  | 文本类型 |
+| IMAGE(1) | 图片类型 |
+| BINARY(2) | 二进制类型 |
+
 ```
 export enum MsgType {
     TEXT = 0,
     IMAGE = 1,
     BINARY = 2,
 }
-
-interface Message {
-    msgType: MessageType;
-    content: string;
-};
 ```
 
 示例：
 ```
 let content = 'js-sdk message';
-let message = Hummer.createMessage(MsgType.TEXT, content);
+let message: TextMessage = Hummer.createMessage(MsgType.TEXT, content);
 ```
 
 【注】 
@@ -469,7 +478,7 @@ try {
 hummer.sendP2PMessage({})；
 ```
 
-请求参数：
+**请求参数**
 
 | Name      | Type                    | Description                                  |
 | --------- | ----------------------- | -------------------------------------------- |
@@ -478,7 +487,7 @@ hummer.sendP2PMessage({})；
 | options  | {isOffline： boolean}  | 离线、在线选项 true:支持离线；false：支持在线消息     |
 | appExtras | { [k: string]: string } | 可选参数。 用户自定义的数据。 键和值为string的Object。 |
 
-响应数据：Promise<>
+**响应数据：Promise<>**
 
 | Name      | Type   | Description                 |
 | --------- | ------ | --------------------------- |
@@ -534,7 +543,7 @@ data定义：
 channel = hummer.createChannel({region, channelId})
 ```
 
-请求参数：
+**请求参数**
 
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- |   ----------------- |
@@ -542,11 +551,11 @@ channel = hummer.createChannel({region, channelId})
 | channelId             |      string      |   channel ID       |
 
 
-响应数据：
+**响应数据**
 
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- | ------------  |
-|                       | object            | channel实例    |
+|                       | object            | channel实例   |
 
 #### joinChannel 
 
@@ -556,10 +565,10 @@ channel = hummer.createChannel({region, channelId})
 channel.joinChannel();
 ```
 
-请求参数：（无）
+**请求参数：（无）**
 
 
-响应数据：Promise<>
+**响应数据：Promise<>**
 
 | Name     | Type    | Description  |
 | -------- | ------- | ------------ |
@@ -584,10 +593,10 @@ try {
 channel.leaveChannel();
 ```
 
-请求参数：（无）
+**请求参数：（无）**
 
 
-响应数据：Promise<>
+**响应数据：Promise<>**
 
 | Name     | Type    | Description  |
 | -------- | ------- | ------------ |
@@ -612,7 +621,7 @@ try {
 channel.sendP2CMessage({})
 ```
 
-请求参数：
+**请求参数：**
 
 | Name      | Type                    | Description                                         |
 | --------- | ----------------------- | --------------------------------------------------- |
@@ -648,7 +657,7 @@ channel暂不支持离线消息
 channel.on('P2CMessageReceived', (data) => { console.log(data); })
 ```
 
-回调通知：
+**回调通知：**
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
@@ -656,7 +665,7 @@ channel.on('P2CMessageReceived', (data) => { console.log(data); })
 | handler | function  | 接收回调                 |
 
 
-handler回调参数：
+**handler回调参数：**
 
 | name    | type    | description                 |
 | ------- | ------- | --------------------------- |
