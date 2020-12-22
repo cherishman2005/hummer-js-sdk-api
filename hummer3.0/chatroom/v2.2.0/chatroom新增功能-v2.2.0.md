@@ -392,29 +392,31 @@ data定义：
 | Name       | Type   | Description                         |
 | ---------- | ------ | ----------------------------------- |
 | msgType    | MessageType(enum)     |  消息类型             |
-| content    | string|Uint8Array     |  消息内容             |
-| appExtra   | {[k: stirng]: string} |  扩展信息             |
+| content    | string                |  消息内容             |
 
 接口定义如下：
 ```
-enum MessageType {
-    TextType  = 0,
-    BinType   = 1,
-    ImageType = 2,
-};
+export enum MsgType {
+    TEXT = 0,
+    IMAGE = 1,
+    BINARY = 2,
+}
 
 interface Message {
     msgType: MessageType;
-    content: string|Uint8Array;
-    appExtra: {[k: stirng]: string}
+    content: string;
 };
 ```
 
 示例：
 ```
 let content = 'js-sdk message';
-let message = Hummer.createMessage(0, content);
+let message = Hummer.createMessage(MsgType.TEXT, content);
 ```
+
+【注】 
+暂支持 文本消息（TEXT：msgType=0）
+
 
 ### P2P消息
 
