@@ -40,8 +40,8 @@
             - [fetchRoomExtraAttributes](#fetchroomextraattributes)
         - [接收消息的监听接口](#接收消息的监听接口)
                 - [接收单播消息(chatroom.on('SingleUserMessage', (data) => {}))](#接收单播消息chatroomonsingleusermessage-data--)
-            - [接收公屏消息(chatroom.on('TextChat', (data) => {}))](#接收公屏消息chatroomontextchat-data--)
-            - [接收广播消息(chatroom.on('GroupMessage', (data) => {}))](#接收广播消息chatroomongroupmessage-data--)
+            - [TextChat](#textchat)
+            - [GroupMessage](#groupmessage)
             - [接收广播消息(chatroom.on('ChatRoomAttributesUpdated', (data) => {}))](#接收广播消息chatroomonchatroomattributesupdated-data--)
             - [接收用户被踢的广播通知(chatroom.on('UserKickedOff', (data) => {}))](#接收用户被踢的广播通知chatroomonuserkickedoff-data--)
             - [接收用户数更新消息(chatroom.on('UserCountUpdated', (data) => {}))](#接收用户数更新消息chatroomonusercountupdated-data--)
@@ -699,9 +699,8 @@ hummer.dismissChatRoom().then((res) => {
 
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- |  ----------- |
-|    rescode           |      number          | 0：表示成功|
-|    attributes             |      {[k: string]: string}      |  聊天室介绍信息|
-
+|    rescode            |      number          | 0：表示成功 |
+|    attributes         |      {[k: string]: string}  |  聊天室介绍信息 |
 
 示例：
 ```javascript
@@ -772,7 +771,7 @@ hummer.dismissChatRoom().then((res) => {
 | --------------------- | ----------------- | -----------  |
 |    admins             |      {[k: string]: Array<string>}        | |
 |    rescode            |      number          | 0：表示成功|
-
+|    msg                |      string          | 返回描述      |
 
 示例：
 ```javascript
@@ -812,6 +811,7 @@ hummer.dismissChatRoom().then((res) => {
 |    pos                |      number          | |
 |    uids               |      string[]        | 用户UID列表 |
 |    rescode            |      number          | 0：表示成功|
+|    msg                |      string          | 返回描述      |
 
 示例：
 ```javascript
@@ -848,7 +848,7 @@ hummer.dismissChatRoom().then((res) => {
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- |  ---------  |
 |    rescode           |      number          | 0：表示成功|
-
+|    msg                |      string          | 返回描述      |
 
 
 示例：
@@ -881,7 +881,7 @@ hummer.dismissChatRoom().then((res) => {
 | --------------------- | ----------------- |  ---------  |
 |    rescode           |      number          | 0：表示成功|
 |    users             |      {[k: string]: { [k: string]: string}}   | |
-
+|    msg                |      string          | 返回描述      |
 
 **示例：**
 ```javascript
@@ -919,7 +919,7 @@ hummer.dismissChatRoom().then((res) => {
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- |  ---------  |
 |    rescode           |      number          | 返回码：0-成功 |
-|    users             |      {[k: string]: { [k: string]: string}}   | 用户列表 |
+|    msg                |      string          | 返回描述      |
 
 
 **请求示例**
@@ -960,7 +960,7 @@ hummer.dismissChatRoom().then((res) => {
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- |  ---------  |
 |    rescode           |      number          | 返回码：0-成功 |
-|    users             |      {[k: string]: { [k: string]: string}}   | 用户列表 |
+|    msg                |      string          | 返回描述      |
 
 
 **请求示例**
@@ -995,7 +995,8 @@ hummer.dismissChatRoom().then((res) => {
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- | ----------- |
 |    uids               |      string[]        | 禁言用户UID列表 |
-|    rescode            |      number          | 0：表示成功|
+|    rescode            |      number          | 0：表示成功   |
+|    msg                |      string          | 返回描述      |
 
 示例：
 ```javascript
@@ -1041,8 +1042,8 @@ msgTypes暂支持Text(0)
 
 | Name     | Type    | Description  |
 | -------- | ------- | ------------ |
-| rescode  | number  |   0:成功     |
-| msg      | string  | 返回描述     |
+| rescode  | number  |   0:成功      |
+| msg      | string  | 返回描述      |
 | hasMore  | bealean  |  是否还有消息，true: 有，false: 无    |
 | messages | Message[]  |  消息列表    |
 
@@ -1223,6 +1224,7 @@ try {
 ```
 
 ### 接收消息的监听接口
+
 | 监听事件                           | 含义                                                         |
 | :-------------------------------- | :----------------------------------------------------------- |
 | SingleUserMessage                 | 接收单播消息                                                  |
@@ -1270,7 +1272,7 @@ chatroom.on('SingleUserMessage', (data) => { console.log(data); })
  {"uid":"777666","content":"js_sdk sendUnicast","receiver":"777666","requestId":"6834302384034808238","kvExtra":{"name":"nginx大讲堂"}}
 ```
 
-#### 接收公屏消息(chatroom.on('TextChat', (data) => {}))
+#### TextChat
 
 接收公屏消息。
 
@@ -1295,7 +1297,9 @@ chatroom.on('TextChat', (data) => { console.log(data); })
 {"uid":"777888","chat":"js_sdk sendTextChat","extra":{"extra":""},"kvExtra":{"sss":"你好"}}
 ```
 
-#### 接收广播消息(chatroom.on('GroupMessage', (data) => {}))
+#### GroupMessage
+
+接收广播消息。
 
 ```javascript
 chatroom.on('GroupMessage', (data) => { console.log(data); })
