@@ -62,13 +62,17 @@
             - [createMessage](#createmessage)
             - [P2P消息](#p2p消息)
                 - [fetchUserOnlineStatus](#fetchuseronlinestatus)
+                    - [注意事项](#注意事项-5)
                 - [sendP2PMessage](#sendp2pmessage)
+                    - [注意事项](#注意事项-6)
                 - [P2PMessageReceived](#p2pmessagereceived)
             - [P2C Channel消息](#p2c-channel消息)
                 - [createChannel](#createchannel)
                 - [joinChannel](#joinchannel)
+                - [注意事项](#注意事项-7)
                 - [leaveChannel](#leavechannel)
                 - [sendP2CMessage](#sendp2cmessage)
+                    - [注意事项](#注意事项-8)
                 - [P2CMessageReceived](#p2cmessagereceived)
 
 <!-- /TOC -->
@@ -1699,10 +1703,12 @@ let message: TextMessage = Hummer.createMessage(MsgType.TEXT, content);
 
 ##### fetchUserOnlineStatus
 
-批量查询用户在线状态
+查询用户在线状态。
 ```javascript
 hummer.fetchUserOnlineStatus({ uids })
 ```
+
+用户登录过 `Hummer` 系统后，系统会维护一份当前用户在线状态信息，当前登录在线的用户会返回在线，登出下线的用户会返回不在线状态。
 
 **请求参数：**
 
@@ -1738,6 +1744,12 @@ try {
 }
 ```
 
+###### 注意事项
+
+- 单个用户调用频率限制：10次/5s。
+- 单次最多查询200个用户的在线状态。
+
+
 ##### sendP2PMessage
 
 发送点对点（P2P）的消息
@@ -1745,6 +1757,9 @@ try {
 ```javascript
 hummer.sendP2PMessage({})；
 ```
+
+用户登录 `Hummer` 系统后，可通过该接口给其他用户发送点对点文本消息，发送后会触发 [P2PMessageReceived]消息回调，消息目标用户可通过监听 [P2PMessageReceived]接收该文本消息。
+
 
 **请求参数**
 
@@ -1772,6 +1787,14 @@ try {
     console.error(e);
 }
 ```
+
+###### 注意事项
+
+- 调用该接口发送文本消息前，需先调用 [createMessage](#createMessage) 创建 [TextMessage]对象。
+- 登录 `Hummer` 系统即可调用该接口，操作者和接收者均无任何是否在通道内/房间内限制。
+- 单个用户调用频率限制：180次/3秒。
+- 每个接收端最多保存 200 条离线消息，最长保存七天。当保存的离线消息超出限制时，最新消息将覆盖最老消息。
+
 
 ##### P2PMessageReceived
 
@@ -1818,7 +1841,7 @@ channel = hummer.createChannel({region, channelId})
 | Name                  | Type              |  Description |
 | --------------------- | ----------------- |   ----------------- |
 | region    | string                  | channel归属地（"cn"/"ap_southeast"/"ap_south" / "us" / "me_east" / "sa_east"） |
-| channelId             |      string      |   channel ID       |
+| channelId             |      string      | 消息通道ID ，由 **[A,Z]**、**[a,z]**、**[0,9]**、**-**、**_** 组成，最大长度为 64 字节 |
 
 
 **响应数据**
@@ -1856,12 +1879,20 @@ try {
 
 ```
 
+##### 注意事项
+
+- 单个用户同时最多支持加入20 个通道。
+- 对应 `Channel` 操作都需要进入 `Channel` 之后才能正常的操作，如发送通道内广播消息以及接收通道内广播都要进入`Channel` 之后才能正常处理。
+
+
 ##### leaveChannel
 
 离开channel
 ```js
 channel.leaveChannel();
 ```
+
+离开通道后，将不能继续接收通道内的广播消息。
 
 **请求参数：（无）**
 
@@ -1891,6 +1922,8 @@ try {
 channel.sendP2CMessage({})
 ```
 
+在已加入的 Channel 内发送广播消息，发送后会触发 [P2CMessageReceived]消息回调，通道内用户均能通过监听 [P2CMessageReceived]接收到该消息。
+
 **请求参数：**
 
 | Name      | Type                    | Description                                         |
@@ -1916,8 +1949,12 @@ try {
 }
 ```
 
-【注】
-channel暂不支持离线消息
+###### 注意事项
+
+- 单个用户调用频率限制：90 次/3秒。
+- 仅已加入通道的用户，才能往该通道发送广播消息。
+- 离开通道后，将不能继续接收通道内的广播消息。
+
 
 ##### P2CMessageReceived
 
