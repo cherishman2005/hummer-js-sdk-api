@@ -351,6 +351,9 @@ hummer.on('TokenExpired', () => {});
 hummer.on('TokenWillExpire', () => {});
 ```
 
+当Token还有约30s过期时，会触发该回调。收到该通知后，请调用 [refreshToken1](function.html#refreshtoken1) 刷新Token。
+
+
 **回调通知：**
 
 | name    | type    | description                 |
