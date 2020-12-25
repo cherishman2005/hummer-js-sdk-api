@@ -45,7 +45,7 @@
                 - [注意事项](#注意事项-5)
             - [fetchRoomExtraAttributes](#fetchroomextraattributes)
         - [接收消息的监听接口](#接收消息的监听接口)
-                - [SingleUserMessage](#singleusermessage)
+            - [SingleUserMessage](#singleusermessage)
             - [TextChat](#textchat)
             - [GroupMessage](#groupmessage)
             - [ChatRoomAttributesUpdated](#chatroomattributesupdated)
@@ -1331,7 +1331,7 @@ try {
 | RoomExtraAttributesCleared        | 接收到清除房间某些扩展属性Notify回调。                           |
 
 
-##### SingleUserMessage
+#### SingleUserMessage
 
 接收单播消息
 
