@@ -34,9 +34,13 @@
             - [getMutedUserList](#getmuteduserlist)
             - [fetchHistoryMessages](#fetchhistorymessages)
             - [setRoomExtraAttributes](#setroomextraattributes)
+                - [注意事项](#注意事项-1)
             - [updateRoomExtraAttributes](#updateroomextraattributes)
+                - [注意事项](#注意事项-2)
             - [deleteRoomExtraAttributes](#deleteroomextraattributes)
+                - [注意事项](#注意事项-3)
             - [clearRoomExtraAttributes](#clearroomextraattributes)
+                - [注意事项](#注意事项-4)
             - [fetchRoomExtraAttributes](#fetchroomextraattributes)
         - [接收消息的监听接口](#接收消息的监听接口)
                 - [SingleUserMessage](#singleusermessage)
@@ -1020,7 +1024,8 @@ hummer.dismissChatRoom().then((res) => {
 
 #### fetchHistoryMessages
 
-chatroom历史消息获取：查询历史消息
+获取公屏历史消息。
+
 ```js
 chatroom.fetchHistoryMessages({})
 ```
@@ -1041,18 +1046,21 @@ enum Direction {
 }
 ```
 
-【注】
-msgTypes暂支持Text(0)
+> **注意事项：**
+> - msgTypes暂支持Text(0)。
+> - 历史消息存储时间限制一个月。
+> - 无进入聊天室限制，无权限角色限制，所有用户均可调用该接口。
+> - 单次查询结果最大支持100条，最少1条。
+> - 单个用户调用频率限制：10次/5s。
 
 **响应数据：Promise<any>**
 
 | Name     | Type    | Description  |
 | -------- | ------- | ------------ |
-| rescode  | number  |   0:成功      |
-| msg      | string  | 返回描述      |
+| rescode  | number  |   0:成功     |
+| msg      | string  | 返回描述     |
 | hasMore  | bealean  |  是否还有消息，true: 有，false: 无    |
 | messages | Message[]  |  消息列表    |
-
 
 ```
 interface Message {
@@ -1071,18 +1079,22 @@ interface Message {
 * 1 <= limit <= 100 按实际值处理
 * limit > 100 当100处理
 
+
 #### setRoomExtraAttributes
 
-设置房间扩展属性
+设置房间扩展属性。
 ```js
 chatroom.setRoomExtraAttributes({})
 ```
+
+调用该接口会触发房间扩展属性回调 [RoomExtraAttributesSet]。
+
 
 **请求参数：**
 
 | Name | Type   | Description |
 | ---- | ------ | ----------- |
-| extraAttributes | {[k: string]: string} | 房间属性key-value键值对 |
+| extraAttributes | {[k: string]: string} | 扩展属性，由 key-value组成<BR>**key**：单个属性 Key 最大32字节，不能为空<BR>**value**：单个属性value最大8KB，可以为空 |
 
 
 **响应数据：Promise<>**
@@ -1104,19 +1116,28 @@ try {
 }
 ```
 
+##### 注意事项
+
+- 单个房间最多支持32个扩展属性。
+- 仅 `Owner` 和 `Admin` 用户有权限更新房间扩展属性，且操作者需要在该房间内。
+- 单个用户调用频率限制：10次/5s。
+
 
 #### updateRoomExtraAttributes
 
-更新房间扩展属性
+更新房间扩展属性。
 ```js
 chatroom.updateRoomExtraAttributes({})
 ```
+
+当属性（key）不存在时，代表增加属性； 当属性（key）已经存在时，代表更新属性。调用该接口会触发[RoomExtraAttributesUpdated] 回调。
+
 
 **请求参数：**
 
 | Name | Type   | Description |
 | ---- | ------ | ----------- |
-| extraAttributes | {[k: string]: string} | 房间属性key-value键值对 |
+| extraAttributes | {[k: string]: string} | 扩展属性，由 key-value组成<BR>**key**：单个属性 Key 最大32字节，不能为空<BR>**value**：单个属性value最大8KB，可以为空 |
 
 
 **响应数据：Promise<>**
@@ -1138,18 +1159,27 @@ try {
 }
 ```
 
+##### 注意事项
+
+- 单个房间最多支持32个扩展属性。
+- 仅 `Owner` 和 `Admin` 用户有权限更新房间扩展属性，且操作者需要在该房间内。
+- 单个用户调用频率限制：10次/5s。
+
 #### deleteRoomExtraAttributes
 
-删除房间的指定扩展属性
+删除指定房间扩展属性。
+
 ```js
 chatroom.deleteRoomExtraAttributes({})
 ```
+
+用户传入目标属性 key值集合，该接口仅删除key值集合所对应的属性，不能传入空key值集合，调用该接口会触发 [RoomExtraAttributesDeleted]回调。
 
 **请求参数：**
 
 | Name | Type   | Description |
 | ---- | ------ | ----------- |
-| extraKeys | string[] | 房间属性key数组 |
+| extraKeys | string[] | 要删除的属性 key 集合，不能为空，单个 `Key` 最大为32字节 |
 
 
 **响应数据：Promise<>**
@@ -1169,14 +1199,23 @@ try {
 }
 ```
 
+##### 注意事项
+
+- 仅 `Owner` 和 `Admin` 用户有权限执行该操作。
+- 操作者需要在该房间内。
+
 #### clearRoomExtraAttributes
 
-清空某指定房间的扩展属性
+清空房间扩展属性。
+
 ```js
 chatroom.clearRoomExtraAttributes()
 ```
 
+不需要传入任何key值或属性值，该接口会直接清空目标房聊天室的所有属性，调用该接口会触发 [RoomExtraAttributesCleared]回调。
+
 **请求参数：**
+
 （无）
 
 
@@ -1197,6 +1236,12 @@ try {
 }
 ```
 
+##### 注意事项
+
+- 仅 `Owner` 和 `Admin` 用户有权限执行该操作。
+- 操作者需要在该房间内。
+
+
 #### fetchRoomExtraAttributes
 
 查询房间的指定扩展属性
@@ -1209,7 +1254,7 @@ chatroom.fetchRoomExtraAttributes({})
 
 | Name | Type   | Description |
 | ---- | ------ | ----------- |
-| extraKeys | string[] | 房间属性key数组 |
+| extraKeys | string[] | 要查询的属性 key 集合<BR>默认为空，表示查询全量属性<BR>单个属性 `Key` 最大32字节 |
 
 
 **响应数据：Promise<>**
