@@ -13,6 +13,8 @@
             - [TokenExpired](#tokenexpired)
             - [TokenWillExpire](#tokenwillexpire)
             - [refreshToken](#refreshtoken)
+            - [refreshToken1](#refreshtoken1)
+                - [注意事项](#注意事项-1)
             - [createChatRoom](#createchatroom)
             - [dismissChatRoom](#dismisschatroom)
             - [getChatRoomUserCount](#getchatroomusercount)
@@ -34,13 +36,13 @@
             - [getMutedUserList](#getmuteduserlist)
             - [fetchHistoryMessages](#fetchhistorymessages)
             - [setRoomExtraAttributes](#setroomextraattributes)
-                - [注意事项](#注意事项-1)
-            - [updateRoomExtraAttributes](#updateroomextraattributes)
                 - [注意事项](#注意事项-2)
-            - [deleteRoomExtraAttributes](#deleteroomextraattributes)
+            - [updateRoomExtraAttributes](#updateroomextraattributes)
                 - [注意事项](#注意事项-3)
-            - [clearRoomExtraAttributes](#clearroomextraattributes)
+            - [deleteRoomExtraAttributes](#deleteroomextraattributes)
                 - [注意事项](#注意事项-4)
+            - [clearRoomExtraAttributes](#clearroomextraattributes)
+                - [注意事项](#注意事项-5)
             - [fetchRoomExtraAttributes](#fetchroomextraattributes)
         - [接收消息的监听接口](#接收消息的监听接口)
                 - [SingleUserMessage](#singleusermessage)
@@ -62,17 +64,17 @@
             - [createMessage](#createmessage)
             - [P2P消息](#p2p消息)
                 - [fetchUserOnlineStatus](#fetchuseronlinestatus)
-                    - [注意事项](#注意事项-5)
-                - [sendP2PMessage](#sendp2pmessage)
                     - [注意事项](#注意事项-6)
+                - [sendP2PMessage](#sendp2pmessage)
+                    - [注意事项](#注意事项-7)
                 - [P2PMessageReceived](#p2pmessagereceived)
             - [P2C Channel消息](#p2c-channel消息)
                 - [createChannel](#createchannel)
                 - [joinChannel](#joinchannel)
-                - [注意事项](#注意事项-7)
+                - [注意事项](#注意事项-8)
                 - [leaveChannel](#leavechannel)
                 - [sendP2CMessage](#sendp2cmessage)
-                    - [注意事项](#注意事项-8)
+                    - [注意事项](#注意事项-9)
                 - [P2CMessageReceived](#p2cmessagereceived)
 
 <!-- /TOC -->
@@ -386,6 +388,33 @@ hummer.refreshToken({ token });
 | --------- | ------ | --------------------------- |
 | rescode   | number | 0：表示成功                 |
 | msg       | string | 返回描述                    |
+
+#### refreshToken1
+
+更新当前Token。
+
+```javascript
+hummer.refreshToken1({ token });
+```
+
+**请求参数**
+
+| Name      | Type                    | Description                                         |
+| --------- | ----------------------- | --------------------------------------------------- |
+| token     | string                  |           动态密钥                                  |
+
+**响应数据：Promise<any>**
+
+| Name    | Type   | Description    |
+| ------- | ------ | -------------- |
+| rescode | number | 返回码：0-成功 |
+| msg     | string | 返回描述       |
+
+##### 注意事项
+
+- API调用频率为2 次/s，超时时间为15s，接口调用超过频率限制或超时时间，会返回错误码。
+- Token刷新成功，会触发 [ConnectionStateChanged]（SDK连接状态改变回调），连接状态变为 **CONNECTED**。
+- Token刷新失败，系统会主动断开SDK与服务器的连接，并触发 [ConnectionStateChanged]（SDK连接状态改变回调），连接状态变为 **RECONNECTING**，直至刷新成功。
 
 
 #### createChatRoom
