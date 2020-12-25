@@ -71,7 +71,7 @@
             - [P2C Channel消息](#p2c-channel消息)
                 - [createChannel](#createchannel)
                 - [joinChannel](#joinchannel)
-                - [注意事项](#注意事项-8)
+                    - [注意事项](#注意事项-8)
                 - [leaveChannel](#leavechannel)
                 - [sendP2CMessage](#sendp2cmessage)
                     - [注意事项](#注意事项-9)
@@ -1911,7 +1911,7 @@ try {
 
 ```
 
-##### 注意事项
+###### 注意事项
 
 - 单个用户同时最多支持加入20 个通道。
 - 对应 `Channel` 操作都需要进入 `Channel` 之后才能正常的操作，如发送通道内广播消息以及接收通道内广播都要进入`Channel` 之后才能正常处理。
