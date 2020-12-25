@@ -1668,7 +1668,7 @@ Text文本对象TextMessage构造消息对象
 
 ```
 interface TextMessage {
-    msgType: MessageType;
+    msgType: MsgType;
     content: string;
 };
 ```
@@ -1714,7 +1714,7 @@ hummer.fetchUserOnlineStatus({ uids })
 
 | Name | Type   | Description |
 | ---- | ------ | ----------- |
-| uids | string[] | 要查询的uid列表   |
+| uids | string[] | 目标用户ID列表，不能超过200 个 |
 
 **响应数据：Promise<>**
 
