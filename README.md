@@ -46,5 +46,5 @@ zhangbiwu
 * 后端研发
   * nginx/openresty
   * C/C++
-  * go/nodejs
+  * golang/nodejs
   * RTM/RTC
